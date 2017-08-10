@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MyAwesomeReactComponent from './MyAwesomeReactComponent.js';
 
 class App extends Component {
   render() {
@@ -14,7 +16,10 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <h1>Test</h1>
-        <h6>WORKS</h6>
+        <h6>AAAA</h6>
+        <MuiThemeProvider>
+          <MyAwesomeReactComponent />
+        </MuiThemeProvider>
       </div>
     );
   }
