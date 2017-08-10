@@ -21,7 +21,7 @@ class App extends Component {
           <MyAwesomeReactComponent />
         </MuiThemeProvider>
         <h6>WORKS</h6>
-        <h2>OMG!!!!!!!!!!!!!!</h2>
+        <h2>Update</h2>
       </div>
     );
   }
