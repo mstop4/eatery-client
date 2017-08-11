@@ -3,8 +3,8 @@ import React from 'react';
 import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
 
 const coords = {
-  lat: 51.5258541,
-  lng: -0.08040660000006028
+  lat: 43.6451095,
+  lng: -79.3947592
 };
 
 const params = {v: '3.exp', key: process.env["GOOGLEMAPS_APIKEY"]};
@@ -36,7 +36,7 @@ class MapContainer extends React.Component {
         height={'600px'}
         lat={coords.lat}
         lng={coords.lng}
-        zoom={12}
+        zoom={15}
         loadingMessage={'Be happy'}
         params={params}
         onMapCreated={this.onMapCreated}>
@@ -48,13 +48,8 @@ class MapContainer extends React.Component {
         <InfoWindow
           lat={coords.lat}
           lng={coords.lng}
-          content={'Hello, React :)'}
+          content={'I know the MEN stack. :)'}
           onCloseClick={this.onCloseClick} />
-        <Circle
-          lat={coords.lat}
-          lng={coords.lng}
-          radius={500}
-          onClick={this.onClick} />
       </Gmaps>
     );
   }
