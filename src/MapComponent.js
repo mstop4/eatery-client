@@ -7,6 +7,8 @@ const coords = {
   lng: -79.3947592
 };
 
+const labels = "ABCDEFGHIJKL";
+
 const params = {v: '3.exp', key: process.env.REACT_APP_GOOGLEMAPS_APIKEY};
 
 class MapComponent extends React.Component {
@@ -31,13 +33,25 @@ class MapComponent extends React.Component {
 
   render() {
 
-    const markers = []
+    let food = {};
 
-    for (var i = 0; i <= 360; i+=36) {
+    for (var i = 0; i < 12; i++) {
+      food[i] = {
+        id: i,
+        lat: coords.lat + Math.random()*0.002 - 0.001,
+        lng: coords.lng + Math.random()*0.002 - 0.001,
+        label: labels[i]
+      }
+    }
+
+    let markers = []
+
+    for (let f in food) {
       markers.push(<Marker
-          key={i}
-          lat={coords.lat + Math.cos(i) * 0.001}
-          lng={coords.lng + Math.sin(i) * 0.001}
+          key={food[f].id}
+          lat={food[f].lat}
+          lng={food[f].lng}
+          label={food[f].label}
           draggable={true}
           onDragEnd={this.onDragEnd} />
       )
@@ -55,12 +69,6 @@ class MapComponent extends React.Component {
         onMapCreated={this.onMapCreated}>
 
         {markers}
-
-        <InfoWindow
-          lat={coords.lat}
-          lng={coords.lng}
-          content={'I know the MEN stack. :)'}
-          onCloseClick={this.onCloseClick} />
 
       </Gmaps>
     );
