@@ -83,24 +83,24 @@ class App extends Component {
   render() {
     function logoutFacebook(){
       window.FB.getLoginStatus(function(response) {
-          if (response.status === 'connected') {
-            // the user is logged in and has authenticated your
-            // app, and response.authResponse supplies
-            // the user's ID, a valid access token, a signed
-            // request, and the time the access token
-            // and signed request each expire
-            var uid = response.authResponse.userID;
-            var accessToken = response.authResponse.accessToken;
+        if (response.status === 'connected') {
+          // the user is logged in and has authenticated your
+          // app, and response.authResponse supplies
+          // the user's ID, a valid access token, a signed
+          // request, and the time the access token
+          // and signed request each expire
+          var uid = response.authResponse.userID;
+          // var accessToken = response.authResponse.accessToken;
 
-            window.FB.api('/'+uid+'/permissions', 'delete', function(response){});
+          window.FB.api('/'+uid+'/permissions', 'delete', function(response){});
 
-          } else if (response.status === 'not_authorized') {
-            // the user is logged in to Facebook,
-            // but has not authenticated your app
-          } else {
-            // the user isn't logged in to Facebook.
-          }
-         });
+        } else if (response.status === 'not_authorized') {
+          // the user is logged in to Facebook,
+          // but has not authenticated your app
+        } else {
+          // the user isn't logged in to Facebook.
+        }
+       });
     }
     return (
       <div className="App">
@@ -108,13 +108,11 @@ class App extends Component {
 
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>React is alright</h2>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h2>React is alright</h2>
           <FBLoginButton/>
         <p id="status" />
+
         <button id="logout" onClick={logoutFacebook} >Logout</button>
       </div>
     );
