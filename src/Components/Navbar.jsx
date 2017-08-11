@@ -39,7 +39,14 @@ const Logged = props =>
     targetOrigin={{ horizontal: "right", vertical: "top" }}
     anchorOrigin={{ horizontal: "right", vertical: "top" }}
   >
-    <MenuItem primaryText="Hungry" />
+    <MenuItem
+      primaryText="Hungry"
+      onTouchTap={() => {
+        fetch("https://jsonplaceholder.typicode.com/posts", {
+          method: "GET"
+        });
+      }}
+    />
     <MenuItem primaryText="User" />
     <MenuItem primaryText="Sign out" />
   </IconMenu>;
@@ -54,7 +61,11 @@ class UserIcon extends Component {
         zDepth={3}
         circle={true}
         children={
-          <img src="https://vignette3.wikia.nocookie.net/meme/images/c/c7/Fd665178b5.jpg/revision/latest?cb=20160524214933" />
+          <img
+            src="https://vignette3.wikia.nocookie.net/meme/images/c/c7/Fd665178b5.jpg/revision/latest?cb=20160524214933"
+            height="auto"
+            width="auto"
+          />
         }
       />
     );
