@@ -9,7 +9,7 @@ const coords = {
 
 const params = {v: '3.exp', key: process.env["GOOGLEMAPS_APIKEY"]};
 
-class MapContainer extends React.Component {
+class MapComponent extends React.Component {
 
   onMapCreated(map) {
     map.setOptions({
@@ -36,7 +36,7 @@ class MapContainer extends React.Component {
         height={'600px'}
         lat={coords.lat}
         lng={coords.lng}
-        zoom={15}
+        zoom={17}
         loadingMessage={'Be happy'}
         params={params}
         onMapCreated={this.onMapCreated}>
@@ -55,4 +55,4 @@ class MapContainer extends React.Component {
   }
 };
 
-export default MapContainer;
+export default MapComponent;

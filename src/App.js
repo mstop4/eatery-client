@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import MyAwesomeReactComponent from './MyAwesomeReactComponent.js';
-import MapContainer from './GMap.js'
+import MapComponent from './MapComponent.js'
 
 class App extends Component {
 
@@ -26,7 +26,7 @@ class App extends Component {
         <h2>Update</h2>
 
         <h1>My First Google Map</h1>
-        <MapContainer/>
+        <MapComponent/>
       </div>
     );
   }
