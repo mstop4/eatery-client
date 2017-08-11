@@ -40,10 +40,10 @@ const Logged = props =>
     anchorOrigin={{ horizontal: "right", vertical: "top" }}
   >
     <MenuItem primaryText="Hungry" onTouchTap={
-      this.props.handleHungryOnTap
+      props.handleHungryOnTap
       }/> 
     <MenuItem primaryText="User" onTouchTap={
-      this.props.handleUserOnTap
+      props.handleUserOnTap
     }/>
     <MenuItem primaryText="Sign out" />
   </IconMenu>;
@@ -91,7 +91,7 @@ class Navbar extends Component {
         <AppBar
           title="Eatery"
           //showMenuIconButton={false}
-          iconElementRight={this.state.logged ? <Logged /> : <Login />}
+          iconElementRight={this.state.logged ? <Logged handleHungryOnTap={ this.props.handleHungryOnTap } handleUserOnTap={ this.props.handleUserOnTap }/> : <Login />}
           iconElementLeft={<UserIcon />}
         />
       </div>

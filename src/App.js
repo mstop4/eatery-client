@@ -15,8 +15,8 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.handleHungryOnTap.bind(this);
-    this.handleUserOnTap.bind(this);
+    this.handleHungryOnTap = this.handleHungryOnTap.bind(this);
+    this.handleUserOnTap = this.handleUserOnTap.bind(this);
     this.state = {
       onHungryPage: true,
       onUserPage: false
