@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import MyAwesomeReactComponent from './MyAwesomeReactComponent.js';
+import DatePickerExampleSimple from './DatePickerExampleSimple.js';
+import Selector from './Components/Selector.js';
 
 class App extends Component {
   render() {
+    const test = [10,20,30,40,50]
     return (
       <div className="App">
         <div className="App-header">
@@ -17,9 +19,8 @@ class App extends Component {
         </p>
         <h1>Test</h1>
         <h6>AAAA</h6>
-        <MuiThemeProvider>
-          <MyAwesomeReactComponent />
-        </MuiThemeProvider>
+        <Selector selectors={test} width={100}/>
+        <Selector selectors={['banana','apple','grape']} width={150}/>
       </div>
     );
   }
