@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import MyAwesomeReactComponent from './MyAwesomeReactComponent.js';
-import MapComponent from './MapComponent.js'
+import MapComponent from './MapComponent.js';
 import Selector from './Components/Selector.js';
+import BottomNavigationExampleSimple from './Components/BottomNav.js';
 
 class App extends Component {
 
@@ -12,7 +13,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <img src={logo} className="App-logo" alt="logo" />        
           <h2>Welcome to React</h2>
         </div>
         <p className="App-intro">
@@ -28,9 +29,11 @@ class App extends Component {
 
         <h1>My First Google Map</h1>
         <MapComponent/>
+        
 
         <Selector selectors={test} width={100}/>
         <Selector selectors={['banana','apple','grape']} width={150}/>
+        <BottomNavigationExampleSimple/>        
       </div>
     );
   }
