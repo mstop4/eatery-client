@@ -1,6 +1,6 @@
 import React from 'react';
 //import ReactDOM from 'react-dom';
-import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
+import {Gmaps, Marker, InfoWindow} from 'react-gmaps';
 
 const coords = {
   lat: 43.6451095,
@@ -40,6 +40,7 @@ class MapComponent extends React.Component {
         loadingMessage={'Be happy'}
         params={params}
         onMapCreated={this.onMapCreated}>
+
         <Marker
           lat={coords.lat}
           lng={coords.lng}
@@ -50,6 +51,7 @@ class MapComponent extends React.Component {
           lng={coords.lng}
           content={'I know the MEN stack. :)'}
           onCloseClick={this.onCloseClick} />
+
       </Gmaps>
     );
   }
