@@ -30,6 +30,19 @@ class MapComponent extends React.Component {
   }
 
   render() {
+
+    const markers = []
+    console.log(process.env)
+    for (var i = 0; i <= 360; i+=36) {
+      markers.push(<Marker
+          key={i}
+          lat={coords.lat + Math.cos(i) * 0.001}
+          lng={coords.lng + Math.sin(i) * 0.001}
+          draggable={true}
+          onDragEnd={this.onDragEnd} />
+      )
+    }
+
     return (
       <Gmaps
         width={'800px'}
@@ -41,11 +54,8 @@ class MapComponent extends React.Component {
         params={params}
         onMapCreated={this.onMapCreated}>
 
-        <Marker
-          lat={coords.lat}
-          lng={coords.lng}
-          draggable={true}
-          onDragEnd={this.onDragEnd} />
+        {markers}
+
         <InfoWindow
           lat={coords.lat}
           lng={coords.lng}

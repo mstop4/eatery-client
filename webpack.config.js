@@ -1,4 +1,6 @@
+const DotenvPlugin = require('webpack-dotenv-plugin');
 const path = require('path');
+
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -11,10 +13,10 @@ module.exports = {
       { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }
     ]
   },
-plugins: [
-    new DotenvPlugin({
-      sample: './.env.default',
-      path: './.env'
-    })
-  ]
+  plugins: [
+      new DotenvPlugin({
+        sample: './.env.example',
+        path: './.env'
+      })
+    ]
 }
