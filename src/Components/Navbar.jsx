@@ -42,12 +42,19 @@ const Logged = props =>
     <MenuItem
       primaryText="Hungry"
       onTouchTap={() => {
-        fetch("https://jsonplaceholder.typicode.com/posts", {
+        fetch("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=43.6451095,-79.39475924&type=restaurant&radius=200&key=AIzaSyAlibWfdCwp1PWyXZtVVNlVd_BfU39Oj8o", {
           method: "GET"
         });
       }}
     />
-    <MenuItem primaryText="User" />
+    <MenuItem primaryText="User" 
+    primaryText="User"
+      onTouchTap={() => {
+        fetch("http://localhost:3000/user", {
+          method: "GET"
+        });
+      }}
+    />
     <MenuItem primaryText="Sign out" />
   </IconMenu>;
 
