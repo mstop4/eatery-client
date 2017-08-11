@@ -7,7 +7,7 @@ const coords = {
   lng: -79.3947592
 };
 
-const params = {v: '3.exp', key: process.env.GOOGLEMAPS_APIKEY};
+const params = {v: '3.exp', key: process.env.REACT_APP_GOOGLEMAPS_APIKEY};
 
 class MapComponent extends React.Component {
 
@@ -32,7 +32,7 @@ class MapComponent extends React.Component {
   render() {
 
     const markers = []
-    console.log(process.env)
+
     for (var i = 0; i <= 360; i+=36) {
       markers.push(<Marker
           key={i}
