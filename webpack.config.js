@@ -10,5 +10,11 @@ module.exports = {
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
       { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }
     ]
-  }
+  },
+plugins: [
+    new DotenvPlugin({
+      sample: './.env.default',
+      path: './.env'
+    })
+  ]
 }

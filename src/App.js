@@ -3,8 +3,10 @@ import logo from './logo.svg';
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import MyAwesomeReactComponent from './MyAwesomeReactComponent.js';
+import MapContainer from './GMap.js'
 
 class App extends Component {
+
   render() {
     return (
       <div className="App">
@@ -22,6 +24,9 @@ class App extends Component {
         </MuiThemeProvider>
         <h6>WORKS</h6>
         <h2>Update</h2>
+
+        <h1>My First Google Map</h1>
+        <MapContainer/>
       </div>
     );
   }
