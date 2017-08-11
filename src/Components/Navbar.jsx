@@ -39,15 +39,12 @@ const Logged = props =>
     targetOrigin={{ horizontal: "right", vertical: "top" }}
     anchorOrigin={{ horizontal: "right", vertical: "top" }}
   >
-    <MenuItem
-      primaryText="Hungry"
-      onTouchTap={() => {
-        fetch("https://jsonplaceholder.typicode.com/posts", {
-          method: "GET"
-        });
-      }}
-    />
-    <MenuItem primaryText="User" />
+    <MenuItem primaryText="Hungry" onTouchTap={
+      props.handleHungryOnTap
+      }/> 
+    <MenuItem primaryText="User" onTouchTap={
+      props.handleUserOnTap
+    }/>
     <MenuItem primaryText="Sign out" />
   </IconMenu>;
 
@@ -98,7 +95,7 @@ class Navbar extends Component {
         <AppBar
           title="Eatery"
           //showMenuIconButton={false}
-          iconElementRight={this.state.logged ? <Logged /> : <Login />}
+          iconElementRight={this.state.logged ? <Logged handleHungryOnTap={ this.props.handleHungryOnTap } handleUserOnTap={ this.props.handleUserOnTap }/> : <Login />}
           iconElementLeft={<UserIcon />}
         />
       </div>
