@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// Placeholder text
 const text = "React is alright, yeah"
+// Hardcoded mock-GoogleMaps API Restaurant object
 const restaurants = [
   {
    "geometry" : {
@@ -225,9 +227,14 @@ const restaurants = [
          "vicinity" : "461 King Street West, Toronto"
       }
 ]
+//Iterates through restaurants into a list
 const restaurantList = restaurants.map((restaurant, i) =>
   <li key={'restaurant_' + i}>
-    {restaurant.name}
+    <p>{restaurant.name}</p>
+    <p>{restaurant.rating}</p>
+    <p>Price: {restaurant.price_level }</p>
+    <p>Type: {restaurant.types}</p>
+
   </li>)
 
 class RandomizeGroup extends React.Component{
@@ -235,6 +242,7 @@ class RandomizeGroup extends React.Component{
     return (
       <div>
         <h2>{text}</h2>
+        <p> Total Restaurants: {restaurants.length}</p>
         <ul>{restaurantList}</ul>
       </div>
     )
