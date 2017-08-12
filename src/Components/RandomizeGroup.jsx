@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 
 // Placeholder text
 const text = "R-R-R-RANDOMIZER"
@@ -241,6 +241,7 @@ const restaurantList = restaurants.map((restaurant, i) =>
     </ul>
   </li>
 )
+
 const selector = Math.round(Math.random() * restaurants.length)
 const picked = restaurants[selector]
 
