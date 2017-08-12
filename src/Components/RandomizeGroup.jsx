@@ -231,11 +231,16 @@ const restaurants = [
 const restaurantList = restaurants.map((restaurant, i) =>
   <li key={'restaurant_' + i}>
     <p>{restaurant.name}</p>
+    {restaurant.opening_hours.open_now && <p> OPEN NOW</p>}
     <p>{restaurant.rating}</p>
-    <p>Price: {restaurant.price_level }</p>
-    <p>Type: {restaurant.types}</p>
-
-  </li>)
+    <p>Price: {restaurant.price_level}</p>
+    <ul>
+      {restaurant.types.map((type, i)=>
+        <li key={restaurant.name + i} > {type} </li>
+      )}
+    </ul>
+  </li>
+)
 
 class RandomizeGroup extends React.Component{
   render(){
@@ -243,6 +248,7 @@ class RandomizeGroup extends React.Component{
       <div>
         <h2>{text}</h2>
         <p> Total Restaurants: {restaurants.length}</p>
+        <p>Selected Restaurant: </p>
         <ul>{restaurantList}</ul>
       </div>
     )
