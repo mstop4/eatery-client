@@ -241,14 +241,14 @@ const restaurantList = restaurants.map((restaurant, i) =>
     </ul>
   </li>
 )
-
+const selected = Math.round(Math.random() * restaurants.length)
 class RandomizeGroup extends React.Component{
   render(){
     return (
       <div>
         <h2>{text}</h2>
         <p> Total Restaurants: {restaurants.length}</p>
-        <p>Selected Restaurant: </p>
+        <p>SELECTED: {restaurants[selected].name}</p>
         <ul>{restaurantList}</ul>
       </div>
     )
