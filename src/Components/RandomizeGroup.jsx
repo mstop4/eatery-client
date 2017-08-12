@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // Placeholder text
-const text = "React is alright, yeah"
+const text = "R-R-R-RANDOMIZER"
 // Hardcoded mock-GoogleMaps API Restaurant object
 const restaurants = [
   {
@@ -242,6 +242,7 @@ const restaurantList = restaurants.map((restaurant, i) =>
   </li>
 )
 const selected = Math.round(Math.random() * restaurants.length)
+
 class RandomizeGroup extends React.Component{
   render(){
     return (
