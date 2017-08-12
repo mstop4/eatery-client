@@ -6,6 +6,7 @@ import Selector from './Components/Selector.js';
 import Navbar from './Components/Navbar.jsx';
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import FBLoginButton from './FBLoginButton.js';
+import RandomizeGroup from './Components/RandomizeGroup.jsx';
 
 
 class App extends Component {
@@ -142,16 +143,15 @@ class App extends Component {
 
     if(onUserPage) {
       currentPage = <p>On User Page </p>
-    }    
+    }
     return (
       <div className="App">
         <div id="fb-root"></div>
-
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </div>
-        <h2>React is alright</h2>
-          <FBLoginButton/>
+        <RandomizeGroup/>
+        <FBLoginButton/>
         <p id="status" />
 
         <button id="logout" onClick={logoutFacebook} >Logout</button>
