@@ -8,6 +8,10 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import FBLoginButton from './FBLoginButton.js';
 import RandomizeGroup from './Components/RandomizeGroup.jsx';
 import User from './Components/User.jsx';
+//Testing Google User Login
+import { GoogleLogin } from 'react-google-login-component';
+//Facebook Login
+import { FacebookLogin } from 'react-facebook-login-component';
 
 
 class App extends Component {
@@ -20,6 +24,18 @@ class App extends Component {
       onHungryPage: true,
       onUserPage: false
     }
+  }
+
+  //Google response for login
+  responseGoogle (googleUser) {
+    var id_token = googleUser.getAuthResponse().id_token;
+    console.log({accessToken: id_token});
+    //anything else you want to do(save to localStorage)...
+  }
+  //Facebook response
+  responseFacebook (response) {
+    console.log(response);
+    //anything else you want to do(save to localStorage)...
   }
 
   handleHungryOnTap() {
@@ -154,7 +170,22 @@ class App extends Component {
     }
     return (
       <div>
-        <FBLoginButton/>
+        <GoogleLogin socialId={process.env.REACT_APP_GOOGLE_APPID}
+               className="google-login"
+               scope="profile"
+               responseHandler={this.responseGoogle}
+               buttonText="Login With Google"/>
+
+        <FacebookLogin socialId={process.env.REACT_APP_FB_APPID}
+                       language="en_US"
+                       scope="public_profile,email"
+                       responseHandler={this.responseFacebook}
+                       xfbml={true}
+                       fields="id,email,name"
+                       version="v2.5"
+                       className="facebook-login"
+                       buttonText="Login With Facebook"/>
+
         <p id="status" />
         <button id="logout" onClick={logoutFacebook} >Logout</button>
         <MuiThemeProvider>
