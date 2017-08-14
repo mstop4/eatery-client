@@ -2,9 +2,9 @@ import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import DatePicker from 'material-ui/DatePicker';
+import FBLoginButton from '../FBLoginButton.js';
 
-export default class LoginDialogue extends React.Component {
+export default class LoginDialog extends React.Component {
   // state = {
   //   open: false,
   // };
@@ -30,7 +30,7 @@ export default class LoginDialogue extends React.Component {
           onRequestClose={this.props.onRequestClose}
           >
           <h2>Choose an option:</h2>
-          <RaisedButton label="Facebook Button goes here"/>
+          <FBLoginButton/>
           <RaisedButton label="Google Button goes here"/>
         </Dialog>
       </div>
