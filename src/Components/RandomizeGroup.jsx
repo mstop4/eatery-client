@@ -2,6 +2,8 @@ import React from 'react';
 
 // import ReactDOM from 'react-dom';
 
+class RandomizeGroup extends React.Component{
+  render(){
 // Placeholder text
 const text = "R-R-R-RANDOMIZER"
 // Hardcoded mock-GoogleMaps API Restaurant object
@@ -247,8 +249,6 @@ const restaurantList = restaurants.map((restaurant, i) =>
   </li>
 )
 
-class RandomizeGroup extends React.Component{
-  render(){
     return (
       <div>
         <h2>{text}</h2>
