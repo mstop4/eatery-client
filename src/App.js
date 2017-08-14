@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import MapComponent from './Components/MapComponent.jsx'
+import RestaurantChoice from './Components/RestaurantChoice.jsx'
 import Selector from './Components/Selector.js';
 import Navbar from './Components/Navbar.jsx';
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
@@ -163,8 +164,7 @@ class App extends Component {
            To get started, edit <code>src/App.js</code> and save to reload.
         </p>
 
-         <h1>My First Google Map</h1>
-         <MapComponent/>
+         <RestaurantChoice/>
 
          <Selector selectors={['banana','apple','grape']} width={150}/>
       </div>

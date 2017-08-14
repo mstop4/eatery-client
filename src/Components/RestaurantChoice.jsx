@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import RestaurantRow from './RestaurantRow.jsx'
 //import ReactDOM from 'react-dom';
 
 const data = {
@@ -491,8 +492,32 @@ const data = {
 }
 
 class RestaurantChoice extends React.Component {
-  render() {
 
+  render() {
+    const infos = []
+    const places = data.results
+
+    for (let place in places) {
+      infos.push(<RestaurantRow
+          key={place}
+          name={places[place]["name"]}
+          icon={places[place]["icon"]}
+          rating={places[place]["rating"]}
+          vicinity={places[place]["vicinity"]}
+          />
+        )
+    }
+
+    return (
+      <table>
+        <tr>
+          <th colSpan="2">Name</th>
+          <th>Rating</th>
+          <th>Location</th>
+        </tr>
+        {infos}
+      </table>
+    )
   }
 }
 
