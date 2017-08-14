@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-//import RestaurantRow from './RestaurantRow.jsx'
 //import ReactDOM from 'react-dom';
 import {GridList, GridTile} from 'material-ui/GridList';
 import Image from 'react-image-resizer';
@@ -518,17 +517,6 @@ class RestaurantChoice extends React.Component {
       else
         pic = "No Pic"
 
-      // infos.push(<RestaurantRow
-      //     key={place}
-      //     name={places[place]["name"]}
-      //     icon={places[place]["icon"]}
-      //     rating={places[place]["rating"]}
-      //     price={places[place]["price_level"]}
-      //     vicinity={places[place]["vicinity"]}
-      //     photo={pic}
-      //     />
-      //   )
-
       infos.push(
         <GridTile
           key={place}
@@ -544,22 +532,11 @@ class RestaurantChoice extends React.Component {
       )
     }
 
-      {/*<table width="50%">
-        <tr>
-          <th colSpan="2">Name</th>
-          <th>Rating</th>
-          <th>Price</th>
-          <th>Location</th>
-          <th>Photo</th>
-        </tr>
-        {infos}
-      </table>*/}
-
     return (
       <div>
       <h2>Nearby Places</h2>
         <MuiThemeProvider>
-          <GridList cols="4">
+          <GridList cols={4}>
             {infos}
           </GridList>
         </MuiThemeProvider>

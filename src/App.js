@@ -10,7 +10,6 @@ import FBLoginButton from './FBLoginButton.js';
 import RandomizeGroup from './Components/RandomizeGroup.jsx';
 import User from './Components/User.jsx';
 
-
 class App extends Component {
 
   constructor(props) {
@@ -146,8 +145,8 @@ class App extends Component {
       //
       CurrentPage = () => (
         <div>
-          <RestaurantChoice/>
-          <MapComponent/>
+        <RestaurantChoice/>
+        <MapComponent/>
         </div>
       );
     }

@@ -496,14 +496,18 @@ const data = {
   "status": "OK"
 }
 
-const params = {v: '3.exp', key: process.env.REACT_APP_GOOGLEMAPS_APIKEY};
+const params = {v: '3.exp', key: process.env.REACT_APP_GOOGLEMAPS_APIKEY, libraries: "places"};
 
 class MapComponent extends React.Component {
 
+  constructor() {
+    super()
+  }
+
+  componentDidMount() {
+  }
+
   onMapCreated(map) {
-    map.setOptions({
-      disableDefaultUI: true
-    });
   }
 
   onDragEnd(e) {
