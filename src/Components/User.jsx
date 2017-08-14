@@ -8,20 +8,63 @@ import Favourites from './List/Favourites.jsx';
 
 class User extends Component {
 
+  constructor(props){
+    super(props);
+
+    this.handleFriendListOnTap = this.handleFriendListOnTap.bind(this);
+    this.handleFavouritesOnTap = this.handleFavouritesOnTap.bind(this);
+    this.state = {
+      onFavourites: true,
+      onFriendsList: false
+    }
+  }
+
+  handleFriendListOnTap() {
+    this.setState({
+      onFavourites: false,
+      onFriendsList: true
+    });
+  }
+
+  handleFavouritesOnTap() {
+    this.setState({
+      onFavourites: true,
+      onFriendsList: false
+    });
+  }
+
   render() {
-    return (
-      <div>  
-        <MuiThemeProvider>
-          <UserOptions />
-        </MuiThemeProvider>
 
-        <MuiThemeProvider>
-          <FriendList />
-        </MuiThemeProvider>
+    const onFavourites = this.state.onFavourites;
+    const onFriendsList = this.state.onFriendsList;
 
+    let CurrentPage = null;
+
+    if(onFavourites){
+      CurrentPage = () => (
         <MuiThemeProvider>
           <Favourites />
         </MuiThemeProvider>
+      );
+    }
+
+    if(onFriendsList){
+      CurrentPage = () => (
+        <MuiThemeProvider>
+          <FriendList />
+        </MuiThemeProvider>
+      );
+    }
+
+    return (
+      <div>  
+        <MuiThemeProvider>
+          <UserOptions 
+            handleFavouritesOnTap = { this.handleFavouritesOnTap }
+            handleFriendListOnTap = { this.handleFriendListOnTap }
+          />
+        </MuiThemeProvider>
+        <CurrentPage />
 
       </div>
     );

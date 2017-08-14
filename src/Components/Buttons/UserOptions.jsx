@@ -23,22 +23,27 @@ const styles = {
 };
 
 // Creating a function that holds the button
-const UserOptions = () => (
+const UserOptions = (props) => (
   <div>
-    <RaisedButton
-      label="Friends"
-      labelPosition="before"
-      primary={true}
-      icon={<SocialPeople />} //Put friend icon in here
-      style={styles.button}
-    />
-
     <RaisedButton
       label="Favourite"
       labelPosition="before"
       primary={true}
       icon={<PlacesKitchen />} //Put friend icon in here
       style={styles.button}
+      onTouchTap = {
+        props.handleFavouritesOnTap
+      }
+    />
+    <RaisedButton
+      label="Friends"
+      labelPosition="before"
+      primary={true}
+      icon={<SocialPeople />} //Put friend icon in here
+      style={styles.button}
+      onTouchTap = {
+        props.handleFriendListOnTap
+      }
     />
   </div>
 );
