@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import RestaurantRow from './RestaurantRow.jsx'
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+//import RestaurantRow from './RestaurantRow.jsx'
 //import ReactDOM from 'react-dom';
+import {GridList, GridTile} from 'material-ui/GridList';
+import Image from 'react-image-resizer';
 
 const data = {
   "html_attributions": [],
@@ -491,6 +494,16 @@ const data = {
   "status": "OK"
 }
 
+const photos = [
+  "https://lh3.googleusercontent.com/p/AF1QipMYDr-Qqg5XzM6IbD6WQT3WwIE3Jks4Ch5_wqvp=s1600-h400",
+  "https://lh3.googleusercontent.com/p/AF1QipOFD45YLSxayCxJKT3FNZNrHLaUNoCiyLdH-trB=s1600-h400",
+  "https://lh3.googleusercontent.com/p/AF1QipMxBj9CAWHl-jaP02DeM_4_Lh6IuGJ8yrFq-5zT=s1600-h400",
+  "https://lh3.googleusercontent.com/p/AF1QipND-dcHm6EP4CUJVpKtqN2s8nS4qt8SUjW60MEs=s1600-h400",
+  "https://lh3.googleusercontent.com/p/AF1QipOl-oBhmHVKTskkwDW-U5Pv4L3haMM2xZdonfok=s1600-h400",
+  "https://lh3.googleusercontent.com/p/AF1QipMTkdS1nrEeU1toQOAdn4rdosIUxms2_2e4s9-D=s1600-h400"
+
+]
+
 class RestaurantChoice extends React.Component {
 
   render() {
@@ -501,24 +514,37 @@ class RestaurantChoice extends React.Component {
 
       let pic
       if (places[place]["photos"])
-        pic = "Has Pic"
+        pic = photos[Math.min(photos.length-1,place)]
       else
         pic = "No Pic"
 
-      infos.push(<RestaurantRow
+      // infos.push(<RestaurantRow
+      //     key={place}
+      //     name={places[place]["name"]}
+      //     icon={places[place]["icon"]}
+      //     rating={places[place]["rating"]}
+      //     price={places[place]["price_level"]}
+      //     vicinity={places[place]["vicinity"]}
+      //     photo={pic}
+      //     />
+      //   )
+
+      infos.push(
+        <GridTile
           key={place}
-          name={places[place]["name"]}
-          icon={places[place]["icon"]}
-          rating={places[place]["rating"]}
-          price={places[place]["price_level"]}
-          vicinity={places[place]["vicinity"]}
-          photo={pic}
+          title={places[place]["name"]}
+          subtitle={places[place]["vicinity"]}
+          onClick={() => {alert("Click")}}
+        >
+          <Image
+            src={pic}
+            height = {300}
           />
-        )
+        </GridTile>
+      )
     }
 
-    return (
-      <table width="50%">
+      {/*<table width="50%">
         <tr>
           <th colSpan="2">Name</th>
           <th>Rating</th>
@@ -527,7 +553,17 @@ class RestaurantChoice extends React.Component {
           <th>Photo</th>
         </tr>
         {infos}
-      </table>
+      </table>*/}
+
+    return (
+      <div>
+      <h2>Nearby Places</h2>
+        <MuiThemeProvider>
+          <GridList cols="4">
+            {infos}
+          </GridList>
+        </MuiThemeProvider>
+      </div>
     )
   }
 }
