@@ -1,6 +1,3 @@
-import React from 'react';
-//import ReactDOM from 'react-dom';
-
 const data = {
   "html_attributions": [],
   "results": [
@@ -489,11 +486,3 @@ const data = {
   ],
   "status": "OK"
 }
-
-class RestaurantChoice extends React.Component {
-  render() {
-
-  }
-}
-
-export default RestaurantChoice;
