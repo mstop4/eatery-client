@@ -7,6 +7,7 @@ import Navbar from './Components/Navbar.jsx';
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import FBLoginButton from './FBLoginButton.js';
 import RandomizeGroup from './Components/RandomizeGroup.jsx';
+import RestaurantDetail from './Components/RestaurantDetail.jsx';
 
 
 class App extends Component {
@@ -150,6 +151,7 @@ class App extends Component {
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </div>
+        <RestaurantDetail/>
         <RandomizeGroup/>
         <FBLoginButton/>
         <p id="status" />
