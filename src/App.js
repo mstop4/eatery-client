@@ -1,10 +1,41 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import MapComponent from './MapComponent.js'
+import Selector from './Components/Selector.js';
+import Navbar from './Components/Navbar.jsx';
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import FBLoginButton from './FBLoginButton.js';
+import RandomizeGroup from './Components/RandomizeGroup.jsx';
+import User from './Components/User.jsx';
 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleHungryOnTap = this.handleHungryOnTap.bind(this);
+    this.handleUserOnTap = this.handleUserOnTap.bind(this);
+    this.state = {
+      onHungryPage: true,
+      onUserPage: false
+    }
+  }
+
+  handleHungryOnTap() {
+    this.setState({
+      onHungryPage: true,
+      onUserPage: false
+    });
+  }
+
+  handleUserOnTap() {
+    this.setState({
+      onHungryPage: false,
+      onUserPage: true
+    });
+  }
+
 
   componentDidMount() {
     // This is called with the results from from window.FB.getLoginStatus().
@@ -102,18 +133,34 @@ class App extends Component {
         }
        });
     }
+    const onHungryPage = this.state.onHungryPage;
+    const onUserPage = this.state.onUserPage;
+
+    //Components can be functions or classes, React gives us the choice
+    //Declared an empty component
+    let CurrentPage = null;
+
+    if(onHungryPage) {
+      //
+      CurrentPage = () => (
+        <MapComponent/>
+      );
+    }
+
+    if(onUserPage) {
+      CurrentPage = () => (
+        <User />
+      );
+    }
     return (
-      <div className="App">
-        <div id="fb-root"></div>
-
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-        </div>
-        <h2>React is alright</h2>
-          <FBLoginButton/>
+      <div>
+        <FBLoginButton/>
         <p id="status" />
-
         <button id="logout" onClick={logoutFacebook} >Logout</button>
+        <MuiThemeProvider>
+          <Navbar handleHungryOnTap={this.handleHungryOnTap} handleUserOnTap={this.handleUserOnTap}/>
+        </MuiThemeProvider>
+        <CurrentPage/>
       </div>
     );
   }
