@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 import logo from './logo.svg';
 import './App.css';
-import MapComponent from './MapComponent.js'
+import MapComponent from './Components/MapComponent.jsx'
+import RestaurantChoice from './Components/RestaurantChoice.jsx'
 import Selector from './Components/Selector.js';
 import Navbar from './Components/Navbar.jsx';
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
@@ -85,7 +86,10 @@ class App extends Component {
     if(onHungryPage) {
       //
       CurrentPage = () => (
-        <MapComponent/>
+        <div>
+          <RestaurantChoice/>
+          <MapComponent/>
+        </div>
       );
     }
 

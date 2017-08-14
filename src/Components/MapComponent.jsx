@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-//import RestaurantRow from './RestaurantRow.jsx'
+import React from 'react';
 //import ReactDOM from 'react-dom';
-import {GridList, GridTile} from 'material-ui/GridList';
-import Image from 'react-image-resizer';
+import {Gmaps, Marker, InfoWindow} from 'react-gmaps';
+
+const coords = {
+  lat: 43.6451095,
+  lng: -79.3947592
+};
 
 const data = {
   "html_attributions": [],
@@ -494,78 +496,84 @@ const data = {
   "status": "OK"
 }
 
-const photos = [
-  "https://lh3.googleusercontent.com/p/AF1QipMYDr-Qqg5XzM6IbD6WQT3WwIE3Jks4Ch5_wqvp=s1600-h400",
-  "https://lh3.googleusercontent.com/p/AF1QipOFD45YLSxayCxJKT3FNZNrHLaUNoCiyLdH-trB=s1600-h400",
-  "https://lh3.googleusercontent.com/p/AF1QipMxBj9CAWHl-jaP02DeM_4_Lh6IuGJ8yrFq-5zT=s1600-h400",
-  "https://lh3.googleusercontent.com/p/AF1QipND-dcHm6EP4CUJVpKtqN2s8nS4qt8SUjW60MEs=s1600-h400",
-  "https://lh3.googleusercontent.com/p/AF1QipOl-oBhmHVKTskkwDW-U5Pv4L3haMM2xZdonfok=s1600-h400",
-  "https://lh3.googleusercontent.com/p/AF1QipMTkdS1nrEeU1toQOAdn4rdosIUxms2_2e4s9-D=s1600-h400"
+const params = {v: '3.exp', key: process.env.REACT_APP_GOOGLEMAPS_APIKEY};
 
-]
+class MapComponent extends React.Component {
 
-class RestaurantChoice extends React.Component {
+  onMapCreated(map) {
+    map.setOptions({
+      disableDefaultUI: true
+    });
+  }
+
+  onDragEnd(e) {
+    console.log('onDragEnd', e);
+  }
+
+  onCloseClick() {
+    console.log('onCloseClick');
+  }
+
+  onClick(e) {
+    console.log('onClick', e);
+  }
 
   render() {
+
+    const markers = []
     const infos = []
+
     const places = data.results
 
     for (let place in places) {
-
-      let pic
-      if (places[place]["photos"])
-        pic = photos[Math.min(photos.length-1,place)]
-      else
-        pic = "No Pic"
-
-      // infos.push(<RestaurantRow
-      //     key={place}
-      //     name={places[place]["name"]}
-      //     icon={places[place]["icon"]}
-      //     rating={places[place]["rating"]}
-      //     price={places[place]["price_level"]}
-      //     vicinity={places[place]["vicinity"]}
-      //     photo={pic}
-      //     />
-      //   )
-
-      infos.push(
-        <GridTile
+      markers.push(<Marker
           key={place}
-          title={places[place]["name"]}
-          subtitle={places[place]["vicinity"]}
-          onClick={() => {alert("Click")}}
-        >
-          <Image
-            src={pic}
-            height = {300}
+          lat={places[place]["geometry"]["location"].lat}
+          lng={places[place]["geometry"]["location"].lng}
+          //draggable={true}
+          //onDragEnd={this.onDragEnd}
           />
-        </GridTile>
       )
+
+      infos.push(<InfoWindow
+          key={place}
+          lat={places[place]["geometry"]["location"].lat}
+          lng={places[place]["geometry"]["location"].lng}
+          content={places[place]["name"]}
+          onCloseClick={this.onCloseClick} />
+        )
     }
 
-      {/*<table width="50%">
-        <tr>
-          <th colSpan="2">Name</th>
-          <th>Rating</th>
-          <th>Price</th>
-          <th>Location</th>
-          <th>Photo</th>
-        </tr>
-        {infos}
-      </table>*/}
+    // for (var i = 0; i <= 360; i+=36) {
+    //   markers.push(<Marker
+    //       key={i}
+    //       lat={coords.lat + Math.cos(i) * 0.001}
+    //       lng={coords.lng + Math.sin(i) * 0.001}
+    //       draggable={true}
+    //       onDragEnd={this.onDragEnd} />
+    //   )
+    // }
 
     return (
-      <div>
-      <h2>Nearby Places</h2>
-        <MuiThemeProvider>
-          <GridList cols="4">
-            {infos}
-          </GridList>
-        </MuiThemeProvider>
-      </div>
-    )
-  }
-}
+      <Gmaps
+        width={'50%'}
+        height={'600px'}
+        lat={coords.lat}
+        lng={coords.lng}
+        zoom={17}
+        zoomControl={true}
+        loadingMessage={'Be happy'}
+        params={params}
+        onMapCreated={this.onMapCreated}>
 
-export default RestaurantChoice;
+        {//markers
+        }
+
+        {infos}
+
+      </Gmaps>
+    );
+  }
+};
+
+export default MapComponent;
