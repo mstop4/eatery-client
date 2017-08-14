@@ -7,6 +7,7 @@ import Navbar from './Components/Navbar.jsx';
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import FBLoginButton from './FBLoginButton.js';
 import RandomizeGroup from './Components/RandomizeGroup.jsx';
+import User from './Components/User.jsx';
 
 
 class App extends Component {
@@ -136,38 +137,32 @@ class App extends Component {
     const onHungryPage = this.state.onHungryPage;
     const onUserPage = this.state.onUserPage;
 
-    let currentPage = null;
+    //Components can be functions or classes, React gives us the choice
+    //Declared an empty component
+    let CurrentPage = null;
+
     if(onHungryPage) {
-      currentPage = <p>On Hungry Page</p>
+      //
+      CurrentPage = () => (
+        <MapComponent/>
+      );
     }
 
     if(onUserPage) {
-      currentPage = <p>On User Page </p>
-    }
+      CurrentPage = () => (
+        <User />
+      );
+    }    
     return (
-      <div className="App">
-        <div id="fb-root"></div>
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-        </div>
-        <RandomizeGroup/>
+      <div>
         <FBLoginButton/>
         <p id="status" />
-
         <button id="logout" onClick={logoutFacebook} >Logout</button>
         <MuiThemeProvider>
           <Navbar handleHungryOnTap={this.handleHungryOnTap} handleUserOnTap={this.handleUserOnTap}/>
         </MuiThemeProvider>
-        {currentPage}
-        <p className="App-intro">
-           To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-
-         <h1>My First Google Map</h1>
-         <MapComponent/>
-
-         <Selector selectors={['banana','apple','grape']} width={150}/>
-      </div>
+        <CurrentPage/>
+      </div>   
     );
   }
 }
