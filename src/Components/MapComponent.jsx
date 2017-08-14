@@ -556,7 +556,7 @@ class MapComponent extends React.Component {
 
     return (
       <Gmaps
-        width={'100%'}
+        width={'50%'}
         height={'600px'}
         lat={coords.lat}
         lng={coords.lng}

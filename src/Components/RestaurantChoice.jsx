@@ -498,22 +498,33 @@ class RestaurantChoice extends React.Component {
     const places = data.results
 
     for (let place in places) {
+
+      let pic
+      if (places[place]["photos"])
+        pic = "Has Pic"
+      else
+        pic = "No Pic"
+
       infos.push(<RestaurantRow
           key={place}
           name={places[place]["name"]}
           icon={places[place]["icon"]}
           rating={places[place]["rating"]}
+          price={places[place]["price_level"]}
           vicinity={places[place]["vicinity"]}
+          photo={pic}
           />
         )
     }
 
     return (
-      <table>
+      <table width="50%">
         <tr>
           <th colSpan="2">Name</th>
           <th>Rating</th>
+          <th>Price</th>
           <th>Location</th>
+          <th>Photo</th>
         </tr>
         {infos}
       </table>
