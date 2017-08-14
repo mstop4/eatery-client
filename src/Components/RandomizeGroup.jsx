@@ -1,4 +1,5 @@
 import React from 'react';
+
 // import ReactDOM from 'react-dom';
 
 // Placeholder text
@@ -227,9 +228,13 @@ const restaurants = [
          "vicinity" : "461 King Street West, Toronto"
       }
 ]
+
+const selector = Math.round(Math.random() * restaurants.length)
+const picked = restaurants[selector]
+
 //Iterates through restaurants into a list
 const restaurantList = restaurants.map((restaurant, i) =>
-  <li key={'restaurant_' + i}>
+  <li key={'restaurant_' + i} className={i === selector ? 'selected' : ''}>
     <p>{restaurant.name}</p>
     {restaurant.opening_hours.open_now && <p> OPEN NOW</p>}
     <p>{restaurant.rating}</p>
@@ -241,9 +246,6 @@ const restaurantList = restaurants.map((restaurant, i) =>
     </ul>
   </li>
 )
-
-const selector = Math.round(Math.random() * restaurants.length)
-const picked = restaurants[selector]
 
 class RandomizeGroup extends React.Component{
   render(){
@@ -257,6 +259,5 @@ class RandomizeGroup extends React.Component{
     )
   }
 }
-
 
 export default RandomizeGroup;
