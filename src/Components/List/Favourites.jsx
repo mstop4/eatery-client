@@ -74,8 +74,8 @@ const Favourites = () => (
           actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
         >
           <Image src={tile.img} 
-            height = {500}
-            width = {450}
+            height = {400}
+            width = {400}
           />
         </GridTile>
       ))}
