@@ -59,7 +59,8 @@ class UserIcon extends Component {
         circle={true}
         children={
           <img
-            src="https://vignette3.wikia.nocookie.net/meme/images/c/c7/Fd665178b5.jpg/revision/latest?cb=20160524214933"
+            src=""
+            /* https://vignette3.wikia.nocookie.net/meme/images/c/c7/Fd665178b5.jpg/revision/latest?cb=20160524214933 */
             height="auto"
             width="auto"
           />
