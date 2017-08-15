@@ -9,15 +9,15 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import FBLoginButton from './FBLoginButton.js';
 import RandomizeGroup from './Components/RandomizeGroup.jsx';
 import User from './Components/User.jsx';
-
+import {TestPage} from './Components/TestPage.jsx'
 
 class App extends Component {
-
   constructor(props) {
     super(props);
 
     this.handleHungryOnTap = this.handleHungryOnTap.bind(this);
     this.handleUserOnTap = this.handleUserOnTap.bind(this);
+    this.handleTestOnTap = this.handleTestOnTap.bind(this);
     this.state = {
       onHungryPage: true,
       onUserPage: false
@@ -27,17 +27,27 @@ class App extends Component {
   handleHungryOnTap() {
     this.setState({
       onHungryPage: true,
-      onUserPage: false
+      onUserPage: false,
+      onTestPage: false,
     });
   }
 
   handleUserOnTap() {
     this.setState({
       onHungryPage: false,
-      onUserPage: true
+      onUserPage: true,
+      onTestPage: false
     });
   }
 
+  handleTestOnTap(){
+    this.setState({
+      onHungryPage: false,
+      onUserPage: false,
+      onTestPage: true
+    });
+    console.log('asd')
+  }
 
   componentDidMount() {
     // This is called with the results from from window.FB.getLoginStatus().
@@ -137,6 +147,7 @@ class App extends Component {
     }
     const onHungryPage = this.state.onHungryPage;
     const onUserPage = this.state.onUserPage;
+    const onTestPage = this.state.onTestPage;
 
     //Components can be functions or classes, React gives us the choice
     //Declared an empty component
@@ -157,13 +168,22 @@ class App extends Component {
         <User />
       );
     }
+    if(onTestPage) {
+      CurrentPage = () => (
+        <TestPage />
+      );
+    }
     return (
       <div>
         <FBLoginButton/>
         <p id="status" />
         <button id="logout" onClick={logoutFacebook} >Logout</button>
         <MuiThemeProvider>
-          <Navbar handleHungryOnTap={this.handleHungryOnTap} handleUserOnTap={this.handleUserOnTap}/>
+          <Navbar
+            handleHungryOnTap={this.handleHungryOnTap}
+            handleUserOnTap={this.handleUserOnTap}
+            handleTestOnTap={this.handleTestOnTap}
+          />
         </MuiThemeProvider>
         <CurrentPage/>
       </div>
