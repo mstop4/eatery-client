@@ -3,6 +3,7 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 //import ReactDOM from 'react-dom';
 import {GridList, GridTile} from 'material-ui/GridList';
 import Image from 'react-image-resizer';
+import MapComponent from './MapComponent.jsx'
 
 class RestaurantChoice extends React.Component {
 
@@ -10,7 +11,13 @@ class RestaurantChoice extends React.Component {
     super(props)
     this.state = {
       foodJSON: [],
-      photos: []
+      photos: [],
+      position: {
+        lat: 22.2797537, //43.64518819999999
+        lng: 114.1735712 //-79.39392040000001
+      },
+      radius: 200,
+      maxResults: 10
     }
   }
 
@@ -19,12 +26,7 @@ class RestaurantChoice extends React.Component {
   }
 
   getFood() {
-
-    let lat = 22.2797537 //43.64518819999999;
-    let lng = 114.1735712 //-79.39392040000001;
-    let radius = 200
-
-    fetch(`http://localhost:3000/places?lat=${lat}&lng=${lng}&radius${radius}`, {
+    fetch(`http://localhost:3000/places?lat=${this.state.position.lat}&lng=${this.state.position.lng}&radius=${this.state.radius}`, {
       mode: "cors",
     })
       .then((response) => {
@@ -32,9 +34,8 @@ class RestaurantChoice extends React.Component {
       })
       .then((json) => {
 
-        let newPhotos = [];
-
-
+        let newPhotos = []
+        let n = 0
 
         for (let place in json.results) {
 
@@ -46,6 +47,8 @@ class RestaurantChoice extends React.Component {
           } else {
             newPhotos[place] = ""
           }
+
+          if (++n >= 10) break
         }
 
         this.setState({ foodJSON: json, photos: newPhotos })
@@ -60,6 +63,7 @@ class RestaurantChoice extends React.Component {
   render() {
     const infos = []
     const places = this.state.foodJSON.results
+    let n = 0
 
     for (let place in places) {
 
@@ -78,6 +82,8 @@ class RestaurantChoice extends React.Component {
           />
         </GridTile>
       )
+
+      if (++n >= 10) break
     }
 
     return (
@@ -88,6 +94,7 @@ class RestaurantChoice extends React.Component {
             {infos}
           </GridList>
         </MuiThemeProvider>
+        <MapComponent data={this.state.foodJSON.results} center={this.state.position} />
       </div>
     )
   }
