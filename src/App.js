@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import ReactRouter from 'react-router';
 import logo from './logo.svg';
 import './App.css';
 import MapComponent from './Components/MapComponent.jsx'
@@ -10,6 +10,7 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import FBLoginButton from './FBLoginButton.js';
 import RandomizeGroup from './Components/RandomizeGroup.jsx';
 import User from './Components/User.jsx';
+import {TestPage} from './Components/TestPage.jsx'
 //Testing Google User Login
 import { GoogleLogin } from 'react-google-login-component';
 //Facebook Login
@@ -21,32 +22,25 @@ class App extends Component {
 
     this.handleHungryOnTap = this.handleHungryOnTap.bind(this);
     this.handleUserOnTap = this.handleUserOnTap.bind(this);
+    this.handleTestOnTap = this.handleTestOnTap.bind(this);
     this.state = {
-      onHungryPage: true,
-      onUserPage: false
+      currentPage: 'Hungry'
     }
   }
 
   handleHungryOnTap() {
     this.setState({
-      onHungryPage: true,
-      onUserPage: false
+      currentPage: 'Hungry'
     });
   }
 
   handleUserOnTap() {
     this.setState({
-      onHungryPage: false,
-      onUserPage: true
+      currentPage: 'User'
+
     });
   }
 
-  responseGoogle (googleUser) {
-    var id_token = googleUser.getAuthResponse().id_token;
-    console.log('GOOGLE LOGIN')
-    console.log({accessToken: id_token});
-    //anything else you want to do(save to localStorage)...
-  }
 
   responseFacebook (response) {
     console.log('FACEBOOK LOGIN')
@@ -78,25 +72,30 @@ class App extends Component {
     }
     const onHungryPage = this.state.onHungryPage;
     const onUserPage = this.state.onUserPage;
+    const onTestPage = this.state.onTestPage;
 
     //Components can be functions or classes, React gives us the choice
     //Declared an empty component
     let CurrentPage = null;
 
-    if(onHungryPage) {
-      //
-      CurrentPage = () => (
-        <div>
-          <RestaurantChoice/>
-          <MapComponent/>
-        </div>
-      );
-    }
-
-    if(onUserPage) {
-      CurrentPage = () => (
-        <User />
-      );
+    switch (this.state.currentPage) {
+      case 'Hungry':
+        CurrentPage = () => (
+          <div>
+            <RestaurantChoice/>
+            <MapComponent/>
+          </div>
+        );
+        break;
+      case 'User':
+        CurrentPage = () => (
+          <User />
+        );
+        break;
+      case 'Test':
+        CurrentPage = () => (
+          <TestPage />
+        );
     }
 
     return (
@@ -120,7 +119,11 @@ class App extends Component {
         <p id="status" />
         <button id="logout" onClick={logoutFacebook} >Logout</button>
         <MuiThemeProvider>
-          <Navbar handleHungryOnTap={this.handleHungryOnTap} handleUserOnTap={this.handleUserOnTap}/>
+          <Navbar
+            handleHungryOnTap={this.handleHungryOnTap}
+            handleUserOnTap={this.handleUserOnTap}
+            handleTestOnTap={this.handleTestOnTap}
+          />
         </MuiThemeProvider>
         <CurrentPage/>
       </div>

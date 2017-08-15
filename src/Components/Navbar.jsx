@@ -41,9 +41,12 @@ const Logged = props =>
   >
     <MenuItem primaryText="Hungry" onTouchTap={
       props.handleHungryOnTap
-      }/> 
+      }/>
     <MenuItem primaryText="User" onTouchTap={
       props.handleUserOnTap
+    }/>
+    <MenuItem primaryText="Placeholder" onTouchTap={
+      props.handleTestOnTap
     }/>
     <MenuItem primaryText="Sign out" />
   </IconMenu>;
@@ -96,7 +99,13 @@ class Navbar extends Component {
         <AppBar
           title="Eatery"
           //showMenuIconButton={false}
-          iconElementRight={this.state.logged ? <Logged handleHungryOnTap={ this.props.handleHungryOnTap } handleUserOnTap={ this.props.handleUserOnTap }/> : <Login />}
+          iconElementRight={this.state.logged ?
+            <Logged
+              handleHungryOnTap={ this.props.handleHungryOnTap }
+              handleUserOnTap={ this.props.handleUserOnTap }
+              handleTestOnTap={ this.props.handleTestOnTap}
+            />
+            : <Login />}
           iconElementLeft={<UserIcon />}
         />
       </div>
