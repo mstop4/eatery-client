@@ -29,7 +29,6 @@ class Fetch extends Component {
         console.log(this.state["foodJSON"])
 
         if (!this.state["fooded"]) {
-          //this.forcepdate()
           this.setState({fooded: true})
         }
 
