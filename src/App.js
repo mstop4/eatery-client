@@ -98,9 +98,7 @@ class App extends Component {
         <User />
       );
     }
-    function testClick(){
-      console.log('test clicked')
-    }
+
     return (
       <div>
         <GoogleLogin socialId={process.env.REACT_APP_GOOGLE_APPID}
