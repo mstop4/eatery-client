@@ -23,9 +23,7 @@ class App extends Component {
     this.handleHungryOnTap = this.handleHungryOnTap.bind(this);
     this.handleUserOnTap = this.handleUserOnTap.bind(this);
     this.handleTestOnTap = this.handleTestOnTap.bind(this);
-    this.state = {
-      currentPage: 'Hungry'
-    }
+    this.state = { currentPage: 'Hungry' }
   }
 
   handleHungryOnTap() {
@@ -37,13 +35,12 @@ class App extends Component {
   handleUserOnTap() {
     this.setState({
       currentPage: 'User'
-
     });
   }
+
   handleTestOnTap() {
     this.setState({
       currentPage: 'Test'
-
     });
   }
 
