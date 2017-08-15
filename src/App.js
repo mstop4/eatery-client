@@ -11,15 +11,12 @@ import FBLoginButton from './FBLoginButton.js';
 import RandomizeGroup from './Components/RandomizeGroup.jsx';
 import User from './Components/User.jsx';
 import {TestPage} from './Components/TestPage.jsx'
-//Testing Google User Login
-import { GoogleLogin } from 'react-google-login-component';
 //Facebook Login
 import { FacebookLogin } from 'react-facebook-login-component';
 
 class App extends Component {
   constructor(props) {
     super(props);
-
     this.handleHungryOnTap = this.handleHungryOnTap.bind(this);
     this.handleUserOnTap = this.handleUserOnTap.bind(this);
     this.handleTestOnTap = this.handleTestOnTap.bind(this);
@@ -45,12 +42,13 @@ class App extends Component {
   }
 
   responseFacebook (response) {
-    console.log('FACEBOOK LOGIN')
+    console.log('Facebook LOGIN, SAVE SESSION HERE')
     console.log(response);
     //anything else you want to do(save to localStorage)...
   }
 
   render() {
+
     function logoutFacebook(){
       window.FB.getLoginStatus(function(response) {
         if (response.status === 'connected') {
@@ -119,7 +117,8 @@ class App extends Component {
                        buttonText="Login With Facebook"/>
 
         <p id="status" />
-        <button id="logout" onClick={logoutFacebook} >Logout</button>
+        <button id="logout" onClick={logoutGoogle} >Logout Google</button>
+        <button id="logout" onClick={logoutFacebook} >Logout FB</button>
         <MuiThemeProvider>
           <Navbar
             handleHungryOnTap={this.handleHungryOnTap}
