@@ -4,6 +4,7 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 //import ReactDOM from 'react-dom';
 import {GridList, GridTile} from 'material-ui/GridList';
 import Image from 'react-image-resizer';
+import DetailDrawer from './DetailDrawer.jsx'
 
 const data = {
   "html_attributions": [],
@@ -505,6 +506,20 @@ const photos = [
 ]
 
 class RestaurantChoice extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { 
+      open: false,
+      load:false,
+      details: {
+        title:"",
+        subtitle:""
+      }};
+  }
+
+  handleToggle = () => this.setState({open: true})
+  handleClose = () => this.setState({ open: false });
+  handleDetails = (details) => this.setState({ details: details });
 
   render() {
     const infos = []
@@ -534,7 +549,20 @@ class RestaurantChoice extends React.Component {
           key={place}
           title={places[place]["name"]}
           subtitle={places[place]["vicinity"]}
-          onClick={() => {alert("Click")}}
+          onClick={() => {
+              let detail = {
+                title: places[place]["name"],
+                subtitle: places[place]["vicinity"]
+              }
+              this.setState({details: detail}, function () {
+                console.log(this.state.details)
+              })
+              console.log(this.state.details)
+              this.handleToggle();
+              
+            {/* this.setState({details:details}) */}
+            {/* this.handleToggle(details) */}
+          }}
         >
           <Image
             src={pic}
@@ -563,6 +591,7 @@ class RestaurantChoice extends React.Component {
             {infos}
           </GridList>
         </MuiThemeProvider>
+        <DetailDrawer open={this.state.open} detail={this.state.details} request={open => this.setState({ open })}/>
       </div>
     )
   }
