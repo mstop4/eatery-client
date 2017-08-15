@@ -19,7 +19,12 @@ class RestaurantChoice extends React.Component {
   }
 
   getFood() {
-    fetch("http://localhost:3000/places", {
+
+    let lat = 22.2797537 //43.64518819999999;
+    let lng = 114.1735712 //-79.39392040000001;
+    let radius = 200
+
+    fetch(`http://localhost:3000/places?lat=${lat}&lng=${lng}&radius${radius}`, {
       mode: "cors",
     })
       .then((response) => {
