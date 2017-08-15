@@ -20,34 +20,28 @@ class App extends Component {
     this.handleUserOnTap = this.handleUserOnTap.bind(this);
     this.handleTestOnTap = this.handleTestOnTap.bind(this);
     this.state = {
-      onHungryPage: true,
-      onUserPage: false
+      currentPage: 'Hungry'
     }
   }
 
   handleHungryOnTap() {
     this.setState({
-      onHungryPage: true,
-      onUserPage: false,
-      onTestPage: false,
+      currentPage: 'Hungry'
     });
   }
 
   handleUserOnTap() {
     this.setState({
-      onHungryPage: false,
-      onUserPage: true,
-      onTestPage: false
+      currentPage: 'User'
+
     });
   }
 
   handleTestOnTap(){
     this.setState({
-      onHungryPage: false,
-      onUserPage: false,
-      onTestPage: true
+      currentPage: 'Test'
+
     });
-    console.log('asd')
   }
 
   componentDidMount() {
@@ -154,7 +148,7 @@ class App extends Component {
     //Declared an empty component
     let CurrentPage = null;
 
-    if(onHungryPage) {
+    if(this.state.currentPage === 'Hungry') {
       //
       CurrentPage = () => (
         <div>
@@ -164,12 +158,12 @@ class App extends Component {
       );
     }
 
-    if(onUserPage) {
+    if(this.state.currentPage === 'User') {
       CurrentPage = () => (
         <User />
       );
     }
-    if(onTestPage) {
+    if(this.state.currentPage === 'Test') {
       CurrentPage = () => (
         <TestPage />
       );
