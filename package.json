@@ -11,6 +11,7 @@
     "react-google-login-component": "^0.8.0",
     "react-router-dom": "^4.1.2",
     "react-scripts": "1.0.11",
+    "react-stars": "^2.2.3",
     "react-tap-event-plugin": "^2.0.1"
   },
   "scripts": {
