@@ -40,7 +40,12 @@ class App extends Component {
 
     });
   }
+  handleTestOnTap() {
+    this.setState({
+      currentPage: 'Test'
 
+    });
+  }
 
   responseFacebook (response) {
     console.log('FACEBOOK LOGIN')
