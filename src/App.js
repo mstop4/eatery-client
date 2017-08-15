@@ -100,11 +100,6 @@ class App extends Component {
 
     return (
       <div>
-        <GoogleLogin socialId={process.env.REACT_APP_GOOGLE_APPID}
-               className="google-login"
-               scope="profile"
-               responseHandler={this.responseGoogle}
-               buttonText="Login With Google"/>
 
         <FacebookLogin socialId={process.env.REACT_APP_FB_APPID}
                        language="en_US"
@@ -117,7 +112,6 @@ class App extends Component {
                        buttonText="Login With Facebook"/>
 
         <p id="status" />
-        <button id="logout" onClick={logoutGoogle} >Logout Google</button>
         <button id="logout" onClick={logoutFacebook} >Logout FB</button>
         <MuiThemeProvider>
           <Navbar
