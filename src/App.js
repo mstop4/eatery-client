@@ -148,26 +148,26 @@ class App extends Component {
     //Declared an empty component
     let CurrentPage = null;
 
-    if(this.state.currentPage === 'Hungry') {
-      //
-      CurrentPage = () => (
-        <div>
-          <RestaurantChoice/>
-          <MapComponent/>
-        </div>
-      );
+    switch (this.state.currentPage) {
+      case 'Hungry':
+        CurrentPage = () => (
+          <div>
+            <RestaurantChoice/>
+            <MapComponent/>
+          </div>
+        );
+        break;
+      case 'User':
+        CurrentPage = () => (
+          <User />
+        );
+        break;
+      case 'Test':
+        CurrentPage = () => (
+          <TestPage />
+        );
     }
 
-    if(this.state.currentPage === 'User') {
-      CurrentPage = () => (
-        <User />
-      );
-    }
-    if(this.state.currentPage === 'Test') {
-      CurrentPage = () => (
-        <TestPage />
-      );
-    }
     return (
       <div>
         <FBLoginButton/>
