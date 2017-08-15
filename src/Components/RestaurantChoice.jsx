@@ -500,7 +500,6 @@ const photos = [
   "https://lh3.googleusercontent.com/p/AF1QipND-dcHm6EP4CUJVpKtqN2s8nS4qt8SUjW60MEs=s1600-h400",
   "https://lh3.googleusercontent.com/p/AF1QipOl-oBhmHVKTskkwDW-U5Pv4L3haMM2xZdonfok=s1600-h400",
   "https://lh3.googleusercontent.com/p/AF1QipMTkdS1nrEeU1toQOAdn4rdosIUxms2_2e4s9-D=s1600-h400"
-
 ]
 
 class RestaurantChoice extends React.Component {

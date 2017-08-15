@@ -9,6 +9,7 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import FBLoginButton from './FBLoginButton.js';
 import RandomizeGroup from './Components/RandomizeGroup.jsx';
 import User from './Components/User.jsx';
+import Fetch from './Components/fetch.jsx';
 
 class App extends Component {
 
@@ -145,8 +146,7 @@ class App extends Component {
       //
       CurrentPage = () => (
         <div>
-        <RestaurantChoice/>
-        <MapComponent/>
+        <Fetch/>
         </div>
       );
     }
