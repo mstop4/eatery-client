@@ -59,7 +59,7 @@ export default class FacebookLogin extends React.Component {
     return (
       <div>
         <MuiThemeProvider>
-          <RaisedButton fullWidth={true} {...props} onClick={this.clickHandler.bind(this)}>
+          <RaisedButton fullWidth={true} style={{margin: 12}} {...props} onClick={this.clickHandler.bind(this)}>
             {children}
             {buttonText}
           </RaisedButton>
