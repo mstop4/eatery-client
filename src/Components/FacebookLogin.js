@@ -1,4 +1,7 @@
 import React from 'react';
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import RaisedButton from 'material-ui/RaisedButton';
+
 
 export default class FacebookLogin extends React.Component {
   constructor(props) {
@@ -55,10 +58,12 @@ export default class FacebookLogin extends React.Component {
 
     return (
       <div>
-        <button {...props} onClick={this.clickHandler.bind(this)}>
-          {children}
-          {buttonText}
-        </button>
+        <MuiThemeProvider>
+          <RaisedButton fullWidth={true} {...props} onClick={this.clickHandler.bind(this)}>
+            {children}
+            {buttonText}
+          </RaisedButton>
+        </MuiThemeProvider>
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactRouter from 'react-router';
-import logo from './logo.svg';
+import RaisedButton from 'material-ui/RaisedButton';
 import './App.css';
 import MapComponent from './Components/MapComponent.jsx'
 import RestaurantChoice from './Components/RestaurantChoice.jsx'
@@ -44,7 +44,9 @@ class App extends Component {
 
   responseFacebook (response) {
     console.log(response);
-    document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
+    if (response !== undefined){
+      document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
+    }
   }
 
   // Deletes permission of Eatery on User's FB
@@ -102,7 +104,6 @@ class App extends Component {
 
     return (
       <div>
-
         <FacebookLogin socialId={process.env.REACT_APP_FB_APPID}
                        language="en_US"
                        scope="public_profile,email"
@@ -112,7 +113,6 @@ class App extends Component {
                        version="v2.5"
                        className="facebook-login"
                        buttonText="Login With Facebook"/>
-
         <p id="status" />
         <MuiThemeProvider>
           <Navbar
@@ -124,6 +124,7 @@ class App extends Component {
         </MuiThemeProvider>
         <CurrentPage/>
       </div>
+
     );
   }
 }
