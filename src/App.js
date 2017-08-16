@@ -47,6 +47,8 @@ class App extends Component {
     document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
   }
 
+  // Deletes permission of Eatery on User's FB
+  // Otherwise it will log them out of FB too for some reaosn
   logoutFacebook(){
     window.FB.getLoginStatus(function(response) {
       if (response.status === 'connected') {
@@ -57,7 +59,6 @@ class App extends Component {
         // and signed request each expire
         var uid = response.authResponse.userID;
         // var accessToken = response.authResponse.accessToken;
-
         window.FB.api('/'+uid+'/permissions', 'delete', function(response){
         });
         document.getElementById('status').innerHTML = 'Logged out!';
