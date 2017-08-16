@@ -39,13 +39,25 @@ const Logged = props =>
     targetOrigin={{ horizontal: "right", vertical: "top" }}
     anchorOrigin={{ horizontal: "right", vertical: "top" }}
   >
-    <MenuItem primaryText="Hungry" onTouchTap={
-      props.handleHungryOnTap
-      }/> 
-    <MenuItem primaryText="User" onTouchTap={
-      props.handleUserOnTap
-    }/>
-    <MenuItem primaryText="Sign out" />
+    <MenuItem
+      primaryText="Hungry"
+      onTouchTap={ props.handleHungryOnTap }
+    />
+
+    <MenuItem
+      primaryText="User"
+      onTouchTap={ props.handleUserOnTap }
+    />
+
+    <MenuItem
+      primaryText="Placeholder"
+      onTouchTap={ props.handleTestOnTap }
+    />
+
+    <MenuItem
+      primaryText="Sign out"
+      onTouchTap={ props.logoutFacebook }
+    />
   </IconMenu>;
 
 Logged.muiName = "IconMenu";
@@ -96,7 +108,14 @@ class Navbar extends Component {
         <AppBar
           title="Eatery"
           //showMenuIconButton={false}
-          iconElementRight={this.state.logged ? <Logged handleHungryOnTap={ this.props.handleHungryOnTap } handleUserOnTap={ this.props.handleUserOnTap }/> : <Login />}
+          iconElementRight={this.state.logged ?
+            <Logged
+              handleHungryOnTap={ this.props.handleHungryOnTap }
+              handleUserOnTap={ this.props.handleUserOnTap }
+              handleTestOnTap={ this.props.handleTestOnTap}
+              logoutFacebook={ this.props.logoutFacebook}
+            />
+            : <Login />}
           iconElementLeft={<UserIcon />}
         />
       </div>
