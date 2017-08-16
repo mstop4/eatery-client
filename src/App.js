@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactRouter from 'react-router';
-import RaisedButton from 'material-ui/RaisedButton';
 import './App.css';
 import MapComponent from './Components/MapComponent.jsx'
 import RestaurantChoice from './Components/RestaurantChoice.jsx'

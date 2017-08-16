@@ -1,5 +1,5 @@
 import React from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from 'material-ui/Button';
 // import ActionAndroid from 'material-ui/svg-icons/action/android';
 import SocialPeople from 'material-ui/svg-icons/social/people'
 import PlacesKitchen from 'material-ui/svg-icons/places/kitchen'
@@ -25,7 +25,8 @@ const styles = {
 // Creating a function that holds the button
 const UserOptions = (props) => (
   <div>
-    <RaisedButton
+    <Button
+      raised
       label="Favourite"
       labelPosition="before"
       primary={true}
@@ -35,7 +36,8 @@ const UserOptions = (props) => (
         props.handleFavouritesOnTap
       }
     />
-    <RaisedButton
+    <Button
+      raised
       label="Friends"
       labelPosition="before"
       primary={true}

@@ -1,7 +1,6 @@
 import React from "react";
 import Drawer from "material-ui/Drawer";
 import MenuItem from "material-ui/MenuItem";
-import RaisedButton from "material-ui/RaisedButton";
 import FavoriteButton from "./FavoriteButton.jsx";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
