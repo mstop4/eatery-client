@@ -8,7 +8,7 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 export default class DetailDrawer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
         open: false,
         details: this.props.detail
      };
@@ -21,7 +21,7 @@ export default class DetailDrawer extends React.Component {
   detail = this.props.detail;
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ details: nextProps.detail });  
+    this.setState({ details: nextProps.detail });
   }
 
   render() {
@@ -36,7 +36,7 @@ export default class DetailDrawer extends React.Component {
           <h1> {this.state.details.title} </h1>
           <div>
             <img
-              src="https://s3.amazonaws.com/academiadacarne/content/3331-picanha-com-farofa-e-vinagrete-html.jpg"
+              src={this.state.details.photo}
               height="500"
               width="600"
             />

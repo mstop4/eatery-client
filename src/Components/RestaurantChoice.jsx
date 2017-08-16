@@ -23,13 +23,13 @@ class RestaurantChoice extends React.Component {
       load: false,
       details: {
         title: "",
-        subtitle: ""
+        subtitle: "",
+        photo: ""
       }
     }
   }
 
   getFood = (lat, lng) => {
-
     fetch(`http://localhost:3000/places?lat=${lat}&lng=${lng}&radius=${this.state.radius}`, {
       mode: "cors",
     })
@@ -84,7 +84,8 @@ class RestaurantChoice extends React.Component {
           onClick={() => {
               let detail = {
                 title: places[place]["name"],
-                subtitle: places[place]["vicinity"]
+                subtitle: places[place]["vicinity"],
+                photo: this.state.photos[place]
               }
               this.setState({details: detail}, function () {
                 //console.log(this.state.details)
@@ -120,7 +121,11 @@ class RestaurantChoice extends React.Component {
           getFood={this.getFood}
           maxResults={this.state.maxResults}
         />
-        <DetailDrawer open={this.state.open} detail={this.state.details} request={open => this.setState({ open })}/>
+        <DetailDrawer
+          open={this.state.open}
+          detail={this.state.details}
+          request={open => this.setState({ open })}
+        />
       </div>
     )
   }
