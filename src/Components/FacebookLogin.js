@@ -2,7 +2,12 @@ import React from 'react';
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import RaisedButton from 'material-ui/RaisedButton';
 
-
+const style = {
+  button: {
+    margin: 12,
+    padding: 12
+  }
+}
 export default class FacebookLogin extends React.Component {
   constructor(props) {
     super(props);
@@ -59,7 +64,7 @@ export default class FacebookLogin extends React.Component {
     return (
       <div>
         <MuiThemeProvider>
-          <RaisedButton fullWidth={true} style={{margin: 12}} {...props} onClick={this.clickHandler.bind(this)}>
+          <RaisedButton style={style.button} {...props} onClick={this.clickHandler.bind(this)}>
             {children}
             {buttonText}
           </RaisedButton>
