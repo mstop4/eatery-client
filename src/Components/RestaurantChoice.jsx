@@ -5,17 +5,18 @@ import Image from 'react-image-resizer'
 import MapComponent from './MapComponent.jsx'
 import DetailDrawer from './DetailDrawer.jsx'
 
+let g_foodJSON = []
+let g_photos = []
+let g_position = { lat: 43.64518819999999, lng: -79.39392040000001 }
+
 class RestaurantChoice extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      foodJSON: [],
-      photos: [],
-      position: {
-        lat: 43.64518819999999,
-        lng: -79.39392040000001
-      },
+      foodJSON: g_foodJSON,
+      photos: g_photos,
+      position: g_position,
       radius: 200,
       maxResults: 12,
 
@@ -30,37 +31,43 @@ class RestaurantChoice extends React.Component {
   }
 
   getFood = (lat, lng) => {
-    fetch(`http://localhost:3000/places?lat=${lat}&lng=${lng}&radius=${this.state.radius}`, {
-      mode: "cors",
-    })
-      .then((response) => {
-        return response.json()
+
+    if (this.state.foodJSON.length === 0 || this.state.photos.length === 0) {
+      fetch(`http://localhost:3000/places?lat=${lat}&lng=${lng}&radius=${this.state.radius}`, {
+        mode: "cors",
       })
-      .then((json) => {
+        .then((response) => {
+          return response.json()
+        })
+        .then((json) => {
 
-        let newPhotos = []
-        let n = 0
+          let newPhotos = []
+          let n = 0
 
-        for (let place in json.results) {
+          for (let place in json.results) {
 
-          if (json.results[place].photos) {
-            newPhotos[place] = "https://maps.googleapis.com/maps/api/place/photo?"
-            newPhotos[place] += `key=${process.env.REACT_APP_GOOGLEMAPS_APIKEY}&`
-            newPhotos[place] += `photoreference=${json.results[place].photos[0].photo_reference}&`
-            newPhotos[place] += "maxheight=400"
-          } else {
-            newPhotos[place] = ""
+            if (json.results[place].photos) {
+              newPhotos[place] = "https://maps.googleapis.com/maps/api/place/photo?"
+              newPhotos[place] += `key=${process.env.REACT_APP_GOOGLEMAPS_APIKEY}&`
+              newPhotos[place] += `photoreference=${json.results[place].photos[0].photo_reference}&`
+              newPhotos[place] += "maxheight=400"
+            } else {
+              newPhotos[place] = ""
+            }
+
+            if (++n >= this.state.maxResults) break
           }
 
-          if (++n >= this.state.maxResults) break
-        }
+          g_foodJSON = json
+          g_photos = newPhotos
+          g_position = {lat: lat, lng: lng}
+          this.setState({ foodJSON: json, photos: newPhotos, position: { lat: lat, lng: lng } })
 
-        this.setState({ foodJSON: json, photos: newPhotos, position: { lat: lat, lng: lng } })
-
-      })
-      .catch((error) => {
-        console.error(error)
-      })
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    }
   }
 
   handleToggle = () => this.setState({ open: true })
