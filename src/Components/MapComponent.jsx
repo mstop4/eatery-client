@@ -2,7 +2,6 @@ import React from 'react';
 //import ReactDOM from 'react-dom';
 import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import CircularProgress from 'material-ui/CircularProgress';
 
 const params = {v: '3.exp', key: process.env.REACT_APP_GOOGLEMAPS_APIKEY, libraries: "places"};
 
@@ -85,10 +84,6 @@ class MapComponent extends React.Component {
           fillColor={'#00BCD4'}
           fillOpacity={0.15}
           />
-    } else {
-      message = <MuiThemeProvider>
-                  <CircularProgress size="75" thickness="10"/>
-                </MuiThemeProvider>
     }
 
     return (
@@ -97,7 +92,7 @@ class MapComponent extends React.Component {
 
         <Gmaps
           width={'100%'}
-          height={'600px'}
+          height={'525px'}
           lat={this.props.center.lat}
           lng={this.props.center.lng}
           zoom={17}

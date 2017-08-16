@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
-import Paper from 'material-ui/Paper'
-import Grid from 'material-ui/Grid'
+import CircularProgress from 'material-ui/CircularProgress';
 import {GridList, GridTile} from 'material-ui/GridList'
 import Image from 'react-image-resizer'
 import MapComponent from './MapComponent.jsx'
@@ -33,8 +32,8 @@ class RestaurantChoice extends React.Component {
   }
 
   getFood = (lat, lng) => {
-
     if (this.state.foodJSON.length === 0 || this.state.photos.length === 0) {
+
       fetch(`http://localhost:3000/places?lat=${lat}&lng=${lng}&radius=${this.state.radius}`, {
         mode: "cors",
       })
@@ -79,83 +78,76 @@ class RestaurantChoice extends React.Component {
   render = () => {
     const infos = []
     const places = this.state.foodJSON.results
+    let gridComp
     let n = 0
 
-    for (let place in places) {
+    console.dir(places)
 
-      let pic = this.state.photos[place]
+    if (places) {
+      for (let place in places) {
 
-      infos.push(
-        <GridTile
-          key={place}
-          title={places[place]["name"]}
-          subtitle={places[place]["vicinity"]}
-          onClick={() => {
-              let detail = {
-                title: places[place]["name"],
-                subtitle: places[place]["vicinity"],
-                photo: this.state.photos[place]
-              }
-              this.setState({details: detail}, function () {
+        let pic = this.state.photos[place]
+
+        infos.push(
+          <GridTile
+            key={place}
+            title={places[place]["name"]}
+            subtitle={places[place]["vicinity"]}
+            onClick={() => {
+                let detail = {
+                  title: places[place]["name"],
+                  subtitle: places[place]["vicinity"],
+                  photo: this.state.photos[place],
+                  rating: places[place]["rating"]
+                }
+                this.setState({details: detail}, function () {
+                  //console.log(this.state.details)
+                })
                 //console.log(this.state.details)
-              })
-              //console.log(this.state.details)
-              this.handleToggle();
+                this.handleToggle();
 
-            {/* this.setState({details:details}) */}
-            {/* this.handleToggle(details) */}
-          }}
-        >
-          <Image
-            src={pic}
-            height = {300}
-          />
-        </GridTile>
-      )
+              {/* this.setState({details:details}) */}
+              {/* this.handleToggle(details) */}
+            }}
+          >
+            <Image
+              src={pic}
+              height = {300}
+            />
+          </GridTile>
+        )
 
-      if (++n >= this.state.maxResults) break
+        if (++n >= this.state.maxResults) break
+      }
+
+      gridComp =  <GridList cols={4}>
+                    {infos}
+                  </GridList>
+
+    } else {
+      gridComp = <CircularProgress size="75" thickness="10"/>
     }
 
     return (
       <div>
-<div>
-      <Grid container spacing={24}>
-        <Grid item xs={12}>
-          <Paper>xs=12</Paper>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Paper>xs=12 sm=6</Paper>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Paper>xs=12 sm=6</Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <Paper>xs=6 sm=3</Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <Paper>xs=6 sm=3</Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <Paper>xs=6 sm=3</Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <Paper>xs=6 sm=3</Paper>
-        </Grid>
-      </Grid>
-    </div>
-
-        <MuiThemeProvider>
-          <GridList cols={4}>
-            {infos}
-          </GridList>
-        </MuiThemeProvider>
-        <MapComponent
-          data={this.state.foodJSON.results}
-          center={this.state.position}
-          radius={this.state.radius}
-          getFood={this.getFood}
-          maxResults={this.state.maxResults}
-        />
+        <table width={"100%"} height={"100%"}>
+          <tr>
+            <td width={"50%"}>
+              <MuiThemeProvider>
+                {gridComp}
+              </MuiThemeProvider>
+            </td>
+            <td width={"50%"}>
+              <MapComponent
+                data={this.state.foodJSON.results}
+                center={this.state.position}
+                radius={this.state.radius}
+                getFood={this.getFood}
+                maxResults={this.state.maxResults}
+              />
+            </td>
+          </tr>
+        </table>
         <DetailDrawer
           open={this.state.open}
           detail={this.state.details}

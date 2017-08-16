@@ -34,11 +34,10 @@ export default class DetailDrawer extends React.Component {
           onRequestChange={this.props.request}
         >
           <h1> {this.state.details.title} </h1>
+          <p> {this.state.details.rating}</p>
           <div>
             <img
               src={this.state.details.photo}
-              height="500"
-              width="600"
             />
           </div>
           <div>
