@@ -1,6 +1,8 @@
 import React from 'react';
 //import ReactDOM from 'react-dom';
 import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import CircularProgress from 'material-ui/CircularProgress';
 
 const params = {v: '3.exp', key: process.env.REACT_APP_GOOGLEMAPS_APIKEY, libraries: "places"};
 
@@ -45,60 +47,72 @@ class MapComponent extends React.Component {
 
     const markers = []
     const infos = []
-
+    let message
+    let circle
     const places = this.props.data
-    let n = 0
 
-    for (let place in places) {
-      markers.push(<Marker
-          key={place}
-          lat={places[place]["geometry"]["location"].lat}
-          lng={places[place]["geometry"]["location"].lng}
-          //draggable={true}
-          //onDragEnd={this.onDragEnd}
-          />
-      )
+    if (places && places.length > 0) {
+      let n = 0
 
-      infos.push(<InfoWindow
-          key={place}
-          lat={places[place]["geometry"]["location"].lat}
-          lng={places[place]["geometry"]["location"].lng}
-          content={places[place]["name"]}
-          onCloseClick={this.onCloseClick} />
+      for (let place in places) {
+        markers.push(<Marker
+            key={place}
+            lat={places[place]["geometry"]["location"].lat}
+            lng={places[place]["geometry"]["location"].lng}
+            //draggable={true}
+            //onDragEnd={this.onDragEnd}
+            />
         )
 
-      if (++n >= this.props.maxResults) break
+        infos.push(<InfoWindow
+            key={place}
+            lat={places[place]["geometry"]["location"].lat}
+            lng={places[place]["geometry"]["location"].lng}
+            content={places[place]["name"]}
+            onCloseClick={this.onCloseClick} />
+          )
+
+        if (++n >= this.props.maxResults) break
+      }
+
+      circle = <Circle
+          lat={this.props.center.lat}
+          lng={this.props.center.lng}
+          radius={this.props.radius}
+          strokeColor={'#00BCD4'}
+          strokeOpacity={0.3}
+          strokeWeight={2}
+          fillColor={'#00BCD4'}
+          fillOpacity={0.15}
+          />
+    } else {
+      message = <MuiThemeProvider>
+                  <CircularProgress size="75" thickness="10"/>
+                </MuiThemeProvider>
     }
 
-    const circle = <Circle
-        lat={this.props.center.lat}
-        lng={this.props.center.lng}
-        radius={this.props.radius}
-        strokeColor={'#00BCD4'}
-        strokeOpacity={0.3}
-        strokeWeight={2}
-        fillColor={'#00BCD4'}
-        fillOpacity={0.15}
-        />
-
     return (
-      <Gmaps
-        width={'100%'}
-        height={'600px'}
-        lat={this.props.center.lat}
-        lng={this.props.center.lng}
-        zoom={17}
-        zoomControl={true}
-        gestureHandling={'cooperative'}
-        loadingMessage={'Eatery'}
-        params={params}
-        onMapCreated={this.onMapCreated}>
+      <div>
+        {message}
 
-        {markers}
+        <Gmaps
+          width={'100%'}
+          height={'600px'}
+          lat={this.props.center.lat}
+          lng={this.props.center.lng}
+          zoom={17}
+          zoomControl={true}
+          gestureHandling={'cooperative'}
+          loadingMessage={'Eatery'}
+          params={params}
+          onMapCreated={this.onMapCreated}>
 
-        {circle}
+          {markers}
 
-      </Gmaps>
+          {circle}
+
+        </Gmaps>
+      </div>
     );
   }
 };
