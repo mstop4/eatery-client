@@ -17,14 +17,13 @@ class RestaurantChoice extends React.Component {
         lng: -79.39392040000001
       },
       radius: 200,
-      maxResults: 10
+      maxResults: 12
     }
 
     this.getFood = this.getFood.bind(this)
   }
 
   componentDidMount() {
-    //this.getFood()
   }
 
   getFood(lat, lng) {
@@ -50,10 +49,10 @@ class RestaurantChoice extends React.Component {
             newPhotos[place] = ""
           }
 
-          if (++n >= 10) break
+          if (++n >= this.state.maxResults) break
         }
 
-        this.setState({ foodJSON: json, photos: newPhotos })
+        this.setState({ foodJSON: json, photos: newPhotos, position: { lat: lat, lng: lng } })
 
       })
       .catch((error) => {
@@ -84,7 +83,7 @@ class RestaurantChoice extends React.Component {
         </GridTile>
       )
 
-      if (++n >= 10) break
+      if (++n >= this.state.maxResults) break
     }
 
     return (
@@ -98,7 +97,9 @@ class RestaurantChoice extends React.Component {
         <MapComponent
           data={this.state.foodJSON.results}
           center={this.state.position}
+          radius={this.state.radius}
           getFood={this.getFood}
+          maxResults={this.state.maxResults}
         />
       </div>
     )

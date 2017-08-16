@@ -1,6 +1,6 @@
 import React from 'react';
 //import ReactDOM from 'react-dom';
-import {Gmaps, Marker, InfoWindow} from 'react-gmaps';
+import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
 
 const params = {v: '3.exp', key: process.env.REACT_APP_GOOGLEMAPS_APIKEY, libraries: "places"};
 
@@ -24,9 +24,7 @@ class MapComponent extends React.Component {
       navigator.geolocation.getCurrentPosition((position) => {
 
         map.panTo({lat: position.coords.latitude, lng: position.coords.longitude})
-
-        if (this.props.getFood)
-          this.props.getFood(position.coords.latitude, position.coords.longitude)
+        this.props.getFood(position.coords.latitude, position.coords.longitude)
       })
     }
   }
@@ -69,27 +67,36 @@ class MapComponent extends React.Component {
           onCloseClick={this.onCloseClick} />
         )
 
-      if (++n >= 10) break
+      if (++n >= this.props.maxResults) break
     }
+
+    const circle = <Circle
+        lat={this.props.center.lat}
+        lng={this.props.center.lng}
+        radius={this.props.radius}
+        strokeColor={'#00BCD4'}
+        strokeOpacity={0.3}
+        strokeWeight={2}
+        fillColor={'#00BCD4'}
+        fillOpacity={0.15}
+        />
 
     return (
       <Gmaps
-        width={'50%'}
+        width={'100%'}
         height={'600px'}
         lat={this.props.center.lat}
         lng={this.props.center.lng}
         zoom={17}
         zoomControl={true}
-        draggable = {false}
-        loadingMessage={'Be happy'}
+        gestureHandling={'cooperative'}
+        loadingMessage={'Eatery'}
         params={params}
         onMapCreated={this.onMapCreated}>
 
-        {markers
-        }
+        {markers}
 
-        {//infos
-        }
+        {circle}
 
       </Gmaps>
     );
