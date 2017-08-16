@@ -20,6 +20,7 @@ class App extends Component {
     this.handleHungryOnTap = this.handleHungryOnTap.bind(this);
     this.handleUserOnTap = this.handleUserOnTap.bind(this);
     this.handleTestOnTap = this.handleTestOnTap.bind(this);
+    this.logoutFacebook = this.logoutFacebook.bind(this);
     this.state = { currentPage: 'Hungry' }
   }
 
@@ -42,38 +43,38 @@ class App extends Component {
   }
 
   responseFacebook (response) {
-    console.log('Facebook LOGIN, SAVE SESSION HERE')
     console.log(response);
-    //anything else you want to do(save to localStorage)...
+    document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
   }
 
+  logoutFacebook(){
+    window.FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+        // the user is logged in and has authenticated your
+        // app, and response.authResponse supplies
+        // the user's ID, a valid access token, a signed
+        // request, and the time the access token
+        // and signed request each expire
+        var uid = response.authResponse.userID;
+        // var accessToken = response.authResponse.accessToken;
+
+        window.FB.api('/'+uid+'/permissions', 'delete', function(response){
+        });
+        document.getElementById('status').innerHTML = 'Logged out!';
+      } else if (response.status === 'not_authorized') {
+        // the user is logged in to Facebook,
+        // but has not authenticated your app
+      } else {
+        // the user isn't logged in to Facebook.
+      }
+     });
+  }
   render() {
 
-    function logoutFacebook(){
-      window.FB.getLoginStatus(function(response) {
-        if (response.status === 'connected') {
-          // the user is logged in and has authenticated your
-          // app, and response.authResponse supplies
-          // the user's ID, a valid access token, a signed
-          // request, and the time the access token
-          // and signed request each expire
-          var uid = response.authResponse.userID;
-          // var accessToken = response.authResponse.accessToken;
-
-          window.FB.api('/'+uid+'/permissions', 'delete', function(response){});
-
-        } else if (response.status === 'not_authorized') {
-          // the user is logged in to Facebook,
-          // but has not authenticated your app
-        } else {
-          // the user isn't logged in to Facebook.
-        }
-       });
-    }
     const onHungryPage = this.state.onHungryPage;
     const onUserPage = this.state.onUserPage;
     const onTestPage = this.state.onTestPage;
-
+    const logoutFacebook = this.state.logoutFacebook;
     //Components can be functions or classes, React gives us the choice
     //Declared an empty component
     let CurrentPage = null;
@@ -112,12 +113,12 @@ class App extends Component {
                        buttonText="Login With Facebook"/>
 
         <p id="status" />
-        <button id="logout" onClick={logoutFacebook} >Logout FB</button>
         <MuiThemeProvider>
           <Navbar
             handleHungryOnTap={this.handleHungryOnTap}
             handleUserOnTap={this.handleUserOnTap}
             handleTestOnTap={this.handleTestOnTap}
+            logoutFacebook={this.logoutFacebook}
           />
         </MuiThemeProvider>
         <CurrentPage/>
