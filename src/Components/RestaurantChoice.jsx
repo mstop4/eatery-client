@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
+import Paper from 'material-ui/Paper'
+import Grid from 'material-ui/Grid'
 import {GridList, GridTile} from 'material-ui/GridList'
 import Image from 'react-image-resizer'
 import MapComponent from './MapComponent.jsx'
@@ -116,6 +118,32 @@ class RestaurantChoice extends React.Component {
 
     return (
       <div>
+<div>
+      <Grid container spacing={24}>
+        <Grid item xs={12}>
+          <Paper>xs=12</Paper>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Paper>xs=12 sm=6</Paper>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Paper>xs=12 sm=6</Paper>
+        </Grid>
+        <Grid item xs={6} sm={3}>
+          <Paper>xs=6 sm=3</Paper>
+        </Grid>
+        <Grid item xs={6} sm={3}>
+          <Paper>xs=6 sm=3</Paper>
+        </Grid>
+        <Grid item xs={6} sm={3}>
+          <Paper>xs=6 sm=3</Paper>
+        </Grid>
+        <Grid item xs={6} sm={3}>
+          <Paper>xs=6 sm=3</Paper>
+        </Grid>
+      </Grid>
+    </div>
+
         <MuiThemeProvider>
           <GridList cols={4}>
             {infos}
