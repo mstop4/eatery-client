@@ -13,20 +13,22 @@ class RestaurantChoice extends React.Component {
       foodJSON: [],
       photos: [],
       position: {
-        lat: 22.2797537, //43.64518819999999
-        lng: 114.1735712 //-79.39392040000001
+        lat: 43.64518819999999,
+        lng: -79.39392040000001
       },
       radius: 200,
       maxResults: 10
     }
+
+    this.getFood = this.getFood.bind(this)
   }
 
   componentDidMount() {
-    this.getFood()
+    //this.getFood()
   }
 
-  getFood() {
-    fetch(`http://localhost:3000/places?lat=${this.state.position.lat}&lng=${this.state.position.lng}&radius=${this.state.radius}`, {
+  getFood(lat, lng) {
+    fetch(`http://localhost:3000/places?lat=${lat}&lng=${lng}&radius=${this.state.radius}`, {
       mode: "cors",
     })
       .then((response) => {
@@ -52,7 +54,6 @@ class RestaurantChoice extends React.Component {
         }
 
         this.setState({ foodJSON: json, photos: newPhotos })
-        console.log(newPhotos)
 
       })
       .catch((error) => {
@@ -94,7 +95,11 @@ class RestaurantChoice extends React.Component {
             {infos}
           </GridList>
         </MuiThemeProvider>
-        <MapComponent data={this.state.foodJSON.results} center={this.state.position} />
+        <MapComponent
+          data={this.state.foodJSON.results}
+          center={this.state.position}
+          getFood={this.getFood}
+        />
       </div>
     )
   }

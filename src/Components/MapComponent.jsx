@@ -6,14 +6,29 @@ const params = {v: '3.exp', key: process.env.REACT_APP_GOOGLEMAPS_APIKEY, librar
 
 class MapComponent extends React.Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+    this.state = {}
+
+    this.onMapCreated = this.onMapCreated.bind(this)
   }
 
   componentDidMount() {
   }
 
   onMapCreated(map) {
+    this.setState({map: map})
+
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+
+        map.panTo({lat: position.coords.latitude, lng: position.coords.longitude})
+
+        if (this.props.getFood)
+          this.props.getFood(position.coords.latitude, position.coords.longitude)
+      })
+    }
   }
 
   onDragEnd(e) {
