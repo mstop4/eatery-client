@@ -12,7 +12,7 @@ import RandomizeGroup from './Components/RandomizeGroup.jsx';
 import User from './Components/User.jsx';
 import {TestPage} from './Components/TestPage.jsx'
 //Facebook Login
-import { FacebookLogin } from 'react-facebook-login-component';
+import FacebookLogin from './Components/FacebookLogin.js';
 
 class App extends Component {
   constructor(props) {
