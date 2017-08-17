@@ -13,6 +13,9 @@ import User from './Components/User.jsx';
 import {TestPage} from './Components/TestPage.jsx'
 //Facebook Login
 import FacebookLogin from './Components/FacebookLogin.js';
+import Login from './Components/Login.jsx';
+
+
 
 class App extends Component {
   constructor(props) {
@@ -21,6 +24,7 @@ class App extends Component {
     this.handleUserOnTap = this.handleUserOnTap.bind(this);
     this.handleTestOnTap = this.handleTestOnTap.bind(this);
     this.logoutFacebook = this.logoutFacebook.bind(this);
+    this.testClick = this.testClick.bind(this);
     this.state = { currentPage: 'Hungry' }
   }
 
@@ -43,9 +47,22 @@ class App extends Component {
   }
 
   responseFacebook (response) {
-    console.log(response);
     if (response !== undefined){
+      console.log(response);
       document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
+
+      fetch('http://localhost:3001/facebook', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: response.name,
+          email: response.email,
+          fbId: response.id
+        })
+      })
     }
   }
 
@@ -61,16 +78,36 @@ class App extends Component {
         // and signed request each expire
         var uid = response.authResponse.userID;
         // var accessToken = response.authResponse.accessToken;
+        //Removes permission for FB
         window.FB.api('/'+uid+'/permissions', 'delete', function(response){
         });
+        //Get request to remove session
+        fetch('http://localhost:3001/logout', {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          }
+        })
         document.getElementById('status').innerHTML = 'Logged out!';
+
       } else if (response.status === 'not_authorized') {
         // the user is logged in to Facebook,
         // but has not authenticated your app
       } else {
         // the user isn't logged in to Facebook.
       }
-     });
+    });
+  }
+  testClick(){
+    console.log('test Click')
+    fetch('http://localhost:3001/auth', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    })
   }
   render() {
 
@@ -114,6 +151,7 @@ class App extends Component {
                        className="facebook-login"
                        buttonText="Login With Facebook"/>
         <p id="status" />
+        <button onClick={this.testClick} >Test</button>
         <MuiThemeProvider>
           <Navbar
             handleHungryOnTap={this.handleHungryOnTap}
