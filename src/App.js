@@ -110,7 +110,6 @@ class App extends Component {
     })
   }
   render() {
-
     const onHungryPage = this.state.onHungryPage;
     const onUserPage = this.state.onUserPage;
     const onTestPage = this.state.onTestPage;
@@ -121,22 +120,13 @@ class App extends Component {
 
     switch (this.state.currentPage) {
       case 'Hungry':
-        CurrentPage = () => (
-          <div>
-            <RestaurantChoice/>
-            <MapComponent/>
-          </div>
-        );
-        break;
+        CurrentPage = <RestaurantChoice/>
+        break
       case 'User':
-        CurrentPage = () => (
-          <User />
-        );
-        break;
+        CurrentPage = <User />
+        break
       case 'Test':
-        CurrentPage = () => (
-          <TestPage />
-        );
+        CurrentPage = <TestPage />
     }
 
     return (
@@ -160,7 +150,7 @@ class App extends Component {
             logoutFacebook={this.logoutFacebook}
           />
         </MuiThemeProvider>
-        <CurrentPage/>
+        {CurrentPage}
       </div>
 
     );
