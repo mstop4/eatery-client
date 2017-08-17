@@ -93,8 +93,6 @@ class RestaurantChoice extends React.Component {
           g_position = {lat: lat, lng: lng}
           g_album = newAlbum
 
-          console.dir(g_album)
-
           this.setState({
             foodJSON: json,
             photos: newPhotos,
