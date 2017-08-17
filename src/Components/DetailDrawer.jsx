@@ -25,6 +25,13 @@ export default class DetailDrawer extends React.Component {
   }
 
   render() {
+
+    let album = []
+
+    for (let photo in this.state.details.photos) {
+      album.push(<img src={this.state.details.photos[photo]}/>)
+    }
+
     return (
       <MuiThemeProvider>
         <Drawer
@@ -36,9 +43,7 @@ export default class DetailDrawer extends React.Component {
           <h1> {this.state.details.title} </h1>
           <p> {this.state.details.rating}</p>
           <div>
-            <img
-              src={this.state.details.photo}
-            />
+            {album}
           </div>
           <div>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque in
