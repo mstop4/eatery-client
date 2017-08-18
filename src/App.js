@@ -11,6 +11,7 @@ import FBLoginButton from './FBLoginButton.js';
 import RandomizeGroup from './Components/RandomizeGroup.jsx';
 import User from './Components/User.jsx';
 import {TestPage} from './Components/TestPage.jsx'
+import GridList from './Components/Feed.jsx'
 //Facebook Login
 import FacebookLogin from './Components/FacebookLogin.js';
 
@@ -155,6 +156,10 @@ class App extends Component {
           />
         </MuiThemeProvider>
         {CurrentPage}
+        <GridList       foodJson={this.state.foodJSON}
+                        photos={this.state.photos}
+                        album={this.state.album}
+                        updateCache={this.updateCache}/>
       </div>
 
     );
