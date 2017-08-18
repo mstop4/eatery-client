@@ -45,15 +45,10 @@ class MapComponent extends React.Component {
 
       for (let place in places) {
         if (bounds) {
-          console.dir({
-            lat: places[place]["geometry"]["location"].lat,
-            lng: places[place]["geometry"]["location"].lng
-          })
           bounds.extend({
             lat: places[place]["geometry"]["location"].lat,
             lng: places[place]["geometry"]["location"].lng
           })
-          console.dir(bounds)
         }
 
         if (++n >= this.props.maxResults) break
@@ -141,8 +136,9 @@ class MapComponent extends React.Component {
           height={'525px'}
           lat={this.props.center.lat}
           lng={this.props.center.lng}
-          zoom={17}
+          zoom={10}
           zoomControl={true}
+          mapTypeControl={false}
           gestureHandling={'cooperative'}
           loadingMessage={'Eatery'}
           params={params}

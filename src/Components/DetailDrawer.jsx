@@ -4,6 +4,9 @@ import MenuItem from "material-ui/MenuItem";
 import RaisedButton from "material-ui/RaisedButton";
 import FavoriteButton from "./FavoriteButton.jsx";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import Rating from "react-rating";
+import StarBorder from "material-ui/svg-icons/toggle/star-border";
+import Star from "material-ui/svg-icons/toggle/star"
 
 export default class DetailDrawer extends React.Component {
   constructor(props) {
@@ -30,6 +33,7 @@ export default class DetailDrawer extends React.Component {
 
     for (let photo in this.state.details.photos) {
       album.push(<img src={this.state.details.photos[photo]}/>)
+      break;
     }
 
     return (
@@ -41,7 +45,12 @@ export default class DetailDrawer extends React.Component {
           onRequestChange={this.props.request}
         >
           <h1> {this.state.details.title} </h1>
-          <p> {this.state.details.rating}</p>
+          <Rating
+            initialRate={this.state.details.rating}
+            empty={<StarBorder/>}
+            full={<Star/>}
+            readonly
+          />
           <div>
             {album}
           </div>
