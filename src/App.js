@@ -20,8 +20,13 @@ class App extends Component {
     this.handleHungryOnTap = this.handleHungryOnTap.bind(this);
     this.handleUserOnTap = this.handleUserOnTap.bind(this);
     this.handleTestOnTap = this.handleTestOnTap.bind(this);
+    this.handleUserLogin = this.handleUserLogin.bind(this);    
     this.logoutFacebook = this.logoutFacebook.bind(this);
-    this.state = { currentPage: 'Hungry' }
+    this.state = { 
+      currentPage: 'Hungry',
+      currentUser: '',
+      currentEmail: ''
+    }
   }
 
   handleHungryOnTap() {
@@ -39,6 +44,13 @@ class App extends Component {
   handleTestOnTap() {
     this.setState({
       currentPage: 'Test'
+    });
+  }
+
+  handleUserLogin(name, email){
+    this.setState({
+      currentUser: name,
+      currentEmail: email
     });
   }
 
@@ -73,6 +85,7 @@ class App extends Component {
      });
   }
   render() {
+   
     const onHungryPage = this.state.onHungryPage;
     const onUserPage = this.state.onUserPage;
     const onTestPage = this.state.onTestPage;
@@ -86,7 +99,15 @@ class App extends Component {
         CurrentPage = <RestaurantChoice/>
         break
       case 'User':
-        CurrentPage = <User />
+        CurrentPage = 
+          <User 
+            currentEmail = {
+              this.state.currentEmail
+            }
+            currentUser = {
+              this.state.currentUser
+            }
+          />
         break
       case 'Test':
         CurrentPage = <TestPage />
@@ -102,7 +123,9 @@ class App extends Component {
                        fields="id,email,name"
                        version="v2.5"
                        className="facebook-login"
-                       buttonText="Login With Facebook"/>
+                       buttonText="Login With Facebook"
+                       handleUserLogin={this.handleUserLogin}
+        />
         <p id="status" />
         <MuiThemeProvider>
           <Navbar
