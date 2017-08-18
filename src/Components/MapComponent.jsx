@@ -9,7 +9,9 @@ class MapComponent extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      map: null
+    }
 
     this.onMapCreated = this.onMapCreated.bind(this)
   }
@@ -44,14 +46,23 @@ class MapComponent extends React.Component {
 
   render() {
 
+    console.log(this.state.map)
+
     const markers = []
     const infos = []
     let message
     let circle
+    let bounds = null
     const places = this.props.data
+    let n = 0
+
+    // create a new bounds object only if map is set up
+    if (this.state.map) {
+      bounds = new window.google.maps.LatLngBounds(null)
+      console.dir(bounds)
+    }
 
     if (places && places.length > 0) {
-      let n = 0
 
       for (let place in places) {
         markers.push(<Marker
@@ -71,7 +82,27 @@ class MapComponent extends React.Component {
             onCloseClick={this.onCloseClick} />
           )
 
+        // update bounds only if map is set up
+        if (bounds) {
+          console.dir({
+            lat: places[place]["geometry"]["location"].lat,
+            lng: places[place]["geometry"]["location"].lng
+          })
+          bounds.extend({
+            lat: places[place]["geometry"]["location"].lat,
+            lng: places[place]["geometry"]["location"].lng
+          })
+          console.dir(bounds)
+        }
+
         if (++n >= this.props.maxResults) break
+      }
+
+      // pan to bounds only if bounds exist
+
+      if (bounds) {
+        console.dir(bounds)
+        this.state.map.panToBounds(bounds)
       }
 
       circle = <Circle
@@ -104,7 +135,8 @@ class MapComponent extends React.Component {
 
           {markers}
 
-          {circle}
+          {//circle
+          }
 
         </Gmaps>
       </div>

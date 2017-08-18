@@ -9,7 +9,7 @@ import DetailDrawer from './DetailDrawer.jsx'
 let g_foodJSON = []
 let g_photos = []
 let g_album = {}
-let g_position = { lat: 43.64518819999999, lng: -79.39392040000001 }
+let g_position = { lat: 44, lng: -80 }
 
 class RestaurantChoice extends React.Component {
 
@@ -20,7 +20,8 @@ class RestaurantChoice extends React.Component {
       photos: g_photos,
       album: g_album,
       position: g_position,
-      radius: 200,
+      radius: 2000,
+      rankBy: "distance",
       maxResults: 12,
 
       open: false,
@@ -36,7 +37,9 @@ class RestaurantChoice extends React.Component {
   getFood = (lat, lng) => {
     if (this.state.foodJSON.length === 0 || this.state.photos.length === 0) {
 
-      fetch(`http://localhost:3000/places?lat=${lat}&lng=${lng}&radius=${this.state.radius}`, {
+      const type = "restaurant"
+
+      fetch(`http://localhost:3000/places?lat=${lat}&lng=${lng}&type=${type}&rankby=${this.state.rankBy}`, {
         mode: "cors"
       })
         .then((response) => {
@@ -120,6 +123,7 @@ class RestaurantChoice extends React.Component {
     if (places) {
       for (let place in places) {
 
+        // build grid tile
         let pic = this.state.photos[place]
 
         infos.push(
