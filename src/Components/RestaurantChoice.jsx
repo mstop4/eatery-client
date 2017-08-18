@@ -39,8 +39,6 @@ class RestaurantChoice extends React.Component {
 
       const type = "restaurant"
 
-      console.log(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/places?lat=${lat}&lng=${lng}&type=${type}&rankby=${this.state.rankBy}`)
-
       fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/places?lat=${lat}&lng=${lng}&type=${type}&rankby=${this.state.rankBy}`, {
         mode: "cors"
       })
@@ -65,8 +63,6 @@ class RestaurantChoice extends React.Component {
 
               let place_id = json.results[place].place_id;
               newAlbum[place] = []
-
-              console.log(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/details?placeid=${place_id}`)
 
               fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/details?placeid=${place_id}`, {
                 mode: "cors"
