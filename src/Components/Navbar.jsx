@@ -91,32 +91,20 @@ class Navbar extends Component {
     logged: true
   };
 
-  handleChange = (event, logged) => {
-    this.setState({ logged: logged });
-  };
-
   render() {
     return (
       <div>
-        <Toggle
-          label="Logged"
-          defaultToggled={true}
-          onToggle={this.handleChange}
-          labelPosition="right"
-          style={{ margin: 20 }}
-        />
+
         <AppBar
           title="Eatery"
           //showMenuIconButton={false}
-          iconElementRight={this.state.logged ?
+          iconElementRight={
             <Logged
               handleHungryOnTap={ this.props.handleHungryOnTap }
               handleUserOnTap={ this.props.handleUserOnTap }
               handleTestOnTap={ this.props.handleTestOnTap}
               logoutFacebook={ this.props.logoutFacebook}
-            />
-            : <Login />}
-          iconElementLeft={<UserIcon />}
+            />}
         />
       </div>
     );

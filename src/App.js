@@ -125,18 +125,7 @@ class App extends Component {
 
     return (
       <div>
-        <FacebookLogin socialId={process.env.REACT_APP_FB_APPID}
-                       language="en_US"
-                       scope="public_profile,email"
-                       responseHandler={this.responseFacebook}
-                       xfbml={true}
-                       fields="id,email,name"
-                       version="v2.5"
-                       className="facebook-login"
-                       buttonText="Login With Facebook"
-                       handleUserLogin={this.handleUserLogin}
-        />
-        <p id="status" />
+        <span id="status" />
         <MuiThemeProvider muiTheme={muiTheme}>
           <Navbar
             handleHungryOnTap={this.handleHungryOnTap}
