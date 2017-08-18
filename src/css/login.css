@@ -1,10 +1,9 @@
 .facebook-login {
   font-size: 20px;
-  margin: auto !important;
+  padding-top: 40% !important;
   display:block !important;
   width: 20%;
-  color: white;
-  text-decoration-color: white;
+  color: white !important;
   display: block;
 }
 
@@ -14,10 +13,13 @@
   /* Full height */
   height: 100%;
   width: 100%;
-  filter: brightness(65%);
+  filter: brightness(50%);
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: fixed;
+}
+button {
+  color: white;
 }

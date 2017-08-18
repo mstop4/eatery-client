@@ -2,9 +2,6 @@ import React from 'react';
 import FacebookLogin from '../Components/FacebookLogin.js';
 import '../css/login.css';
 
-let imgUrl = '/images/login.gif'
-
-
 export class TestPage extends React.Component{
   constructor(props){
     super(props);
