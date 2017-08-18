@@ -1,15 +1,19 @@
 import React from 'react';
 import FacebookLogin from '../Components/FacebookLogin.js';
+import '../css/login.css';
 
 let imgUrl = '/images/login.gif'
 let style = {
-  background: 'url('+ imgUrl + ') noRepeat center center fixed',
-  backgroundSize: 'cover',
-  width: '100%',
   image:{
     width: '100vw',
-    position: 'absolute',
-    backgroundColor: 'rgba(0, 0, 0, 0.75)'
+    position: 'absolute'
+  },
+  darken:{
+    backgroundColor: 'rgba(0,0,0,1)'
+  },
+  button:{
+    marginLeft: '50%',
+    marginTop: '50%'
   }
 }
 
@@ -21,8 +25,9 @@ export class TestPage extends React.Component{
   render(){
     return (
         <div>
-        <img src={imgUrl} style={style.image}/>
-        THIS IS THE TEST PAGE
+          <div style={style.darken}>
+            <img src={imgUrl} style={style.image}/>
+          </div>
         <FacebookLogin socialId={process.env.REACT_APP_FB_APPID}
                        language="en_US"
                        scope="public_profile,email"
@@ -32,6 +37,7 @@ export class TestPage extends React.Component{
                        version="v2.5"
                        className="facebook-login"
                        handleUserLogin={this.handleUserLogin}
+                       style = {style.button}
         />
       </div>
     )
