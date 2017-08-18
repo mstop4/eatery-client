@@ -5,16 +5,63 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 const params = {v: '3.exp', key: process.env.REACT_APP_GOOGLEMAPS_APIKEY, libraries: "places"};
 
+const size = {width: 24, height: 24}
+const mapicons = [
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon56.png", scaledSize: size },
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon57.png", scaledSize: size },
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon58.png", scaledSize: size },
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon59.png", scaledSize: size },
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon60.png", scaledSize: size },
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon61.png", scaledSize: size },
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon62.png", scaledSize: size },
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon63.png", scaledSize: size },
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon32.png", scaledSize: size },
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon33.png", scaledSize: size },
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon34.png", scaledSize: size },
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon35.png", scaledSize: size },
+]
+
 class MapComponent extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      map: null
+    }
 
     this.onMapCreated = this.onMapCreated.bind(this)
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
+
+    // create a new bounds object only if map is set up
+    if (this.state.map) {
+      let bounds = new window.google.maps.LatLngBounds(null)
+
+      // update bounds only if map is set up
+
+      const places = this.props.data
+      let n = 0
+
+      for (let place in places) {
+        if (bounds) {
+          console.dir({
+            lat: places[place]["geometry"]["location"].lat,
+            lng: places[place]["geometry"]["location"].lng
+          })
+          bounds.extend({
+            lat: places[place]["geometry"]["location"].lat,
+            lng: places[place]["geometry"]["location"].lng
+          })
+          console.dir(bounds)
+        }
+
+        if (++n >= this.props.maxResults) break
+      }
+
+      this.state.map.panToBounds(bounds)
+      this.state.map.fitBounds(bounds)
+    }
   }
 
   onMapCreated(map) {
@@ -49,27 +96,26 @@ class MapComponent extends React.Component {
     let message
     let circle
     const places = this.props.data
+    let n = 0
 
     if (places && places.length > 0) {
-      let n = 0
 
       for (let place in places) {
         markers.push(<Marker
             key={place}
             lat={places[place]["geometry"]["location"].lat}
             lng={places[place]["geometry"]["location"].lng}
-            //draggable={true}
-            //onDragEnd={this.onDragEnd}
+            icon={mapicons[place]}
             />
         )
 
-        infos.push(<InfoWindow
-            key={place}
-            lat={places[place]["geometry"]["location"].lat}
-            lng={places[place]["geometry"]["location"].lng}
-            content={places[place]["name"]}
-            onCloseClick={this.onCloseClick} />
-          )
+        // infos.push(<InfoWindow
+        //     key={place}
+        //     lat={places[place]["geometry"]["location"].lat}
+        //     lng={places[place]["geometry"]["location"].lng}
+        //     content={places[place]["name"]}
+        //     onCloseClick={this.onCloseClick} />
+        //   )
 
         if (++n >= this.props.maxResults) break
       }
@@ -104,7 +150,8 @@ class MapComponent extends React.Component {
 
           {markers}
 
-          {circle}
+          {//circle
+          }
 
         </Gmaps>
       </div>

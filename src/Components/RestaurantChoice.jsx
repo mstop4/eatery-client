@@ -18,7 +18,7 @@ const muiTheme = getMuiTheme({
 let g_foodJSON = []
 let g_photos = []
 let g_album = {}
-let g_position = { lat: 43.64518819999999, lng: -79.39392040000001 }
+let g_position = { lat: 43.6532, lng: -79.3832 }
 
 class RestaurantChoice extends React.Component {
 
@@ -29,7 +29,8 @@ class RestaurantChoice extends React.Component {
       photos: g_photos,
       album: g_album,
       position: g_position,
-      radius: 200,
+      radius: 2000,
+      rankBy: "distance",
       maxResults: 12,
 
       open: false,
@@ -45,7 +46,11 @@ class RestaurantChoice extends React.Component {
   getFood = (lat, lng) => {
     if (this.state.foodJSON.length === 0 || this.state.photos.length === 0) {
 
-      fetch(`http://localhost:3000/places?lat=${lat}&lng=${lng}&radius=${this.state.radius}`, {
+      const type = "restaurant"
+
+      console.log(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/places?lat=${lat}&lng=${lng}&type=${type}&rankby=${this.state.rankBy}`)
+
+      fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/places?lat=${lat}&lng=${lng}&type=${type}&rankby=${this.state.rankBy}`, {
         mode: "cors"
       })
         .then((response) => {
@@ -70,7 +75,9 @@ class RestaurantChoice extends React.Component {
               let place_id = json.results[place].place_id;
               newAlbum[place] = []
 
-              fetch(`http://localhost:3000/details?placeid=${place_id}`, {
+              console.log(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/details?placeid=${place_id}`)
+
+              fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/details?placeid=${place_id}`, {
                 mode: "cors"
               })
                 .then((dResponse) => {
@@ -109,6 +116,8 @@ class RestaurantChoice extends React.Component {
             position: { lat: lat, lng: lng }
           })
 
+          this.props.updateCache(newAlbum)
+
         })
         .catch((error) => {
           console.error(error)
@@ -129,6 +138,7 @@ class RestaurantChoice extends React.Component {
     if (places) {
       for (let place in places) {
 
+        // build grid tile
         let pic = this.state.photos[place]
 
         infos.push(
@@ -148,7 +158,6 @@ class RestaurantChoice extends React.Component {
                 })
                 //console.log(this.state.details)
                 this.handleToggle();
-
               {/* this.setState({details:details}) */}
               {/* this.handleToggle(details) */}
             }}

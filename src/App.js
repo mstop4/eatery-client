@@ -23,6 +23,7 @@ const muiTheme = getMuiTheme({
     primary1Color: red500,
   }
 });
+let g_album = {}
 
 class App extends Component {
   constructor(props) {
@@ -34,9 +35,13 @@ class App extends Component {
     this.logoutFacebook = this.logoutFacebook.bind(this);
     this.state = {
       currentPage: 'Test',
+      currentPage: 'Hungry',
       currentUser: '',
-      currentEmail: ''
+      currentEmail: '',
+      album: {},
     }
+
+    this.updateCache = this.updateCache.bind(this)
   }
 
   handleHungryOnTap() {
@@ -62,6 +67,14 @@ class App extends Component {
       currentUser: name,
       currentEmail: email
     });
+  }
+
+  updateCache(newAlbum){
+    g_album = newAlbum
+
+    this.setState({
+      album: newAlbum,
+    })
   }
 
   responseFacebook (response) {
@@ -106,7 +119,12 @@ class App extends Component {
 
     switch (this.state.currentPage) {
       case 'Hungry':
-        CurrentPage = <RestaurantChoice/>
+        CurrentPage = <RestaurantChoice
+                        foodJson={this.state.foodJSON}
+                        photos={this.state.photos}
+                        album={this.state.album}
+                        position={this.state.position}
+                        updateCache={this.updateCache}/>
         break
       case 'User':
         CurrentPage =
