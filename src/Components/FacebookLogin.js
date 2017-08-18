@@ -2,7 +2,28 @@ import React from 'react';
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import RaisedButton from 'material-ui/RaisedButton';
 
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { red500, white } from 'material-ui/styles/colors';
 
+
+const muiTheme = getMuiTheme({
+  palette: {
+    canvasColor: red500,
+    alternateTextColor: red500,
+    textColor: white,
+    primary1Color: white,
+  }
+});
+
+const style = {
+  button:{
+    margin: 'auto',
+    color: 'white',
+    labelColor: 'white',
+
+  }
+
+}
 export default class FacebookLogin extends React.Component {
   constructor(props) {
     super(props);
@@ -59,10 +80,9 @@ export default class FacebookLogin extends React.Component {
 
     return (
       <div>
-        <MuiThemeProvider>
-          <RaisedButton fullWidth={true} {...props} onClick={this.clickHandler.bind(this)}>
-            {children}
-            {buttonText}
+        <MuiThemeProvider muiTheme={muiTheme}>
+          <RaisedButton style={style.button} {...props} onClick={this.clickHandler.bind(this)}>
+            Log In
           </RaisedButton>
         </MuiThemeProvider>
       </div>

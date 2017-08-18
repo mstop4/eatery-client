@@ -17,6 +17,7 @@ import FacebookLogin from './Components/FacebookLogin.js';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {red500} from 'material-ui/styles/colors';
 
+
 const muiTheme = getMuiTheme({
   palette: {
     primary1Color: red500,
@@ -32,7 +33,7 @@ class App extends Component {
     this.handleUserLogin = this.handleUserLogin.bind(this);
     this.logoutFacebook = this.logoutFacebook.bind(this);
     this.state = {
-      currentPage: 'Hungry',
+      currentPage: 'Test',
       currentUser: '',
       currentEmail: ''
     }
