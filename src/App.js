@@ -14,15 +14,24 @@ import {TestPage} from './Components/TestPage.jsx'
 //Facebook Login
 import FacebookLogin from './Components/FacebookLogin.js';
 
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import {red500} from 'material-ui/styles/colors';
+
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: red500,
+  }
+});
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.handleHungryOnTap = this.handleHungryOnTap.bind(this);
     this.handleUserOnTap = this.handleUserOnTap.bind(this);
     this.handleTestOnTap = this.handleTestOnTap.bind(this);
-    this.handleUserLogin = this.handleUserLogin.bind(this);    
+    this.handleUserLogin = this.handleUserLogin.bind(this);
     this.logoutFacebook = this.logoutFacebook.bind(this);
-    this.state = { 
+    this.state = {
       currentPage: 'Hungry',
       currentUser: '',
       currentEmail: ''
@@ -85,7 +94,7 @@ class App extends Component {
      });
   }
   render() {
-   
+
     const onHungryPage = this.state.onHungryPage;
     const onUserPage = this.state.onUserPage;
     const onTestPage = this.state.onTestPage;
@@ -99,8 +108,8 @@ class App extends Component {
         CurrentPage = <RestaurantChoice/>
         break
       case 'User':
-        CurrentPage = 
-          <User 
+        CurrentPage =
+          <User
             currentEmail = {
               this.state.currentEmail
             }
@@ -127,7 +136,7 @@ class App extends Component {
                        handleUserLogin={this.handleUserLogin}
         />
         <p id="status" />
-        <MuiThemeProvider>
+        <MuiThemeProvider muiTheme={muiTheme}>
           <Navbar
             handleHungryOnTap={this.handleHungryOnTap}
             handleUserOnTap={this.handleUserOnTap}
