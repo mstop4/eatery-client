@@ -9,7 +9,7 @@ import DetailDrawer from './DetailDrawer.jsx'
 let g_foodJSON = []
 let g_photos = []
 let g_album = {}
-let g_position = { lat: 44, lng: -80 }
+let g_position = { lat: 43.6532, lng: -79.3832 }
 
 class RestaurantChoice extends React.Component {
 
@@ -39,7 +39,9 @@ class RestaurantChoice extends React.Component {
 
       const type = "restaurant"
 
-      fetch(`http://localhost:3000/places?lat=${lat}&lng=${lng}&type=${type}&rankby=${this.state.rankBy}`, {
+      console.log(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/places?lat=${lat}&lng=${lng}&type=${type}&rankby=${this.state.rankBy}`)
+
+      fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/places?lat=${lat}&lng=${lng}&type=${type}&rankby=${this.state.rankBy}`, {
         mode: "cors"
       })
         .then((response) => {
@@ -64,7 +66,9 @@ class RestaurantChoice extends React.Component {
               let place_id = json.results[place].place_id;
               newAlbum[place] = []
 
-              fetch(`http://localhost:3000/details?placeid=${place_id}`, {
+              console.log(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/details?placeid=${place_id}`)
+
+              fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/details?placeid=${place_id}`, {
                 mode: "cors"
               })
                 .then((dResponse) => {

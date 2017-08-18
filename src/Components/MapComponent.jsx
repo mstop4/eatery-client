@@ -5,6 +5,22 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 const params = {v: '3.exp', key: process.env.REACT_APP_GOOGLEMAPS_APIKEY, libraries: "places"};
 
+const size = 32;
+const mapicons = [
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon56.png", scaledSize: {width: size, height: size} },
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon57.png", scaledSize: {width: size, height: size} },
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon58.png", scaledSize: {width: size, height: size} },
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon59.png", scaledSize: {width: size, height: size} },
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon60.png", scaledSize: {width: size, height: size} },
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon61.png", scaledSize: {width: size, height: size} },
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon62.png", scaledSize: {width: size, height: size} },
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon63.png", scaledSize: {width: size, height: size} },
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon32.png", scaledSize: {width: size, height: size} },
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon33.png", scaledSize: {width: size, height: size} },
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon34.png", scaledSize: {width: size, height: size} },
+  { url: "http://maps.google.com/mapfiles/kml/pal5/icon35.png", scaledSize: {width: size, height: size} },
+]
+
 class MapComponent extends React.Component {
 
   constructor(props) {
@@ -69,18 +85,17 @@ class MapComponent extends React.Component {
             key={place}
             lat={places[place]["geometry"]["location"].lat}
             lng={places[place]["geometry"]["location"].lng}
-            //draggable={true}
-            //onDragEnd={this.onDragEnd}
+            icon={mapicons[place]}
             />
         )
 
-        infos.push(<InfoWindow
-            key={place}
-            lat={places[place]["geometry"]["location"].lat}
-            lng={places[place]["geometry"]["location"].lng}
-            content={places[place]["name"]}
-            onCloseClick={this.onCloseClick} />
-          )
+        // infos.push(<InfoWindow
+        //     key={place}
+        //     lat={places[place]["geometry"]["location"].lat}
+        //     lng={places[place]["geometry"]["location"].lng}
+        //     content={places[place]["name"]}
+        //     onCloseClick={this.onCloseClick} />
+        //   )
 
         // update bounds only if map is set up
         if (bounds) {
