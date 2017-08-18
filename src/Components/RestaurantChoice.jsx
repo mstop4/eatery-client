@@ -107,6 +107,8 @@ class RestaurantChoice extends React.Component {
             position: { lat: lat, lng: lng }
           })
 
+          this.props.updateCache(newAlbum)
+
         })
         .catch((error) => {
           console.error(error)
@@ -147,7 +149,6 @@ class RestaurantChoice extends React.Component {
                 })
                 //console.log(this.state.details)
                 this.handleToggle();
-
               {/* this.setState({details:details}) */}
               {/* this.handleToggle(details) */}
             }}

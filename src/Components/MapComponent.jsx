@@ -37,7 +37,6 @@ class MapComponent extends React.Component {
     // create a new bounds object only if map is set up
     if (this.state.map) {
       let bounds = new window.google.maps.LatLngBounds(null)
-      console.dir(bounds)
 
       // update bounds only if map is set up
 
@@ -60,7 +59,6 @@ class MapComponent extends React.Component {
         if (++n >= this.props.maxResults) break
       }
 
-      console.dir(bounds)
       this.state.map.panToBounds(bounds)
       this.state.map.fitBounds(bounds)
     }
@@ -92,8 +90,6 @@ class MapComponent extends React.Component {
   }
 
   render() {
-
-    console.log(this.state.map)
 
     const markers = []
     const infos = []
