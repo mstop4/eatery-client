@@ -10,7 +10,7 @@ export class TestPage extends React.Component{
   render(){
     return (
         <div style={{width: '100%', height: '100%'}}>
-          <span className='title'> Eatery </span>
+          <span className='login-title'> Eatery </span>
           <div className='bg'></div>
             <FacebookLogin socialId={process.env.REACT_APP_FB_APPID}
                            language="en_US"
