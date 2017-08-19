@@ -34,6 +34,36 @@ class RestaurantChoice extends React.Component {
     }
   }
 
+  getMoreDetails = (json, place, newAlbum) => {
+    // get more details
+
+    let place_id = json.results[place].place_id;
+    newAlbum[place] = []
+
+    return new Promise ((resolve, reject) => {
+      fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/details?placeid=${place_id}`, {
+        mode: "cors"
+      })
+      .then((response) => {
+        return response.json()
+      })
+      .then((json) => {
+        for (let photo in json.result.photos) {
+          newAlbum[place][photo] = "https://maps.googleapis.com/maps/api/place/photo?"
+          newAlbum[place][photo] += `key=${process.env.REACT_APP_GOOGLEMAPS_APIKEY}&`
+          newAlbum[place][photo] += `photoreference=${json.result.photos[photo].photo_reference}&`
+          newAlbum[place][photo] += "maxheight=400"
+        }
+        resolve()
+      })
+      .catch((error) => {
+        console.error(error)
+        reject(error)
+      })
+    })
+    ///////////
+  }
+
   getFood = (lat, lng) => {
     if (this.state.foodJSON.length === 0 || this.state.photos.length === 0) {
 
@@ -49,40 +79,16 @@ class RestaurantChoice extends React.Component {
 
           let newPhotos = []
           let newAlbum = {}
+          let promises = []
           let n = 0
 
           for (let place in json.results) {
-
             if (json.results[place].photos) {
               newPhotos[place] = "https://maps.googleapis.com/maps/api/place/photo?"
               newPhotos[place] += `key=${process.env.REACT_APP_GOOGLEMAPS_APIKEY}&`
               newPhotos[place] += `photoreference=${json.results[place].photos[0].photo_reference}&`
               newPhotos[place] += "maxheight=400"
-
-              // get more details
-
-              let place_id = json.results[place].place_id;
-              newAlbum[place] = []
-
-              fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/details?placeid=${place_id}`, {
-                mode: "cors"
-              })
-                .then((dResponse) => {
-                  return dResponse.json()
-                })
-                .then((dJson) => {
-                  for (let photo in dJson.result.photos) {
-                    newAlbum[place][photo] = "https://maps.googleapis.com/maps/api/place/photo?"
-                    newAlbum[place][photo] += `key=${process.env.REACT_APP_GOOGLEMAPS_APIKEY}&`
-                    newAlbum[place][photo] += `photoreference=${dJson.result.photos[photo].photo_reference}&`
-                    newAlbum[place][photo] += "maxheight=400"
-                  }
-                })
-                .catch((error) => {
-                  console.error(error)
-                })
-
-              ///////////
+              promises.push(this.getMoreDetails(json, place, newAlbum))
 
             } else {
               newPhotos[place] = ""
@@ -91,20 +97,26 @@ class RestaurantChoice extends React.Component {
             if (++n >= this.state.maxResults) break
           }
 
-          g_foodJSON = json
-          g_photos = newPhotos
-          g_position = {lat: lat, lng: lng}
-          g_album = newAlbum
+          Promise.all(promises)
+          .then(() => {
 
-          this.setState({
-            foodJSON: json,
-            photos: newPhotos,
-            album: newAlbum,
-            position: { lat: lat, lng: lng }
+            g_foodJSON = json
+            g_photos = newPhotos
+            g_position = {lat: lat, lng: lng}
+            g_album = newAlbum
+
+            this.setState({
+              foodJSON: json,
+              photos: newPhotos,
+              album: newAlbum,
+              position: { lat: lat, lng: lng }
+            })
+
+            this.props.updateCache(newAlbum)
           })
-
-          this.props.updateCache(newAlbum)
-
+          .catch((error) => {
+            console.error(error)
+          })
         })
         .catch((error) => {
           console.error(error)

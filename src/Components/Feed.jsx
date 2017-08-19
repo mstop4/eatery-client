@@ -82,17 +82,15 @@ const tilesData = [
   }
 ];
 
-
-
 /**
  * A simple example of a scrollable `GridList` containing a [Subheader](/#/components/subheader).
  */
-class Grid extends React.Component {
+class Feed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
-      foodJson: this.props.foodJSON,
+      album: this.props.album,
       details: {
           title: "",
           subtitle: "",
@@ -103,47 +101,82 @@ class Grid extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ foodJson: nextProps.foodJson });
+    console.log("will received")
+    console.dir(nextProps.album)
+    this.setState({ album: nextProps.album });
+  }
+
+  shouldComponentUpdate() {
+    console.log ("should update")
+    return true
+  }
+  componentWillUpdate() {
+    console.log("will update")
+  }
+  componentDidUpdate() {
+    console.log("did update")
   }
 
   handleToggle = () => this.setState({ open: true })
   handleClose = () => this.setState({ open: false })
 
   render = () => {
+
+    console.log("feed me")
+
+    let tiles = []
+    let places = this.state.album
+
+    console.log("Places:")
+    console.dir(this.state.album)
+
+    for (let place in this.state.album) {
+
+      console.dir(this.state.album[place])
+
+      for (let photo in this.state.album[place]) {
+
+        console.log("In loop")
+        console.log(`places[${place}][${photo}]`)
+
+        tiles.push(
+          <GridTile
+            key={places[place][photo]}
+            title={"Shut up and take my money!"}
+            onTouchTap={() => {
+              let detail = {
+                  title: "shut up and take my money!",
+                  subtitle: "Fry",
+                  photos: "",
+                  rating: ""
+                }
+                this.setState({details:detail})
+                this.handleToggle();
+            }}
+            subtitle={
+              <span>
+                by <b>"Fry"</b>
+              </span>
+            }
+            actionIcon={
+              <IconButton>
+                <StarBorder color="white" />
+              </IconButton>
+            }
+          >
+            <img src={places[place][photo]} />
+          </GridTile>
+        )
+      }
+    }
+
     return (
       <div>
         <MuiThemeProvider>
           <div style={styles.root}>
             <GridList cols={4} cellHeight={180} style={styles.gridList}>
               <Subheader>Restaurants</Subheader>
-              {tilesData.map(tile =>
-                <GridTile
-                  key={tile.img}
-                  title={tile.title}
-                  onTouchTap={() => {
-                    let detail = {
-                        title: tile.title,//places[place]["name"],
-                        subtitle: tile.author,//places[place]["vicinity"],
-                        photos: "",//this.state.album[place],
-                        rating: ""//places[place]["rating"]
-                      }
-                      this.setState({details:detail})
-                      this.handleToggle();
-                  }}
-                  subtitle={
-                    <span>
-                      by <b>{tile.author}</b>
-                    </span>
-                  }
-                  actionIcon={
-                    <IconButton>
-                      <StarBorder color="white" />
-                    </IconButton>
-                  }
-                >
-                  <img src="http://s2.quickmeme.com/img/79/79af6b3bc5b23131ace1d835c402fa444ebd7cfc574c6b040665280337e74d7e.jpg" />
-                </GridTile>
-              )}
+              {tiles}
             </GridList>
           </div>
         </MuiThemeProvider>
@@ -156,4 +189,4 @@ class Grid extends React.Component {
     );
   };
 }
-export default Grid;
+export default Feed;
