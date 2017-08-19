@@ -4,7 +4,17 @@ import IconButton from "material-ui/IconButton";
 import Subheader from "material-ui/Subheader";
 import StarBorder from "material-ui/svg-icons/toggle/star-border";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import CircularProgress from 'material-ui/CircularProgress';
 import DetailDrawer from "./DetailDrawer.jsx";
+
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import {red500} from 'material-ui/styles/colors';
+
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: red500,
+  }
+});
 
 const styles = {
   root: {
@@ -18,69 +28,6 @@ const styles = {
     overflowY: "auto"
   }
 };
-
-const tilesData = [
-  {
-    img: "images/grid-list/00-52-29-429_640.jpg",
-    title: "Breakfast",
-    author: "jill111"
-  },
-  {
-    img: "images/grid-list/burger-827309_640.jpg",
-    title: "Tasty burger",
-    author: "pashminu"
-  },
-  {
-    img: "images/grid-list/camera-813814_640.jpg",
-    title: "Camera",
-    author: "Danson67"
-  },
-  {
-    img: "images/grid-list/morning-819362_640.jpg",
-    title: "Morning",
-    author: "fancycrave1"
-  },
-  {
-    img: "images/grid-list/hats-829509_640.jpg",
-    title: "Hats",
-    author: "Hans"
-  },
-  {
-    img: "images/grid-list/honey-823614_640.jpg",
-    title: "Honey",
-    author: "fancycravel"
-  },
-  {
-    img: "images/grid-list/vegetables-790022_640.jpg",
-    title: "Vegetables",
-    author: "jill111"
-  },
-  {
-    img: "images/gerid-list/water-plant-821293_640.jpg",
-    title: "Water 3tplant",
-    author: "BkrmaerdtyaKarki"
-  },
-  {
-    img: "images/gridert-list/water-plant-821293_640sss.jpg",
-    title: "Water pldgantss",
-    author: "Bkrmadt34gyaKarkiss"
-  },
-  {
-    img: "images/grtyid-list/water-plant-821293_640sss.jpg",
-    title: "Water perlafgntss",
-    author: "BkrmadtyaKarkiss"
-  },
-  {
-    img: "images/grifd-list/water-plant-821293_640sss.jpg",
-    title: "Water plqwantss",
-    author: "BkrmadtyaKsqarkiss"
-  },
-  {
-    img: "images/grid-slist/water-plant-821293_640sss.jpg",
-    title: "Water pladntss",
-    author: "BkrmadtyaKdarkiss"
-  }
-];
 
 /**
  * A simple example of a scrollable `GridList` containing a [Subheader](/#/components/subheader).
@@ -109,7 +56,6 @@ class Feed extends React.Component {
 
   render = () => {
 
-    let tiles = []
     let flatAlbum = []
 
     // convert nested album into a flat hierarchy
@@ -128,40 +74,50 @@ class Feed extends React.Component {
     }
 
     // build grid tiles
-    for (let photo in flatAlbum) {
-      tiles.push(
-        <GridTile
-          key={flatAlbum[photo]}
-          title={"Shut up and take my money!"}
-          onTouchTap={() => {
-            let detail = {
-                title: "shut up and take my money!",
-                subtitle: "Fry",
-                photos: "",
-                rating: ""
-              }
-              this.setState({details:detail})
-              this.handleToggle();
-          }}
-          subtitle={
-            <span>
-              by <b>"Fry"</b>
-            </span>
-          }
-          actionIcon={
-            <IconButton>
-              <StarBorder color="white" />
-            </IconButton>
-          }
-        >
-          <img src={flatAlbum[photo]} />
-        </GridTile>
-      )
+
+    let tiles
+
+    if (flatAlbum.length > 0) {
+
+      tiles = []
+
+      for (let photo in flatAlbum) {
+        tiles.push(
+          <GridTile
+            key={flatAlbum[photo]}
+            title={"Shut up and take my money!"}
+            onTouchTap={() => {
+              let detail = {
+                  title: "shut up and take my money!",
+                  subtitle: "Fry",
+                  photos: "",
+                  rating: ""
+                }
+                this.setState({details:detail})
+                this.handleToggle();
+            }}
+            subtitle={
+              <span>
+                by <b>"Fry"</b>
+              </span>
+            }
+            actionIcon={
+              <IconButton>
+                <StarBorder color="white" />
+              </IconButton>
+            }
+          >
+            <img src={flatAlbum[photo]} />
+          </GridTile>
+        )
+      }
+    } else {
+      tiles = <CircularProgress size="75" thickness="10"/>
     }
 
     return (
       <div>
-        <MuiThemeProvider>
+        <MuiThemeProvider muiTheme={muiTheme}>
           <div style={styles.root}>
             <GridList cols={4} cellHeight={180} style={styles.gridList}>
               <Subheader>Restaurants</Subheader>
