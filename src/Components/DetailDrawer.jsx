@@ -2,6 +2,12 @@ import React from "react";
 import Drawer from "material-ui/Drawer";
 import MenuItem from "material-ui/MenuItem";
 import {List, ListItem} from 'material-ui/List';
+
+import Room from 'material-ui/svg-icons/action/room';
+import Email from 'material-ui/svg-icons/communication/email';
+import Phone from 'material-ui/svg-icons/communication/phone';
+
+
 import RaisedButton from "material-ui/RaisedButton";
 import FavoriteButton from "./FavoriteButton.jsx";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
@@ -61,13 +67,21 @@ export default class DetailDrawer extends React.Component {
               <List class="contact-us-list">
 
 
-                <ListItem class="address">{this.state.details.subtitle}</ListItem>
+                <ListItem primaryText={this.state.details.subtitle}
+                          class="address"
+                          leftIcon={<Room />}
+                 />
 
-                <ListItem class="email">
+                <ListItem  class="email"
+                           leftIcon={<Email />}
+                >
                   <a href="mailto:">hello@yeticave.com</a>
                 </ListItem>
 
-                <ListItem class="phone">1 (408) 445 9978</ListItem>
+                <ListItem primaryText="1 (408) 445 9978"
+                          class="phone"
+                          leftIcon={<Phone />}
+                />
 
 
               </List>
