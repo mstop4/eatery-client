@@ -185,11 +185,6 @@ class RestaurantChoice extends React.Component {
         <table width={"100%"} height={"100%"}>
           <tr>
             <td width={"50%"}>
-              <MuiThemeProvider muiTheme={muiTheme}>
-                {gridComp}
-              </MuiThemeProvider>
-            </td>
-            <td width={"50%"}>
               <MapComponent
                 data={this.state.foodJSON.results}
                 center={this.state.position}
@@ -197,6 +192,11 @@ class RestaurantChoice extends React.Component {
                 getFood={this.getFood}
                 maxResults={this.state.maxResults}
               />
+            </td>
+            <td width={"50%"}>
+              <MuiThemeProvider muiTheme={muiTheme}>
+                {gridComp}
+              </MuiThemeProvider>
             </td>
           </tr>
         </table>
