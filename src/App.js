@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import ReactRouter from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
-import './App.css';
+// NOT NEEDED, THIS IS THE WELCOME TO REACT CSS
+// import './App.css';
 import MapComponent from './Components/MapComponent.jsx'
 import RestaurantChoice from './Components/RestaurantChoice.jsx'
 import Selector from './Components/Selector.js';

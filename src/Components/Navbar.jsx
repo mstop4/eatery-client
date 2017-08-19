@@ -9,6 +9,9 @@ import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
 import NavigationClose from "material-ui/svg-icons/navigation/close";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import Paper from "material-ui/Paper";
+import '../css/navbar.css';
+
+const font = "'Raleway', sans-serif";
 
 const style = {
   height: 50,
@@ -17,7 +20,10 @@ const style = {
   display: "inline-block",
   float: "left",
   marginBottom: 10,
-  marginLeft: 15
+  marginLeft: 15,
+  nav:{
+    fontFamily: font
+  }
 };
 
 class Login extends Component {
@@ -95,7 +101,7 @@ class Navbar extends Component {
     return (
       <div>
 
-        <AppBar
+        <AppBar style={style.nav}
           title="Eatery"
           //showMenuIconButton={false}
           iconElementRight={
