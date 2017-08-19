@@ -6,6 +6,15 @@ import Image from 'react-image-resizer'
 import MapComponent from './MapComponent.jsx'
 import DetailDrawer from './DetailDrawer.jsx'
 
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import {red500} from 'material-ui/styles/colors';
+
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: red500,
+  }
+});
+
 let g_foodJSON = []
 let g_photos = []
 let g_album = {}
@@ -184,7 +193,7 @@ class RestaurantChoice extends React.Component {
         <table width={"100%"} height={"100%"}>
           <tr>
             <td width={"50%"}>
-              <MuiThemeProvider>
+              <MuiThemeProvider muiTheme={muiTheme}>
                 {gridComp}
               </MuiThemeProvider>
             </td>

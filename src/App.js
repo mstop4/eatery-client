@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import ReactRouter from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
-import './App.css';
+// NOT NEEDED, THIS IS THE WELCOME TO REACT CSS
+// import './App.css';
 import MapComponent from './Components/MapComponent.jsx'
 import RestaurantChoice from './Components/RestaurantChoice.jsx'
 import Selector from './Components/Selector.js';
@@ -15,6 +16,15 @@ import Feed from './Components/Feed.jsx'
 //Facebook Login
 import FacebookLogin from './Components/FacebookLogin.js';
 
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import {red500} from 'material-ui/styles/colors';
+
+
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: red500,
+  }
+});
 let g_album = {}
 
 class App extends Component {
@@ -29,7 +39,6 @@ class App extends Component {
       currentPage: 'Hungry',
       currentUser: '',
       currentEmail: '',
-
       album: {},
     }
 
@@ -140,19 +149,8 @@ class App extends Component {
 
     return (
       <div>
-        <FacebookLogin socialId={process.env.REACT_APP_FB_APPID}
-                       language="en_US"
-                       scope="public_profile,email"
-                       responseHandler={this.responseFacebook}
-                       xfbml={true}
-                       fields="id,email,name"
-                       version="v2.5"
-                       className="facebook-login"
-                       buttonText="Login With Facebook"
-                       handleUserLogin={this.handleUserLogin}
-        />
-        <p id="status" />
-        <MuiThemeProvider>
+        <span id="status" />
+        <MuiThemeProvider muiTheme={muiTheme}>
           <Navbar
             handleHungryOnTap={this.handleHungryOnTap}
             handleUserOnTap={this.handleUserOnTap}

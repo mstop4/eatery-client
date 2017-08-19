@@ -8,9 +8,11 @@ import VisibilityOff from 'material-ui/svg-icons/action/visibility-off';
 const styles = {
   block: {
     maxWidth: 250,
+    display: 'inline-block',
+
   },
   checkbox: {
-    marginBottom: 16,
+    marginLeft: 16,
   },
 };
 
@@ -19,7 +21,6 @@ const CheckboxExampleSimple = () => (
     <Checkbox
       checkedIcon={<ActionFavorite />}
       uncheckedIcon={<ActionFavoriteBorder />}
-      label="Favorite"
       style={styles.checkbox}
     />
   </div>

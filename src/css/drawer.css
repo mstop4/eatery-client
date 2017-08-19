@@ -1,0 +1,35 @@
+.drawer {
+  padding: 20px;
+}
+
+h1.title {
+  color: #F44336;
+  display: inline-block;
+}
+
+ul.contact-us-list {
+  margin-top: 15px;
+}
+
+div.reviews {
+  margin-top: 5px;
+}
+.album{
+  margin-top: 5px;
+  height: 25%;
+  overflow-wrap: all;
+}
+img.images {
+  object-fit: cover;
+  max-width: 47%;
+  width: 135px;
+  height: 135px;
+  padding: 3px ;
+  padding-bottom: 0;
+
+
+  left: -100%;
+  right: -100%;
+  top: -100%;
+  bottom: -100%;
+}
