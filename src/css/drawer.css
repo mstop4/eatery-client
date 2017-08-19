@@ -1,0 +1,24 @@
+.drawer {
+  padding: 20px;
+}
+
+h1.title {
+  color: #F44336;
+  display: inline-block;
+}
+
+ul.contact-us-list {
+  margin-top: 15px;
+}
+
+div.reviews {
+  margin-top: 15px;
+}
+
+img.images {
+  width: 25%;
+  height: 25%;
+  max-height: 150px;
+  padding: 5px;
+  border-radius: 5%;
+}
