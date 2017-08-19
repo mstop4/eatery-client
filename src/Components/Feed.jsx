@@ -101,20 +101,7 @@ class Feed extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("will received")
-    console.dir(nextProps.album)
     this.setState({ album: nextProps.album });
-  }
-
-  shouldComponentUpdate() {
-    console.log ("should update")
-    return true
-  }
-  componentWillUpdate() {
-    console.log("will update")
-  }
-  componentDidUpdate() {
-    console.log("did update")
   }
 
   handleToggle = () => this.setState({ open: true })
@@ -122,52 +109,54 @@ class Feed extends React.Component {
 
   render = () => {
 
-    console.log("feed me")
-
     let tiles = []
-    let places = this.state.album
+    let flatAlbum = []
 
-    console.log("Places:")
-    console.dir(this.state.album)
-
+    // convert nested album into a flat hierarchy
     for (let place in this.state.album) {
-
-      console.dir(this.state.album[place])
-
       for (let photo in this.state.album[place]) {
-
-        console.log("In loop")
-        console.log(`places[${place}][${photo}]`)
-
-        tiles.push(
-          <GridTile
-            key={places[place][photo]}
-            title={"Shut up and take my money!"}
-            onTouchTap={() => {
-              let detail = {
-                  title: "shut up and take my money!",
-                  subtitle: "Fry",
-                  photos: "",
-                  rating: ""
-                }
-                this.setState({details:detail})
-                this.handleToggle();
-            }}
-            subtitle={
-              <span>
-                by <b>"Fry"</b>
-              </span>
-            }
-            actionIcon={
-              <IconButton>
-                <StarBorder color="white" />
-              </IconButton>
-            }
-          >
-            <img src={places[place][photo]} />
-          </GridTile>
-        )
+        flatAlbum.push(this.state.album[place][photo])
       }
+    }
+
+    // shuffle flat album
+    for (let i = flatAlbum.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        let temp = flatAlbum[i];
+        flatAlbum[i] = flatAlbum[j];
+        flatAlbum[j] = temp;
+    }
+
+    // build grid tiles
+    for (let photo in flatAlbum) {
+      tiles.push(
+        <GridTile
+          key={flatAlbum[photo]}
+          title={"Shut up and take my money!"}
+          onTouchTap={() => {
+            let detail = {
+                title: "shut up and take my money!",
+                subtitle: "Fry",
+                photos: "",
+                rating: ""
+              }
+              this.setState({details:detail})
+              this.handleToggle();
+          }}
+          subtitle={
+            <span>
+              by <b>"Fry"</b>
+            </span>
+          }
+          actionIcon={
+            <IconButton>
+              <StarBorder color="white" />
+            </IconButton>
+          }
+        >
+          <img src={flatAlbum[photo]} />
+        </GridTile>
+      )
     }
 
     return (
