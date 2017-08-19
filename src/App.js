@@ -34,7 +34,7 @@ class App extends Component {
     this.handleUserLogin = this.handleUserLogin.bind(this);
     this.logoutFacebook = this.logoutFacebook.bind(this);
     this.state = {
-      currentPage: 'Hungry',
+      currentPage: 'Test',
       currentUser: '',
       currentEmail: '',
       album: {},

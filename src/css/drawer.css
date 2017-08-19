@@ -12,13 +12,24 @@ ul.contact-us-list {
 }
 
 div.reviews {
-  margin-top: 15px;
+  margin-top: 5px;
 }
-
-img.images {
-  width: 25%;
+.album{
+  margin-top: 5px;
   height: 25%;
-  max-height: 150px;
-  padding: 5px;
-  border-radius: 5%;
+  overflow-wrap: all;
+}
+img.images {
+  object-fit: cover;
+  max-width: 47%;
+  width: 135px;
+  height: 135px;
+  padding: 3px ;
+  padding-bottom: 0;
+
+
+  left: -100%;
+  right: -100%;
+  top: -100%;
+  bottom: -100%;
 }

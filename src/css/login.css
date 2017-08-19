@@ -1,3 +1,7 @@
+button {
+  color: white;
+}
+
 .facebook-login {
   font-size: 20px;
   padding-top: 40% !important;
@@ -13,13 +17,19 @@
   /* Full height */
   height: 100%;
   width: 100%;
-  filter: brightness(50%);
+  filter: brightness(45%);
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: fixed;
 }
-button {
+
+.title {
+  font-size: 250px;
+  z-index: 1;
   color: white;
+  position: absolute;
+  left: 25%;
+  top: 20%;
 }
