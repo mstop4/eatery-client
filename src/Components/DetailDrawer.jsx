@@ -6,6 +6,8 @@ import {List, ListItem} from 'material-ui/List';
 import Room from 'material-ui/svg-icons/action/room';
 import Email from 'material-ui/svg-icons/communication/email';
 import Phone from 'material-ui/svg-icons/communication/phone';
+import Star from 'material-ui/svg-icons/toggle/star';
+import StarEmpty from 'material-ui/svg-icons/toggle/star-border';
 
 
 import RaisedButton from "material-ui/RaisedButton";
@@ -15,6 +17,8 @@ import '../css/drawer.css';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {red500} from 'material-ui/styles/colors';
 import Divider from 'material-ui/Divider';
+
+var Rating = require('react-rating');
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -60,12 +64,16 @@ export default class DetailDrawer extends React.Component {
         >
           <div className="drawer">
             <h1 className="title"> {this.state.details.title} </h1>
-            <FavoriteButton className="favourite"/>
-            <p> {this.state.details.rating}</p>
+            <FavoriteButton className="favourite" />
+            <Rating initialRate={this.state.details.rating}
+                    readonly={true}
+                    quiet={true}
+                    full={<Star/>}
+                    empty={<StarEmpty/>}
+            />
             <Divider />
             <div>
               <List class="contact-us-list">
-
 
                 <ListItem primaryText={this.state.details.subtitle}
                           class="address"

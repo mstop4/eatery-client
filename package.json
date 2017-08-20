@@ -8,11 +8,12 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-gmaps": "^1.6.0",
+    "react-rating": "^0.8.1",
     "react-router-dom": "^4.1.2",
     "react-scripts": "1.0.11",
+    "react-stars": "^2.2.3",
     "react-tap-event-plugin": "^2.0.1",
-    "request": "^2.81.0",
-    "react-stars": "^2.2.3"
+    "request": "^2.81.0"
   },
   "scripts": {
     "start": "react-scripts start",
