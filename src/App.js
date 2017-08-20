@@ -12,6 +12,7 @@ import FBLoginButton from './FBLoginButton.js';
 import RandomizeGroup from './Components/RandomizeGroup.jsx';
 import User from './Components/User.jsx';
 import {TestPage} from './Components/TestPage.jsx'
+import Feed from './Components/Feed.jsx'
 //Facebook Login
 import FacebookLogin from './Components/FacebookLogin.js';
 
@@ -71,6 +72,8 @@ class App extends Component {
 
   updateCache(newAlbum){
     g_album = newAlbum
+
+    console.log("updating cache")
 
     this.setState({
       album: newAlbum,
@@ -141,6 +144,9 @@ class App extends Component {
         CurrentPage = <TestPage />
     }
 
+    console.log("app: render")
+    console.dir(this.state.album)
+
     return (
       <div>
         <span id="status" />
@@ -153,6 +159,10 @@ class App extends Component {
           />
         </MuiThemeProvider>
         {CurrentPage}
+        <Feed
+          key={1}
+          album={this.state.album}
+        />
       </div>
 
     );
