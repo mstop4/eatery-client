@@ -108,7 +108,9 @@ export default class DetailDrawer extends React.Component {
               Curabitur imperdiet urna eu ipsum pretium, in tincidunt tellus
               commodo. Ut tempor laoreet arcu, nec tristique purus congue ut.
               Quisque sit amet auctor erat
+              <div className="reviewer"> Name Namerson </div>
             </div>
+            <Divider />
 
           </div>
         </Drawer>

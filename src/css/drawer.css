@@ -27,9 +27,15 @@ img.images {
   padding: 3px ;
   padding-bottom: 0;
 
-
   left: -100%;
   right: -100%;
   top: -100%;
   bottom: -100%;
+}
+
+.reviews {
+  color: grey;
+}
+.reviewer {
+  color: #F44336;
 }
