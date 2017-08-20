@@ -8,10 +8,15 @@ import DetailDrawer from './DetailDrawer.jsx'
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {red500} from 'material-ui/styles/colors';
+import '../css/restaurantchoice.css';
 
 const muiTheme = getMuiTheme({
   palette: {
     primary1Color: red500,
+  },
+  progress: {
+    marginLeft: '50%'
+
   }
 });
 
@@ -70,7 +75,6 @@ class RestaurantChoice extends React.Component {
         reject(error)
       })
     })
-    ///////////
   }
 
   getFood = (lat, lng) => {
@@ -185,18 +189,16 @@ class RestaurantChoice extends React.Component {
                   </GridList>
 
     } else {
-      gridComp = <CircularProgress size="75" thickness="10"/>
+      gridComp = <CircularProgress size="175"
+                                   thickness="30"
+                                   className="progress"
+      />
     }
 
     return (
       <div>
         <table width={"100%"} height={"100%"}>
           <tr>
-            <td width={"50%"}>
-              <MuiThemeProvider muiTheme={muiTheme}>
-                {gridComp}
-              </MuiThemeProvider>
-            </td>
             <td width={"50%"}>
               <MapComponent
                 data={this.state.foodJSON.results}
@@ -205,6 +207,11 @@ class RestaurantChoice extends React.Component {
                 getFood={this.getFood}
                 maxResults={this.state.maxResults}
               />
+            </td>
+            <td width={"50%"}>
+              <MuiThemeProvider muiTheme={muiTheme}>
+                {gridComp}
+              </MuiThemeProvider>
             </td>
           </tr>
         </table>

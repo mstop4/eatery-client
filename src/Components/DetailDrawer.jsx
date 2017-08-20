@@ -1,16 +1,26 @@
 import React from "react";
 import Drawer from "material-ui/Drawer";
 import MenuItem from "material-ui/MenuItem";
+import {List, ListItem} from 'material-ui/List';
+
+import Room from 'material-ui/svg-icons/action/room';
+import Email from 'material-ui/svg-icons/communication/email';
+import Phone from 'material-ui/svg-icons/communication/phone';
+import Star from 'material-ui/svg-icons/toggle/star';
+import StarEmpty from 'material-ui/svg-icons/toggle/star-border';
+
+
 import RaisedButton from "material-ui/RaisedButton";
 import FavoriteButton from "./FavoriteButton.jsx";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import Rating from "react-rating";
 import StarBorder from "material-ui/svg-icons/toggle/star-border";
-import Star from "material-ui/svg-icons/toggle/star"
 import '../css/drawer.css';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {red500} from 'material-ui/styles/colors';
 import Divider from 'material-ui/Divider';
+
+import Rating from 'react-rating';
+import Slider from 'react-slick';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -28,7 +38,6 @@ export default class DetailDrawer extends React.Component {
   }
 
   handleToggle = () => this.setState({ open: !this.state.open });
-
   handleClose = () => this.setState({ open: false });
 
   detail = this.props.detail;
@@ -38,43 +47,64 @@ export default class DetailDrawer extends React.Component {
   }
 
   render() {
-
     let album = []
 
     for (let photo in this.state.details.photos) {
-
-      // fix this later
-      album.push(<img src={this.state.details.photos[photo]}/>)
-      break;
+      album.push(<div><img className="images" src={this.state.details.photos[photo]}/></div>)
     }
+    if (album.length === 0 ){
+      album.push(<div><img src='http://placekitten.com/g/400/200' /></div>)
+    }
+
+    let slideshowsettings = {
+      dots: true,
+      focusOnSelect: true,
+      slidesToShow: 2,
+      slidesToScroll: 2
+    };
 
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <Drawer
           docked={false}
-          width={'50%'}
+          width={'60%'}
           open={this.props.open}
           onRequestChange={this.props.request}
           openSecondary={true}
         >
-          <div className="drawer">
+          <div className="drawer" style={{height: '100%'}}>
             <h1 className="title"> {this.state.details.title} </h1>
-            <FavoriteButton className="favourite"/>
-            <p> {this.state.details.rating}</p>
+            <FavoriteButton className="favourite" />
+            <Rating initialRate={this.state.details.rating}
+                    className="rating"
+                    readonly={true}
+                    quiet={true}
+                    full={<Star/>}
+                    empty={<StarEmpty/>}
+            />
             <Divider />
             <div>
-              <ul class="contact-us-list">
-                <li class="address">{this.state.details.subtitle}</li>
-                <li class="email">
+              <List class="contact-us-list">
+                <ListItem primaryText={this.state.details.subtitle}
+                          className="contact address"
+                          leftIcon={<Room />}
+                />
+                <ListItem  className="contact email"
+                           leftIcon={<Email />}
+                >
                   <a href="mailto:">hello@yeticave.com</a>
-                </li>
-                <li class="phone">1 (408) 445 9978</li>
-              </ul>
+                </ListItem>
+                <ListItem primaryText="1 (408) 445 9978"
+                          className="contact phone"
+                          leftIcon={<Phone />}
+                />
+              </List>
             </div>
             <Divider />
-            <div className="album">
-              {album}
-            </div>
+            <Slider {...slideshowsettings}>
+                {album}
+            </Slider>
+            <Divider />
             <div className="reviews">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque in
               bibendum tortor, id placerat ex. Pellentesque augue quam, iaculis id
@@ -85,6 +115,7 @@ export default class DetailDrawer extends React.Component {
               Curabitur imperdiet urna eu ipsum pretium, in tincidunt tellus
               commodo. Ut tempor laoreet arcu, nec tristique purus congue ut.
               Quisque sit amet auctor erat
+              <div className="reviewer"> Name Namerson </div>
             </div>
           </div>
         </Drawer>
