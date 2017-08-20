@@ -37,7 +37,6 @@ export default class DetailDrawer extends React.Component {
   }
 
   handleToggle = () => this.setState({ open: !this.state.open });
-
   handleClose = () => this.setState({ open: false });
 
   detail = this.props.detail;
@@ -56,8 +55,11 @@ export default class DetailDrawer extends React.Component {
       album.push(<div><img src='http://placekitten.com/g/400/200' /></div>)
     }
 
-    let settings = {
+    let slideshowsettings = {
       dots: true,
+      focusOnSelect: true,
+      slidesToShow: 2,
+      slidesToScroll: 2
     };
 
     return (
@@ -98,7 +100,7 @@ export default class DetailDrawer extends React.Component {
               </List>
             </div>
             <Divider />
-            <Slider {...settings}>
+            <Slider {...slideshowsettings}>
                 {album}
             </Slider>
             <Divider />
@@ -114,8 +116,6 @@ export default class DetailDrawer extends React.Component {
               Quisque sit amet auctor erat
               <div className="reviewer"> Name Namerson </div>
             </div>
-            <Divider />
-
           </div>
         </Drawer>
       </MuiThemeProvider>

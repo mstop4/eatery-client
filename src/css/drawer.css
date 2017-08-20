@@ -29,21 +29,23 @@ div.reviews {
 }
 img.images {
   object-fit: cover;
-  max-width: 47%;
   width: 100%;
-  height: 135px;
-  padding: 3px ;
-  padding-bottom: 0;
+  height: 250px;
   margin: 16px 0;
   left: -100%;
   right: -100%;
   top: -100%;
   bottom: -100%;
 }
-
+.slick-dots {
+  position: static ;
+  margin: -15px 0 5px;
+}
 .reviews {
   color: grey;
 }
 .reviewer {
   color: #F44336;
+  padding-left: 1em;
+  padding-top: 5px;
 }
