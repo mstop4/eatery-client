@@ -13,9 +13,7 @@ import StarEmpty from 'material-ui/svg-icons/toggle/star-border';
 import RaisedButton from "material-ui/RaisedButton";
 import FavoriteButton from "./FavoriteButton.jsx";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import Rating from "react-rating";
 import StarBorder from "material-ui/svg-icons/toggle/star-border";
-import Star from "material-ui/svg-icons/toggle/star"
 import '../css/drawer.css';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {red500} from 'material-ui/styles/colors';
