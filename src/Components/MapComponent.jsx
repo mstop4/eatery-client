@@ -21,6 +21,11 @@ const mapicons = [
   { url: "http://maps.google.com/mapfiles/kml/pal5/icon35.png", scaledSize: size },
 ]
 
+const defaultStyle = {
+            featureType: 'poi',
+            stylers: [{visibility: 'off'}]
+          }
+
 class MapComponent extends React.Component {
 
   constructor(props) {
@@ -61,6 +66,8 @@ class MapComponent extends React.Component {
 
   onMapCreated(map) {
     this.setState({map: map})
+
+    map.setOptions({style: defaultStyle})
 
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
@@ -115,16 +122,16 @@ class MapComponent extends React.Component {
         if (++n >= this.props.maxResults) break
       }
 
-      circle = <Circle
-          lat={this.props.center.lat}
-          lng={this.props.center.lng}
-          radius={this.props.radius}
-          strokeColor={'#00BCD4'}
-          strokeOpacity={0.3}
-          strokeWeight={2}
-          fillColor={'#00BCD4'}
-          fillOpacity={0.15}
-          />
+      // circle = <Circle
+      //     lat={this.props.center.lat}
+      //     lng={this.props.center.lng}
+      //     radius={this.props.radius}
+      //     strokeColor={'#00BCD4'}
+      //     strokeOpacity={0.3}
+      //     strokeWeight={2}
+      //     fillColor={'#00BCD4'}
+      //     fillOpacity={0.15}
+      //     />
     }
 
     return (
