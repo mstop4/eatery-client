@@ -20,6 +20,8 @@ const muiTheme = getMuiTheme({
   }
 });
 
+const labels = "ABCDEFGHIJKL"
+
 let g_foodJSON = []
 let g_photos = []
 let g_album = {}
@@ -157,7 +159,7 @@ class RestaurantChoice extends React.Component {
           <GridTile
             key={place}
             title={places[place]["name"]}
-            subtitle={places[place]["vicinity"]}
+            subtitle={labels[n]}
             onClick={() => {
                 let detail = {
                   title: places[place]["name"],
@@ -166,12 +168,8 @@ class RestaurantChoice extends React.Component {
                   rating: places[place]["rating"]
                 }
                 this.setState({details: detail}, function () {
-                  //console.log(this.state.details)
                 })
-                //console.log(this.state.details)
-                this.handleToggle();
-              {/* this.setState({details:details}) */}
-              {/* this.handleToggle(details) */}
+              this.handleToggle();
             }}
           >
             <Image
