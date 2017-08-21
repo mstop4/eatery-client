@@ -22,13 +22,7 @@ const muiTheme = getMuiTheme({
 
   }
 });
-const styles = {
-  card:{
-    height: '100%'
-  },
-  cardMedia:{
-  }
-}
+
 let g_foodJSON = []
 let g_photos = []
 let g_album = {}
@@ -218,12 +212,13 @@ class RestaurantChoice extends React.Component {
               />
             </td>
             <td width={"50%"} height={"100%"}>
+
               <MuiThemeProvider muiTheme={muiTheme}>
-                <Card style={styles.card}>
-                  <CardMedia style={styles.cardMedia}>
-                    <img src='http://placekitten.com/g/400/200' alt="" />
+                <Card style={{height: '100%'}}>
+                  <CardMedia >
+                    <img className='card-image'src='http://placekitten.com/g/400/200' alt="" />
                   </CardMedia>
-                  <CardTitle title="Card title" subtitle="Card subtitle" />
+                  <CardTitle title="Card title Card title" subtitle="Card subtitle " />
                 </Card>
               </MuiThemeProvider>
 

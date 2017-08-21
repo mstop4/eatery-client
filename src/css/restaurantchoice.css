@@ -3,3 +3,13 @@
   left: 50%;
   transform: translate(-50%, 0);
 }
+
+.card-image {
+  min-width: 100%;
+  min-height: 60vh;
+  object-fit: cover;
+  left: -100%;
+  right: -100%;
+  top: -100%;
+  bottom: -100%;
+}
