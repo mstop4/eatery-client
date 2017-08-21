@@ -25,7 +25,9 @@ const muiTheme = getMuiTheme({
     primary1Color: red500,
   }
 });
+
 let g_album = {}
+let g_foodInfo = []
 
 class App extends Component {
   constructor(props) {
@@ -40,6 +42,7 @@ class App extends Component {
       currentUser: '',
       currentEmail: '',
       album: {},
+      foodInfo: []
     }
 
     this.updateCache = this.updateCache.bind(this)
@@ -70,11 +73,13 @@ class App extends Component {
     });
   }
 
-  updateCache(newAlbum){
+  updateCache(newAlbum, newInfo){
     g_album = newAlbum
+    g_foodInfo = newInfo
 
     this.setState({
       album: newAlbum,
+      foodInfo: newInfo
     })
   }
 
@@ -154,10 +159,12 @@ class App extends Component {
           />
         </MuiThemeProvider>
         {CurrentPage}
-        <Feed
-          key={1}
-          album={this.state.album}
-        />
+        {//<Feed
+          //key={1}
+          //album={this.state.album}
+          //foodInfo={this.state.foodInfo}
+        ///>
+        }
       </div>
 
     );

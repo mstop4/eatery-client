@@ -80,32 +80,26 @@ class Feed extends React.Component {
     if (this.state.album.length > 0) {
 
       tiles = []
+      let info = this.props.foodInfo
+
+      console.log("Feed")
+      console.dir(info)
 
       for (let photo in this.state.album) {
         tiles.push(
           <GridTile
             key={this.state.album[photo]}
-            //title={"Shut up and take my money!"}
             onTouchTap={() => {
               let detail = {
-                  title: "shut up and take my money!",
-                  subtitle: "Fry",
-                  photos: "",
-                  rating: ""
-                }
+                    title: info[photo]["name"],
+                    subtitle: info[photo]["vicinity"],
+                    photos: this.state.album[photo],
+                    info: info[photo],
+                    rating: info[photo]["rating"]
+                  }
                 this.setState({details:detail})
                 this.handleToggle();
             }}
-            // subtitle={
-            //   <span>
-            //     by <b>"Fry"</b>
-            //   </span>
-            // }
-            // actionIcon={
-            //   <IconButton>
-            //     <StarBorder color="white" />
-            //   </IconButton>
-            // }
           >
             <img src={this.state.album[photo]} />
           </GridTile>

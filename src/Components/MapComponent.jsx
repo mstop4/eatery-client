@@ -6,9 +6,6 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 const params = {v: '3.exp', key: process.env.REACT_APP_GOOGLEMAPS_APIKEY, libraries: "places"};
 
-const labels = "ABCDEFGHIJKL"
-let labelIndex = 0;
-
 const svgIcon = {
   path: "M-16,0a16,16 0 1,0 32,0a16,16 0 1,0 -32,0",
   fillColor: red500,
@@ -102,13 +99,14 @@ class MapComponent extends React.Component {
         if (!pic) {
           continue
         } else {
+
           markers.push(<Marker
               key={place}
               lat={places[place]["geometry"]["location"].lat}
               lng={places[place]["geometry"]["location"].lng}
               icon={svgIcon}//{mapicons[place]}
               label={{
-                  text: labels[labelIndex++ % labels.length],
+                  text: String(n+1),
                   color: "white",
                   fontFamily: "sans-serif"
                 }}
@@ -129,9 +127,10 @@ class MapComponent extends React.Component {
           height={'525px'}
           lat={this.props.center.lat}
           lng={this.props.center.lng}
-          zoom={1}
+          zoom={10}
           zoomControl={true}
           mapTypeControl={false}
+          streetViewControl={false}
           gestureHandling={'cooperative'}
           loadingMessage={'Eatery'}
           params={params}

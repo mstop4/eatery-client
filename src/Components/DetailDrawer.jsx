@@ -49,6 +49,8 @@ export default class DetailDrawer extends React.Component {
   render() {
     let album = []
 
+    console.log("Drawer");
+
     for (let photo in this.state.details.photos) {
       album.push(<div><img className="images" src={this.state.details.photos[photo]}/></div>)
     }
@@ -62,6 +64,15 @@ export default class DetailDrawer extends React.Component {
       slidesToShow: 2,
       slidesToScroll: 2
     };
+
+    let website = ""
+    let phoneNumber = ""
+
+    if (this.state.details.info) {
+      console.dir(this.state.details.info)
+      website = this.state.details.info.website
+      phoneNumber = this.state.details.info.formatted_phone_number
+    }
 
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -92,9 +103,9 @@ export default class DetailDrawer extends React.Component {
                 <ListItem  className="contact email"
                            leftIcon={<Email />}
                 >
-                  <a href="mailto:">hello@yeticave.com</a>
+                  <a href={website}>{website}</a>
                 </ListItem>
-                <ListItem primaryText="1 (408) 445 9978"
+                <ListItem primaryText={phoneNumber}
                           className="contact phone"
                           leftIcon={<Phone />}
                 />
