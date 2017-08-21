@@ -13,8 +13,8 @@ button {
   display: block;
   position: absolute;
   left: 50%;
-  top: 75%;
-  transform: translate(-50%, -75%);
+  top: 85%;
+  transform: translate(-50%, -85%);
 }
 
 #status {
@@ -23,8 +23,8 @@ button {
   color: white;
   position: absolute;
   left: 50%;
-  top: 67%;
-  transform: translate(-50%, -67%);
+  top: 80%;
+  transform: translate(-50%, -80%);
   z-index: 1;
 }
 
