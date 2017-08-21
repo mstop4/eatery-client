@@ -11,7 +11,7 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import FBLoginButton from './FBLoginButton.js';
 import RandomizeGroup from './Components/RandomizeGroup.jsx';
 import User from './Components/User.jsx';
-import {TestPage} from './Components/TestPage.jsx'
+import {Login} from './Components/Login.jsx'
 import Feed from './Components/Feed.jsx'
 //Facebook Login
 import FacebookLogin from './Components/FacebookLogin.js';
@@ -34,8 +34,9 @@ class App extends Component {
     super(props);
     this.handleHungryOnTap = this.handleHungryOnTap.bind(this);
     this.handleUserOnTap = this.handleUserOnTap.bind(this);
-    this.handleTestOnTap = this.handleTestOnTap.bind(this);
+    this.handleLoginOnTap = this.handleLoginOnTap.bind(this);
     this.handleUserLogin = this.handleUserLogin.bind(this);
+    this.responseFacebook = this.responseFacebook.bind(this);
     this.logoutFacebook = this.logoutFacebook.bind(this);
     this.state = {
       currentPage: 'Hungry',
@@ -60,9 +61,9 @@ class App extends Component {
     });
   }
 
-  handleTestOnTap() {
+  handleLoginOnTap() {
     this.setState({
-      currentPage: 'Test'
+      currentPage: 'Login'
     });
   }
 
@@ -117,7 +118,7 @@ class App extends Component {
 
     const onHungryPage = this.state.onHungryPage;
     const onUserPage = this.state.onUserPage;
-    const onTestPage = this.state.onTestPage;
+    const onLoginPage = this.state.onLoginPage;
     const logoutFacebook = this.state.logoutFacebook;
     //Components can be functions or classes, React gives us the choice
     //Declared an empty component
@@ -143,8 +144,11 @@ class App extends Component {
             }
           />
         break
-      case 'Test':
-        CurrentPage = <TestPage />
+      case 'Login':
+        CurrentPage = <Login 
+          handleUserLogin={this.handleUserLogin}
+          responseFacebook={this.responseFacebook}
+        />
     }
 
     return (
@@ -154,7 +158,7 @@ class App extends Component {
           <Navbar
             handleHungryOnTap={this.handleHungryOnTap}
             handleUserOnTap={this.handleUserOnTap}
-            handleTestOnTap={this.handleTestOnTap}
+            handleLoginOnTap={this.handleLoginOnTap}
             logoutFacebook={this.logoutFacebook}
           />
         </MuiThemeProvider>
