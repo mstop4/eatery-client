@@ -16,8 +16,8 @@
 
 .card-container {
   overflow: auto;
-  white-space: nowrap;
   position: fixed;
+  height: 90%;
 }
 
 .card {
