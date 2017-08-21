@@ -85,7 +85,7 @@ class Feed extends React.Component {
         tiles.push(
           <GridTile
             key={flatAlbum[photo]}
-            title={"Shut up and take my money!"}
+            //title={"Shut up and take my money!"}
             onTouchTap={() => {
               let detail = {
                   title: "shut up and take my money!",
@@ -96,16 +96,16 @@ class Feed extends React.Component {
                 this.setState({details:detail})
                 this.handleToggle();
             }}
-            subtitle={
-              <span>
-                by <b>"Fry"</b>
-              </span>
-            }
-            actionIcon={
-              <IconButton>
-                <StarBorder color="white" />
-              </IconButton>
-            }
+            // subtitle={
+            //   <span>
+            //     by <b>"Fry"</b>
+            //   </span>
+            // }
+            // actionIcon={
+            //   <IconButton>
+            //     <StarBorder color="white" />
+            //   </IconButton>
+            // }
           >
             <img src={flatAlbum[photo]} />
           </GridTile>
@@ -119,7 +119,7 @@ class Feed extends React.Component {
       <div>
         <MuiThemeProvider muiTheme={muiTheme}>
           <div style={styles.root}>
-            <GridList cols={4} cellHeight={180} style={styles.gridList}>
+            <GridList cols={4} cellHeight={180} style={styles.gridList} padding={0}>
               <Subheader>Restaurants</Subheader>
               {tiles}
             </GridList>
