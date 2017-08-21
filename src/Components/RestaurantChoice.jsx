@@ -211,10 +211,17 @@ class RestaurantChoice extends React.Component {
                       this.handleToggle();
                     }}
               >
+
                 <CardMedia >
                   <img className='card-image'src={pic} alt="" />
                 </CardMedia>
+                <Badge
+                  badgeContent={n+1}
+                  primary={true}
+                  className ="badge"
+                />
                 <CardTitle title={places[place]["name"]} subtitle={places[place]["vicinity"]} />
+
               </Card>
             </MuiThemeProvider>
 
@@ -242,7 +249,7 @@ class RestaurantChoice extends React.Component {
       <div>
         <table width={"100%"} height={"100%"}>
           <tr>
-            <td width={"50%"} height={"100%"}>
+            <td width={"60%"} height={"100%"}>
               <MapComponent
                 className="map"
                 data={this.state.foodJSON.results}
@@ -252,7 +259,7 @@ class RestaurantChoice extends React.Component {
                 maxResults={this.state.maxResults}
               />
             </td>
-            <td width={"50%"} height={"100%"} className="card-container">
+            <td width={"40%"} height={"100%"} className="card-container">
               {arnold}
             </td>
           </tr>
