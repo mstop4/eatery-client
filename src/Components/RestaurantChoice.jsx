@@ -17,7 +17,6 @@ const muiTheme = getMuiTheme({
   },
   progress: {
     marginLeft: '50%'
-
   }
 });
 
@@ -144,6 +143,7 @@ class RestaurantChoice extends React.Component {
 
   render = () => {
     const infos = []
+    const arnold = []
     const places = this.state.foodJSON.results
     let gridComp
     let n = 0
@@ -165,23 +165,35 @@ class RestaurantChoice extends React.Component {
               key={place}
               title={places[place]["name"]}
               subtitle={labels[n]}
-              onClick={() => {
-                  let detail = {
-                    title: places[place]["name"],
-                    subtitle: places[place]["vicinity"],
-                    photos: this.state.album[place],
-                    rating: places[place]["rating"]
-                  }
-                  this.setState({details: detail}, function () {
-                  })
-                this.handleToggle();
-              }}
             >
               <Image
                 src={pic}
                 height = {300}
               />
             </GridTile>
+          )
+          arnold.push(
+            <MuiThemeProvider muiTheme={muiTheme}>
+              <Card className='card'
+                    onClick={() => {
+                        let detail = {
+                          title: places[place]["name"],
+                          subtitle: places[place]["vicinity"],
+                          photos: this.state.album[place],
+                          rating: places[place]["rating"]
+                        }
+                        this.setState({details: detail}, function () {
+                        })
+                      this.handleToggle();
+                    }}
+              >
+                <CardMedia >
+                  <img className='card-image'src={pic} alt="" />
+                </CardMedia>
+                <CardTitle title={places[place]["name"]} subtitle={places[place]["vicinity"]} />
+              </Card>
+            </MuiThemeProvider>
+
           )
           if (++n >= this.state.maxResults) break
         }
@@ -211,20 +223,8 @@ class RestaurantChoice extends React.Component {
                 maxResults={this.state.maxResults}
               />
             </td>
-            <td width={"50%"} height={"100%"}>
-
-              <MuiThemeProvider muiTheme={muiTheme}>
-                <Card className="card">
-                  <CardMedia >
-                    <img className='card-image'src='http://placekitten.com/g/400/200' alt="" />
-                  </CardMedia>
-                  <CardTitle title="Card title Card title" subtitle="Card subtitle " />
-                </Card>
-              </MuiThemeProvider>
-              <MuiThemeProvider muiTheme={muiTheme}>
-                {gridComp}
-              </MuiThemeProvider>
-
+            <td width={"50%"} height={"100%"} className="card-container">
+              {arnold}
             </td>
           </tr>
         </table>

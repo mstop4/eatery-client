@@ -4,16 +4,24 @@
   transform: translate(-50%, 0);
 }
 
+.card-container {
+  overflow: auto;
+  white-space: nowrap;
+  position: fixed;
+}
+
+.card {
+  margin: 20px;
+  position: relative;
+}
+
 .card-image {
   min-width: 100%;
-  min-height: 60vh;
+  min-height: 60%;
   object-fit: cover;
   left: -100%;
   right: -100%;
   top: -100%;
   bottom: -100%;
-}
-
-.card {
-  margin: 20px;
+  border-radius: 5px 5px 0 0 ;
 }
