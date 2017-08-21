@@ -2,7 +2,7 @@ import React/*, { Component }*/ from 'react'
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
 import CircularProgress from 'material-ui/CircularProgress';
 //import {GridList, GridTile} from 'material-ui/GridList'
-//import Badge from 'material-ui/Badge'
+import Badge from 'material-ui/Badge'
 //import Image from 'react-image-resizer'
 import MapComponent from './MapComponent.jsx'
 import DetailDrawer from './DetailDrawer.jsx'
@@ -182,10 +182,17 @@ class RestaurantChoice extends React.Component {
                       this.handleToggle();
                     }}
               >
+
                 <CardMedia >
                   <img className='card-image'src={pic} alt="" />
                 </CardMedia>
-                <CardTitle title={places[place]["name"]} subtitle={places[place]["vicinity"]} />
+                <Badge
+                  badgeContent={n+1}
+                  primary={true}
+                  className ="badge"
+                />
+                <CardTitle title={places[place]["name"]} subtitle={places[place]["vicinity"]} className="card-title"/>
+
               </Card>
             </MuiThemeProvider>
 
@@ -207,9 +214,9 @@ class RestaurantChoice extends React.Component {
 
     return (
       <div>
-        <table width={"100%"} height={"100%"}>
+        <table width={"100%"} height={"100vh"}>
           <tr>
-            <td width={"50%"} height={"100%"}>
+            <td width={"60%"} height={"100%"}>
               <MapComponent
                 className="map"
                 data={this.state.foodJSON.results}
@@ -219,8 +226,8 @@ class RestaurantChoice extends React.Component {
                 maxResults={this.state.maxResults}
               />
             </td>
-            <td width={"50%"} height={"100%"} className="card-container">
-              {gridComp}
+            <td width={"40%"} height={"100%"} className="card-container">
+              {infos}
             </td>
           </tr>
         </table>
