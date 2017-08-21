@@ -42,6 +42,7 @@ class App extends Component {
       currentPage: 'Hungry',
       currentUser: '',
       currentEmail: '',
+      currentPicture: '',
       album: {},
       foodInfo: []
     }
@@ -67,10 +68,11 @@ class App extends Component {
     });
   }
 
-  handleUserLogin(name, email){
+  handleUserLogin(name, email, picture){
     this.setState({
       currentUser: name,
-      currentEmail: email
+      currentEmail: email,
+      currentPicture: picture
     });
   }
 
@@ -141,6 +143,9 @@ class App extends Component {
             }
             currentUser = {
               this.state.currentUser
+            }
+            currentPicture = {
+              this.state.currentPicture
             }
           />
         break
