@@ -55,6 +55,7 @@ export default class FacebookLogin extends React.Component {
       me.accessToken = authResponse.accessToken;
       this.props.responseFacebook(me);
       this.props.handleUserLogin(me.name, me.email, me.picture.data.url);
+      // fetch
     });
   };
 
