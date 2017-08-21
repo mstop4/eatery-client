@@ -165,35 +165,37 @@ class RestaurantChoice extends React.Component {
         if (!pic) {
           continue
         } else {
-          infos.push(
-            <GridTile
-              key={place}
-              title={places[place]["name"]}
-              subtitle={places[place]["vicinity"]}
-              onClick={() => {
-                  let detail = {
-                    title: this.state.foodInfo[place]["name"],
-                    subtitle: this.state.foodInfo[place]["vicinity"],
-                    photos: this.state.album[place],
-                    info: this.state.foodInfo[place],
-                    rating: this.state.foodInfo[place]["rating"]
-                  }
-                  this.setState({details: detail}, function () {
-                  })
-                this.handleToggle();
-              }}
-            >
-              <Badge
-                badgeContent={n+1}
-                primary={true}
-              >
-                <Image
-                  src={pic}
-                  height={300}
-                />
-              </Badge>
-            </GridTile>
-          )
+
+          // infos.push(
+          //   <GridTile
+          //     key={place}
+          //     title={places[place]["name"]}
+          //     subtitle={places[place]["vicinity"]}
+          //     onClick={() => {
+          //         let detail = {
+          //           title: this.state.foodInfo[place]["name"],
+          //           subtitle: this.state.foodInfo[place]["vicinity"],
+          //           photos: this.state.album[place],
+          //           info: this.state.foodInfo[place],
+          //           rating: this.state.foodInfo[place]["rating"]
+          //         }
+          //         this.setState({details: detail}, function () {
+          //         })
+          //       this.handleToggle();
+          //     }}
+          //   >
+          //     <Badge
+          //       badgeContent={n+1}
+          //       primary={true}
+          //     >
+          //       <Image
+          //         src={pic}
+          //         height={300}
+          //       />
+          //     </Badge>
+          //   </GridTile>
+          // )
+
           arnold.push(
             <MuiThemeProvider muiTheme={muiTheme}>
               <Card className='card'
@@ -221,15 +223,19 @@ class RestaurantChoice extends React.Component {
         }
       }
 
-      gridComp =  <GridList cols={4}>
-                    {infos}
-                  </GridList>
+      gridComp =  {arnold}
+                  //<GridList cols={4}>
+                    //{infos}
+                  //</GridList>
 
     } else {
-      gridComp = <CircularProgress size="175"
-                                   thickness="30"
-                                   className="progress"
-      />
+      gridComp =
+                  <MuiThemeProvider muiTheme={muiTheme}>
+                    <CircularProgress size="175"
+                                 thickness="30"
+                                 className="progress"
+                    />
+                  </MuiThemeProvider>
     }
 
     return (
