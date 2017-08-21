@@ -23,6 +23,8 @@ const muiTheme = getMuiTheme({
   }
 });
 
+const labels = "ABCDEFGHIJKL"
+
 let g_foodJSON = []
 let g_photos = []
 let g_album = {}
@@ -105,12 +107,10 @@ class RestaurantChoice extends React.Component {
               newPhotos[place] += `photoreference=${json.results[place].photos[0].photo_reference}&`
               newPhotos[place] += "maxheight=400"
               promises.push(this.getMoreDetails(json, place, newAlbum))
-
+              if (++n >= this.state.maxResults) break
             } else {
               newPhotos[place] = ""
             }
-
-            if (++n >= this.state.maxResults) break
           }
 
           Promise.all(promises)
@@ -156,35 +156,37 @@ class RestaurantChoice extends React.Component {
         // build grid tile
         let pic = this.state.photos[place]
 
-        infos.push(
-          <GridTile
-            key={place}
-            title={places[place]["name"]}
-            subtitle={places[place]["vicinity"]}
-            onClick={() => {
-                let detail = {
-                  title: places[place]["name"],
-                  subtitle: places[place]["vicinity"],
-                  photos: this.state.album[place],
-                  rating: places[place]["rating"]
-                }
-                this.setState({details: detail}, function () {
-                  //console.log(this.state.details)
-                })
-                //console.log(this.state.details)
+        // ignore places with no photos
+        if (!pic) {
+          console.log("ignore", n)
+          continue
+        } else {
+          console.log("push", n)
+          infos.push(
+            <GridTile
+              key={place}
+              title={places[place]["name"]}
+              subtitle={labels[n]}
+              onClick={() => {
+                  let detail = {
+                    title: places[place]["name"],
+                    subtitle: places[place]["vicinity"],
+                    photos: this.state.album[place],
+                    rating: places[place]["rating"]
+                  }
+                  this.setState({details: detail}, function () {
+                  })
                 this.handleToggle();
-              {/* this.setState({details:details}) */}
-              {/* this.handleToggle(details) */}
-            }}
-          >
-            <Image
-              src={pic}
-              height = {300}
-            />
-          </GridTile>
-        )
-
-        if (++n >= this.state.maxResults) break
+              }}
+            >
+              <Image
+                src={pic}
+                height = {300}
+              />
+            </GridTile>
+          )
+          if (++n >= this.state.maxResults) break
+        }
       }
 
       gridComp =  <GridList cols={4}>
