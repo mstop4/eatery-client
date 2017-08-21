@@ -6,6 +6,7 @@ import Badge from 'material-ui/Badge'
 import Image from 'react-image-resizer'
 import MapComponent from './MapComponent.jsx'
 import DetailDrawer from './DetailDrawer.jsx'
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {red500} from 'material-ui/styles/colors';
@@ -17,7 +18,6 @@ const muiTheme = getMuiTheme({
   },
   progress: {
     marginLeft: '50%'
-
   }
 });
 
@@ -150,6 +150,7 @@ class RestaurantChoice extends React.Component {
 
   render = () => {
     const infos = []
+    const arnold = []
     const places = this.state.foodJSON.results
     let gridComp
     let n = 0
@@ -164,56 +165,86 @@ class RestaurantChoice extends React.Component {
         if (!pic) {
           continue
         } else {
-          infos.push(
-            <GridTile
-              key={place}
-              title={places[place]["name"]}
-              subtitle={places[place]["vicinity"]}
-              onClick={() => {
-                  let detail = {
-                    title: this.state.foodInfo[place]["name"],
-                    subtitle: this.state.foodInfo[place]["vicinity"],
-                    photos: this.state.album[place],
-                    info: this.state.foodInfo[place],
-                    rating: this.state.foodInfo[place]["rating"]
-                  }
-                  this.setState({details: detail}, function () {
-                  })
-                this.handleToggle();
-              }}
-            >
-              <Badge
-                badgeContent={n+1}
-                primary={true}
+
+          // infos.push(
+          //   <GridTile
+          //     key={place}
+          //     title={places[place]["name"]}
+          //     subtitle={places[place]["vicinity"]}
+          //     onClick={() => {
+          //         let detail = {
+          //           title: this.state.foodInfo[place]["name"],
+          //           subtitle: this.state.foodInfo[place]["vicinity"],
+          //           photos: this.state.album[place],
+          //           info: this.state.foodInfo[place],
+          //           rating: this.state.foodInfo[place]["rating"]
+          //         }
+          //         this.setState({details: detail}, function () {
+          //         })
+          //       this.handleToggle();
+          //     }}
+          //   >
+          //     <Badge
+          //       badgeContent={n+1}
+          //       primary={true}
+          //     >
+          //       <Image
+          //         src={pic}
+          //         height={300}
+          //       />
+          //     </Badge>
+          //   </GridTile>
+          // )
+
+          arnold.push(
+            <MuiThemeProvider muiTheme={muiTheme}>
+              <Card className='card'
+                    onClick={() => {
+                        let detail = {
+                          title: places[place]["name"],
+                          subtitle: places[place]["vicinity"],
+                          photos: this.state.album[place],
+                          rating: places[place]["rating"]
+                        }
+                        this.setState({details: detail}, function () {
+                        })
+                      this.handleToggle();
+                    }}
               >
-                <Image
-                  src={pic}
-                  height={300}
-                />
-              </Badge>
-            </GridTile>
+                <CardMedia >
+                  <img className='card-image'src={pic} alt="" />
+                </CardMedia>
+                <CardTitle title={places[place]["name"]} subtitle={places[place]["vicinity"]} />
+              </Card>
+            </MuiThemeProvider>
+
           )
           if (++n >= this.state.maxResults) break
         }
       }
 
-      gridComp =  <GridList cols={4}>
-                    {infos}
-                  </GridList>
+      gridComp =  {arnold}
+                  //<GridList cols={4}>
+                    //{infos}
+                  //</GridList>
 
     } else {
-      gridComp = <CircularProgress size="175"
-                                   thickness="30"
-                                   className="progress"
-      />
+      gridComp =
+                  <MuiThemeProvider muiTheme={muiTheme}>
+                    <CircularProgress size="175"
+                                 thickness="30"
+                                 className="progress"
+                    />
+                  </MuiThemeProvider>
     }
 
     return (
       <div>
         <table width={"100%"} height={"100%"}>
           <tr>
-            <td width={"50%"}>
+            <td width={"50%"} height={"100%"}>
               <MapComponent
+                className="map"
                 data={this.state.foodJSON.results}
                 center={this.state.position}
                 radius={this.state.radius}
@@ -221,10 +252,8 @@ class RestaurantChoice extends React.Component {
                 maxResults={this.state.maxResults}
               />
             </td>
-            <td width={"50%"}>
-              <MuiThemeProvider muiTheme={muiTheme}>
-                {gridComp}
-              </MuiThemeProvider>
+            <td width={"50%"} height={"100%"} className="card-container">
+              {arnold}
             </td>
           </tr>
         </table>
