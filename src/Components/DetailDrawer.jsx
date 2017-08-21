@@ -20,6 +20,7 @@ import Rating from 'react-rating';
 import Slider from 'react-slick';
 import Star from 'material-ui/svg-icons/toggle/star';
 import StarEmpty from 'material-ui/svg-icons/toggle/star-border';
+
 const muiTheme = getMuiTheme({
   palette: {
     primary1Color: red500,
@@ -58,13 +59,14 @@ export default class DetailDrawer extends React.Component {
       dots: true,
       focusOnSelect: true,
       slidesToShow: 2,
-      slidesToScroll: 2
+      slidesToScroll: 1
     };
 
     let website = ""
     let phoneNumber = ""
 
     if (this.state.details.info) {
+      console.dir(this.state.details.info)
       website = this.state.details.info.website
       phoneNumber = this.state.details.info.formatted_phone_number
     }

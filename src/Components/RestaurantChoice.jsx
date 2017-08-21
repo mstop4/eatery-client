@@ -86,7 +86,7 @@ class RestaurantChoice extends React.Component {
   getFood = (lat, lng) => {
     if (this.state.foodJSON.length === 0 || this.state.photos.length === 0) {
 
-      const type = "restaurant"
+      const type = "bar"
 
       fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/places?lat=${lat}&lng=${lng}&type=${type}&rankby=${this.state.rankBy}`, {
         mode: "cors"
@@ -167,7 +167,7 @@ class RestaurantChoice extends React.Component {
         } else {
 
           infos.push(
-            <MuiThemeProvider muiTheme={muiTheme}>
+            <MuiThemeProvider key= {place} muiTheme={muiTheme}>
               <Card className='card'
                     onClick={() => {
                       let detail = {
