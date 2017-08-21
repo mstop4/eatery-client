@@ -46,22 +46,23 @@ button {
 
 .login-title {
   font-family: 'Raleway', sans-serif;
-  font-size: 175px;
+  font-size: 250px;
   z-index: 1;
   color: white;
   position: absolute;
   left: 50%;
-  top: 30%;
-  transform: translate(-50%, -30%);
+  top: 15%;
+  transform: translate(-50%, -15%);
 }
 
 .login-subtitle {
   font-family: 'Raleway', sans-serif;
-  font-size: 30px;
+  font-size: 40px;
   z-index: 1;
+  text-align: center;
   color: white;
   position: absolute;
   left: 50%;
-  top: 52%;
-  transform: translate(-50%, -52%);
+  top: 55%;
+  transform: translate(-50%, -55%);
 }
