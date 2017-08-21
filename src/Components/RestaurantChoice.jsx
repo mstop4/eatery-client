@@ -201,14 +201,16 @@ class RestaurantChoice extends React.Component {
         }
       }
 
-      gridComp = {infos}
+      gridComp = infos
 
 
     } else {
-      gridComp =    <CircularProgress size="175"
+      gridComp = <MuiThemeProvider muiTheme={muiTheme}>
+                  <CircularProgress size="175"
                                  thickness="30"
                                  className="progress"
                     />
+                  </MuiThemeProvider>
 
     }
 
@@ -227,7 +229,7 @@ class RestaurantChoice extends React.Component {
               />
             </td>
             <td width={"40%"} height={"100%"} className="card-container">
-              {infos}
+              {gridComp}
             </td>
           </tr>
         </table>
