@@ -159,12 +159,11 @@ class App extends Component {
           />
         </MuiThemeProvider>
         {CurrentPage}
-        {//<Feed
-          //key={1}
-          //album={this.state.album}
-          //foodInfo={this.state.foodInfo}
-        ///>
-        }
+        <Feed
+          key={1}
+          album={this.state.album}
+          foodInfo={this.state.foodInfo}
+        />
       </div>
 
     );
