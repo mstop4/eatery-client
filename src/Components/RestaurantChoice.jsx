@@ -5,6 +5,7 @@ import {GridList, GridTile} from 'material-ui/GridList'
 import Image from 'react-image-resizer'
 import MapComponent from './MapComponent.jsx'
 import DetailDrawer from './DetailDrawer.jsx'
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {red500} from 'material-ui/styles/colors';
@@ -201,7 +202,7 @@ class RestaurantChoice extends React.Component {
       <div>
         <table width={"100%"} height={"100%"}>
           <tr>
-            <td width={"50%"}>
+            <td width={"50%"} height={"100%"}>
               <MapComponent
                 data={this.state.foodJSON.results}
                 center={this.state.position}
@@ -210,10 +211,20 @@ class RestaurantChoice extends React.Component {
                 maxResults={this.state.maxResults}
               />
             </td>
-            <td width={"50%"}>
+            <td width={"50%"} height={"100%"}>
+
+              <MuiThemeProvider muiTheme={muiTheme}>
+                <Card className="card">
+                  <CardMedia >
+                    <img className='card-image'src='http://placekitten.com/g/400/200' alt="" />
+                  </CardMedia>
+                  <CardTitle title="Card title Card title" subtitle="Card subtitle " />
+                </Card>
+              </MuiThemeProvider>
               <MuiThemeProvider muiTheme={muiTheme}>
                 {gridComp}
               </MuiThemeProvider>
+
             </td>
           </tr>
         </table>
