@@ -220,7 +220,7 @@ class RestaurantChoice extends React.Component {
                   primary={true}
                   className ="badge"
                 />
-                <CardTitle title={places[place]["name"]} subtitle={places[place]["vicinity"]} />
+                <CardTitle title={places[place]["name"]} subtitle={places[place]["vicinity"]} className="card-title"/>
 
               </Card>
             </MuiThemeProvider>

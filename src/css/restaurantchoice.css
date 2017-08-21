@@ -10,9 +10,8 @@
 
 .badge {
   position: absolute !important;
-  right: 20px;
-  bottom: -60px;
-  display: inline;
+  left: 5px;
+  bottom: 25px;
 }
 
 .card-container {
@@ -24,6 +23,10 @@
 .card {
   margin: 20px;
   position: relative;
+}
+
+.card-title{
+  padding-left: 50px !important;
 }
 
 .card-image {
