@@ -150,7 +150,7 @@ class RestaurantChoice extends React.Component {
 
   render = () => {
     const infos = []
-    const arnold = []
+    const cardView = []
     const places = this.state.foodJSON.results
     let gridComp
     let n = 0
@@ -230,7 +230,7 @@ class RestaurantChoice extends React.Component {
         }
       }
 
-      gridComp =  {arnold}
+      gridComp =  {cardView}
                   //<GridList cols={4}>
                     //{infos}
                   //</GridList>
@@ -260,7 +260,7 @@ class RestaurantChoice extends React.Component {
               />
             </td>
             <td width={"40%"} height={"100%"} className="card-container">
-              {arnold}
+              {cardView}
             </td>
           </tr>
         </table>
