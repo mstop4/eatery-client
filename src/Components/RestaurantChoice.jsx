@@ -150,7 +150,6 @@ class RestaurantChoice extends React.Component {
 
   render = () => {
     const infos = []
-    //const arnold = []
     const places = this.state.foodJSON.results
     let gridComp
     let n = 0
@@ -165,6 +164,36 @@ class RestaurantChoice extends React.Component {
         if (!pic) {
           continue
         } else {
+
+          // infos.push(
+          //   <GridTile
+          //     key={place}
+          //     title={places[place]["name"]}
+          //     subtitle={places[place]["vicinity"]}
+          //     onClick={() => {
+          //         let detail = {
+          //           title: this.state.foodInfo[place]["name"],
+          //           subtitle: this.state.foodInfo[place]["vicinity"],
+          //           photos: this.state.album[place],
+          //           info: this.state.foodInfo[place],
+          //           rating: this.state.foodInfo[place]["rating"]
+          //         }
+          //         this.setState({details: detail}, function () {
+          //         })
+          //       this.handleToggle();
+          //     }}
+          //   >
+          //     <Badge
+          //       badgeContent={n+1}
+          //       primary={true}
+          //     >
+          //       <Image
+          //         src={pic}
+          //         height={300}
+          //       />
+          //     </Badge>
+          //   </GridTile>
+          // )
 
           infos.push(
             <MuiThemeProvider key= {place} muiTheme={muiTheme}>
@@ -202,8 +231,6 @@ class RestaurantChoice extends React.Component {
       }
 
       gridComp = infos
-
-
     } else {
       gridComp = <MuiThemeProvider muiTheme={muiTheme}>
                   <CircularProgress size="175"
@@ -211,7 +238,6 @@ class RestaurantChoice extends React.Component {
                                  className="progress"
                     />
                   </MuiThemeProvider>
-
     }
 
     return (
