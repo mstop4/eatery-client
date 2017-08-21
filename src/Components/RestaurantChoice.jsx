@@ -247,7 +247,7 @@ class RestaurantChoice extends React.Component {
 
     return (
       <div>
-        <table width={"100%"} height={"100%"}>
+        <table width={"100%"} height={"100vh"}>
           <tr>
             <td width={"60%"} height={"100%"}>
               <MapComponent

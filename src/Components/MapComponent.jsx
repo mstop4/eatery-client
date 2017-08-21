@@ -124,7 +124,7 @@ class MapComponent extends React.Component {
 
         <Gmaps
           width={'100%'}
-          height={'500px'}
+          height={'90vh'}
           lat={this.props.center.lat}
           lng={this.props.center.lng}
           zoom={10}
