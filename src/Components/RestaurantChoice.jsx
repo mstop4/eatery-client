@@ -56,6 +56,7 @@ class RestaurantChoice extends React.Component {
     let place_id = json.results[place].place_id;
     newAlbum[place] = []
 
+
     return new Promise ((resolve, reject) => {
       fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/details?placeid=${place_id}`, {
         mode: "cors"
@@ -155,10 +156,8 @@ class RestaurantChoice extends React.Component {
 
         // ignore places with no photos
         if (!pic) {
-          console.log("ignore", n)
           continue
         } else {
-          console.log("push", n)
           infos.push(
             <GridTile
               key={place}

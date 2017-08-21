@@ -37,31 +37,24 @@ class Feed extends React.Component {
     super(props);
     this.state = {
       open: false,
-      album: this.props.album,
+      album: [],
       details: {
           title: "",
           subtitle: "",
           photos: "",
           rating:""
-      }
+      },
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ album: nextProps.album });
-  }
-
-  handleToggle = () => this.setState({ open: true })
-  handleClose = () => this.setState({ open: false })
-
-  render = () => {
 
     let flatAlbum = []
 
     // convert nested album into a flat hierarchy
-    for (let place in this.state.album) {
-      for (let photo in this.state.album[place]) {
-        flatAlbum.push(this.state.album[place][photo])
+    for (let place in nextProps.album) {
+      for (let photo in nextProps.album[place]) {
+        flatAlbum.push(nextProps.album[place][photo])
       }
     }
 
@@ -73,18 +66,25 @@ class Feed extends React.Component {
         flatAlbum[j] = temp;
     }
 
-    // build grid tiles
+    this.setState({ album: flatAlbum });
+  }
 
+  handleToggle = () => this.setState({ open: true })
+  handleClose = () => this.setState({ open: false })
+
+  render = () => {
+
+    // build grid tiles
     let tiles
 
-    if (flatAlbum.length > 0) {
+    if (this.state.album.length > 0) {
 
       tiles = []
 
-      for (let photo in flatAlbum) {
+      for (let photo in this.state.album) {
         tiles.push(
           <GridTile
-            key={flatAlbum[photo]}
+            key={this.state.album[photo]}
             //title={"Shut up and take my money!"}
             onTouchTap={() => {
               let detail = {
@@ -107,7 +107,7 @@ class Feed extends React.Component {
             //   </IconButton>
             // }
           >
-            <img src={flatAlbum[photo]} />
+            <img src={this.state.album[photo]} />
           </GridTile>
         )
       }
