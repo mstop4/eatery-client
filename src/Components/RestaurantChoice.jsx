@@ -6,6 +6,9 @@ import Image from 'react-image-resizer'
 import MapComponent from './MapComponent.jsx'
 import DetailDrawer from './DetailDrawer.jsx'
 
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {red500} from 'material-ui/styles/colors';
 import '../css/restaurantchoice.css';
@@ -210,8 +213,14 @@ class RestaurantChoice extends React.Component {
             </td>
             <td width={"50%"}>
               <MuiThemeProvider muiTheme={muiTheme}>
-                {gridComp}
+                <Card>
+                  <CardMedia>
+                    <img src='http://placekitten.com/g/400/200' alt="" />
+                  </CardMedia>
+                  <CardTitle title="Card title" subtitle="Card subtitle" />
+                </Card>
               </MuiThemeProvider>
+
             </td>
           </tr>
         </table>

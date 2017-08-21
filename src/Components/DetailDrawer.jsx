@@ -6,8 +6,6 @@ import {List, ListItem} from 'material-ui/List';
 import Room from 'material-ui/svg-icons/action/room';
 import Email from 'material-ui/svg-icons/communication/email';
 import Phone from 'material-ui/svg-icons/communication/phone';
-import Star from 'material-ui/svg-icons/toggle/star';
-import StarEmpty from 'material-ui/svg-icons/toggle/star-border';
 
 
 import RaisedButton from "material-ui/RaisedButton";
@@ -21,7 +19,8 @@ import Divider from 'material-ui/Divider';
 
 import Rating from 'react-rating';
 import Slider from 'react-slick';
-
+import Star from 'material-ui/svg-icons/toggle/star';
+import StarEmpty from 'material-ui/svg-icons/toggle/star-border';
 const muiTheme = getMuiTheme({
   palette: {
     primary1Color: red500,
@@ -84,20 +83,10 @@ export default class DetailDrawer extends React.Component {
             />
             <Divider />
             <div>
-              <List class="contact-us-list">
-                <ListItem primaryText={this.state.details.subtitle}
-                          className="contact address"
-                          leftIcon={<Room />}
-                />
-                <ListItem  className="contact email"
-                           leftIcon={<Email />}
-                >
-                  <a href="mailto:">hello@yeticave.com</a>
-                </ListItem>
-                <ListItem primaryText="1 (408) 445 9978"
-                          className="contact phone"
-                          leftIcon={<Phone />}
-                />
+              <List className="contact-us-list">
+                  <div className="contact-detail">{this.state.details.subtitle}</div>
+                  <a className="contact-detail" href="mailto:">hello@yeticave.com</a>
+                  <div className="contact-detail" >1 (408) 445 9978 </div>
               </List>
             </div>
             <Divider />
