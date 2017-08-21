@@ -48,6 +48,8 @@ export default class DetailDrawer extends React.Component {
   render() {
     let album = []
 
+    console.log("Drawer");
+
     for (let photo in this.state.details.photos) {
       album.push(<div><img className="images" src={this.state.details.photos[photo]}/></div>)
     }
@@ -61,6 +63,15 @@ export default class DetailDrawer extends React.Component {
       slidesToShow: 2,
       slidesToScroll: 2
     };
+
+    let website = ""
+    let phoneNumber = ""
+
+    if (this.state.details.info) {
+      console.dir(this.state.details.info)
+      website = this.state.details.info.website
+      phoneNumber = this.state.details.info.formatted_phone_number
+    }
 
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -83,10 +94,27 @@ export default class DetailDrawer extends React.Component {
             />
             <Divider />
             <div>
+<<<<<<< HEAD
               <List className="contact-us-list">
                   <div className="contact-detail">{this.state.details.subtitle}</div>
                   <a className="contact-detail" href="mailto:">hello@yeticave.com</a>
                   <div className="contact-detail" >1 (408) 445 9978 </div>
+=======
+              <List class="contact-us-list">
+                <ListItem primaryText={this.state.details.subtitle}
+                          className="contact address"
+                          leftIcon={<Room />}
+                />
+                <ListItem  className="contact email"
+                           leftIcon={<Email />}
+                >
+                  <a href={website}>{website}</a>
+                </ListItem>
+                <ListItem primaryText={phoneNumber}
+                          className="contact phone"
+                          leftIcon={<Phone />}
+                />
+>>>>>>> f02f33be500605b15ade04e6e8e4418ae3f2f27c
               </List>
             </div>
             <Divider />

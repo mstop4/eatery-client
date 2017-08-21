@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
 import CircularProgress from 'material-ui/CircularProgress';
 import {GridList, GridTile} from 'material-ui/GridList'
+import Badge from 'material-ui/Badge'
 import Image from 'react-image-resizer'
 import MapComponent from './MapComponent.jsx'
 import DetailDrawer from './DetailDrawer.jsx'
@@ -20,11 +21,10 @@ const muiTheme = getMuiTheme({
   }
 });
 
-const labels = "ABCDEFGHIJKL"
-
 let g_foodJSON = []
 let g_photos = []
 let g_album = {}
+let g_foodInfo = []
 let g_position = { lat: 43.6532, lng: -79.3832 }
 
 class RestaurantChoice extends React.Component {
@@ -33,6 +33,7 @@ class RestaurantChoice extends React.Component {
     super(props)
     this.state = {
       foodJSON: g_foodJSON,
+      foodInfo: g_foodInfo,
       photos: g_photos,
       album: g_album,
       position: g_position,
@@ -50,7 +51,7 @@ class RestaurantChoice extends React.Component {
     }
   }
 
-  getMoreDetails = (json, place, newAlbum) => {
+  getMoreDetails = (json, place, newAlbum, newInfo) => {
     // get more details
 
     let place_id = json.results[place].place_id;
@@ -64,6 +65,9 @@ class RestaurantChoice extends React.Component {
         return response.json()
       })
       .then((json) => {
+
+        newInfo[place] = json.result
+
         for (let photo in json.result.photos) {
           newAlbum[place][photo] = "https://maps.googleapis.com/maps/api/place/photo?"
           newAlbum[place][photo] += `key=${process.env.REACT_APP_GOOGLEMAPS_APIKEY}&`
@@ -94,6 +98,7 @@ class RestaurantChoice extends React.Component {
 
           let newPhotos = []
           let newAlbum = {}
+          let newInfo = []
           let promises = []
           let n = 0
 
@@ -103,7 +108,7 @@ class RestaurantChoice extends React.Component {
               newPhotos[place] += `key=${process.env.REACT_APP_GOOGLEMAPS_APIKEY}&`
               newPhotos[place] += `photoreference=${json.results[place].photos[0].photo_reference}&`
               newPhotos[place] += "maxheight=400"
-              promises.push(this.getMoreDetails(json, place, newAlbum))
+              promises.push(this.getMoreDetails(json, place, newAlbum, newInfo))
               if (++n >= this.state.maxResults) break
             } else {
               newPhotos[place] = ""
@@ -114,18 +119,20 @@ class RestaurantChoice extends React.Component {
           .then(() => {
 
             g_foodJSON = json
+            g_foodInfo = newInfo
             g_photos = newPhotos
             g_position = {lat: lat, lng: lng}
             g_album = newAlbum
 
             this.setState({
               foodJSON: json,
+              foodInfo: newInfo,
               photos: newPhotos,
               album: newAlbum,
               position: { lat: lat, lng: lng }
             })
 
-            this.props.updateCache(newAlbum)
+            this.props.updateCache(newAlbum, newInfo)
           })
           .catch((error) => {
             console.error(error)
@@ -156,20 +163,39 @@ class RestaurantChoice extends React.Component {
 
         // ignore places with no photos
         if (!pic) {
-          console.log("ignore", n)
           continue
         } else {
-          console.log("push", n)
           infos.push(
             <GridTile
               key={place}
               title={places[place]["name"]}
+<<<<<<< HEAD
               subtitle={labels[n]}
+=======
+              subtitle={places[place]["vicinity"]}
+              onClick={() => {
+                  let detail = {
+                    title: this.state.foodInfo[place]["name"],
+                    subtitle: this.state.foodInfo[place]["vicinity"],
+                    photos: this.state.album[place],
+                    info: this.state.foodInfo[place],
+                    rating: this.state.foodInfo[place]["rating"]
+                  }
+                  this.setState({details: detail}, function () {
+                  })
+                this.handleToggle();
+              }}
+>>>>>>> f02f33be500605b15ade04e6e8e4418ae3f2f27c
             >
-              <Image
-                src={pic}
-                height = {300}
-              />
+              <Badge
+                badgeContent={n+1}
+                primary={true}
+              >
+                <Image
+                  src={pic}
+                  height={300}
+                />
+              </Badge>
             </GridTile>
           )
           arnold.push(

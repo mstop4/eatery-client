@@ -37,31 +37,24 @@ class Feed extends React.Component {
     super(props);
     this.state = {
       open: false,
-      album: this.props.album,
+      album: [],
       details: {
           title: "",
           subtitle: "",
           photos: "",
           rating:""
-      }
+      },
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ album: nextProps.album });
-  }
-
-  handleToggle = () => this.setState({ open: true })
-  handleClose = () => this.setState({ open: false })
-
-  render = () => {
 
     let flatAlbum = []
 
     // convert nested album into a flat hierarchy
-    for (let place in this.state.album) {
-      for (let photo in this.state.album[place]) {
-        flatAlbum.push(this.state.album[place][photo])
+    for (let place in nextProps.album) {
+      for (let photo in nextProps.album[place]) {
+        flatAlbum.push(nextProps.album[place][photo])
       }
     }
 
@@ -73,41 +66,42 @@ class Feed extends React.Component {
         flatAlbum[j] = temp;
     }
 
-    // build grid tiles
+    this.setState({ album: flatAlbum });
+  }
 
+  handleToggle = () => this.setState({ open: true })
+  handleClose = () => this.setState({ open: false })
+
+  render = () => {
+
+    // build grid tiles
     let tiles
 
-    if (flatAlbum.length > 0) {
+    if (this.state.album.length > 0) {
 
       tiles = []
+      let info = this.props.foodInfo
 
-      for (let photo in flatAlbum) {
+      console.log("Feed")
+      console.dir(info)
+
+      for (let photo in this.state.album) {
         tiles.push(
           <GridTile
-            key={flatAlbum[photo]}
-            //title={"Shut up and take my money!"}
+            key={this.state.album[photo]}
             onTouchTap={() => {
               let detail = {
-                  title: "shut up and take my money!",
-                  subtitle: "Fry",
-                  photos: "",
-                  rating: ""
-                }
+                    title: info[photo]["name"],
+                    subtitle: info[photo]["vicinity"],
+                    photos: this.state.album[photo],
+                    info: info[photo],
+                    rating: info[photo]["rating"]
+                  }
                 this.setState({details:detail})
                 this.handleToggle();
             }}
-            // subtitle={
-            //   <span>
-            //     by <b>"Fry"</b>
-            //   </span>
-            // }
-            // actionIcon={
-            //   <IconButton>
-            //     <StarBorder color="white" />
-            //   </IconButton>
-            // }
           >
-            <img src={flatAlbum[photo]} />
+            <img src={this.state.album[photo]} />
           </GridTile>
         )
       }
