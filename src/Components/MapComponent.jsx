@@ -115,18 +115,24 @@ class MapComponent extends React.Component {
     if (places && places.length > 0) {
 
       for (let place in places) {
-        markers.push(<Marker
-            key={place}
-            lat={places[place]["geometry"]["location"].lat}
-            lng={places[place]["geometry"]["location"].lng}
-            icon={svgIcon}//{mapicons[place]}
-            label={{
-                text: labels[labelIndex++ % labels.length],
-                color: "white",
-                fontFamily: "sans-serif"
-              }}
-            />
-        )
+
+        let pic = places[place]["photos"]
+        if (!pic) {
+          continue
+        } else {
+          markers.push(<Marker
+              key={place}
+              lat={places[place]["geometry"]["location"].lat}
+              lng={places[place]["geometry"]["location"].lng}
+              icon={svgIcon}//{mapicons[place]}
+              label={{
+                  text: labels[labelIndex++ % labels.length],
+                  color: "white",
+                  fontFamily: "sans-serif"
+                }}
+              />
+            )
+        }
 
         // infos.push(<InfoWindow
         //     key={place}

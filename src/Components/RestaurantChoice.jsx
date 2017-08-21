@@ -104,12 +104,10 @@ class RestaurantChoice extends React.Component {
               newPhotos[place] += `photoreference=${json.results[place].photos[0].photo_reference}&`
               newPhotos[place] += "maxheight=400"
               promises.push(this.getMoreDetails(json, place, newAlbum))
-
+              if (++n >= this.state.maxResults) break
             } else {
               newPhotos[place] = ""
             }
-
-            if (++n >= this.state.maxResults) break
           }
 
           Promise.all(promises)
@@ -155,31 +153,37 @@ class RestaurantChoice extends React.Component {
         // build grid tile
         let pic = this.state.photos[place]
 
-        infos.push(
-          <GridTile
-            key={place}
-            title={places[place]["name"]}
-            subtitle={labels[n]}
-            onClick={() => {
-                let detail = {
-                  title: places[place]["name"],
-                  subtitle: places[place]["vicinity"],
-                  photos: this.state.album[place],
-                  rating: places[place]["rating"]
-                }
-                this.setState({details: detail}, function () {
-                })
-              this.handleToggle();
-            }}
-          >
-            <Image
-              src={pic}
-              height = {300}
-            />
-          </GridTile>
-        )
-
-        if (++n >= this.state.maxResults) break
+        // ignore places with no photos
+        if (!pic) {
+          console.log("ignore", n)
+          continue
+        } else {
+          console.log("push", n)
+          infos.push(
+            <GridTile
+              key={place}
+              title={places[place]["name"]}
+              subtitle={labels[n]}
+              onClick={() => {
+                  let detail = {
+                    title: places[place]["name"],
+                    subtitle: places[place]["vicinity"],
+                    photos: this.state.album[place],
+                    rating: places[place]["rating"]
+                  }
+                  this.setState({details: detail}, function () {
+                  })
+                this.handleToggle();
+              }}
+            >
+              <Image
+                src={pic}
+                height = {300}
+              />
+            </GridTile>
+          )
+          if (++n >= this.state.maxResults) break
+        }
       }
 
       gridComp =  <GridList cols={4}>
