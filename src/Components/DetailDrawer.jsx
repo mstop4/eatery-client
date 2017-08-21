@@ -4,9 +4,8 @@ import MenuItem from "material-ui/MenuItem";
 import {List, ListItem} from 'material-ui/List';
 
 import Room from 'material-ui/svg-icons/action/room';
-import Email from 'material-ui/svg-icons/communication/email';
+import Globe from 'material-ui/svg-icons/social/public';
 import Phone from 'material-ui/svg-icons/communication/phone';
-
 
 import RaisedButton from "material-ui/RaisedButton";
 import FavoriteButton from "./FavoriteButton.jsx";
@@ -48,8 +47,6 @@ export default class DetailDrawer extends React.Component {
   render() {
     let album = []
 
-    console.log("Drawer");
-
     for (let photo in this.state.details.photos) {
       album.push(<div><img className="images" src={this.state.details.photos[photo]}/></div>)
     }
@@ -68,7 +65,6 @@ export default class DetailDrawer extends React.Component {
     let phoneNumber = ""
 
     if (this.state.details.info) {
-      console.dir(this.state.details.info)
       website = this.state.details.info.website
       phoneNumber = this.state.details.info.formatted_phone_number
     }
@@ -94,10 +90,20 @@ export default class DetailDrawer extends React.Component {
             />
             <Divider />
             <div>
-              <List className="contact-us-list">
-                  <div className="contact-detail">{this.state.details.subtitle}</div>
-                  <a className="contact-detail" href="mailto:">hello@yeticave.com</a>
-                  <div className="contact-detail" >1 (408) 445 9978 </div>
+              <List class="contact-us-list">
+                <ListItem primaryText={this.state.details.subtitle}
+                          className="contact address"
+                          leftIcon={<Room />}
+                />
+                <ListItem  className="contact email"
+                           leftIcon={<Globe />}
+                >
+                  <a href={website}>{website}</a>
+                </ListItem>
+                <ListItem primaryText={phoneNumber}
+                          className="contact phone"
+                          leftIcon={<Phone />}
+                />
               </List>
             </div>
             <Divider />

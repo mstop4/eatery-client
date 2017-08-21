@@ -171,8 +171,8 @@ class App extends Component {
           //key={1}
           //album={this.state.album}
           //foodInfo={this.state.foodInfo}
-        ///>
-        }
+       ///>
+     }
       </div>
 
     );

@@ -8,15 +8,25 @@
   height: 100vh;
 }
 
+.badge {
+  position: absolute !important;
+  left: 5px;
+  bottom: 25px;
+}
+
 .card-container {
   overflow: auto;
-  white-space: nowrap;
   position: fixed;
+  height: 90%;
 }
 
 .card {
   margin: 20px;
   position: relative;
+}
+
+.card-title{
+  padding-left: 50px !important;
 }
 
 .card-image {
