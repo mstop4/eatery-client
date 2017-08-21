@@ -4,6 +4,10 @@
   transform: translate(-50%, 0);
 }
 
+.map {
+  height: 100vh;
+}
+
 .card-container {
   overflow: auto;
   white-space: nowrap;

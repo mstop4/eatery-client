@@ -216,6 +216,7 @@ class RestaurantChoice extends React.Component {
           <tr>
             <td width={"50%"} height={"100%"}>
               <MapComponent
+                className="map"
                 data={this.state.foodJSON.results}
                 center={this.state.position}
                 radius={this.state.radius}
