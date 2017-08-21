@@ -196,7 +196,7 @@ class RestaurantChoice extends React.Component {
           //   </GridTile>
           // )
 
-          arnold.push(
+          cardView.push(
             <MuiThemeProvider muiTheme={muiTheme}>
               <Card className='card'
                     onClick={() => {
