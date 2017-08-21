@@ -61,8 +61,6 @@ class MapComponent extends React.Component {
 
   onMapCreated(map) {
 
-    console.log("mapCreated")
-
     this.setState({map: map})
     //map.setOptions({style: defaultStyle})
 

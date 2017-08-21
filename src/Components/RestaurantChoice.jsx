@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
 import CircularProgress from 'material-ui/CircularProgress';
 import {GridList, GridTile} from 'material-ui/GridList'
+import Badge from 'material-ui/Badge'
 import Image from 'react-image-resizer'
 import MapComponent from './MapComponent.jsx'
 import DetailDrawer from './DetailDrawer.jsx'
@@ -162,7 +163,7 @@ class RestaurantChoice extends React.Component {
             <GridTile
               key={place}
               title={places[place]["name"]}
-              subtitle={labels[n]}
+              subtitle={places[place]["vicinity"]}
               onClick={() => {
                   let detail = {
                     title: places[place]["name"],
@@ -175,10 +176,15 @@ class RestaurantChoice extends React.Component {
                 this.handleToggle();
               }}
             >
-              <Image
-                src={pic}
-                height = {300}
-              />
+              <Badge
+                badgeContent={labels[n]}
+                primary={true}
+              >
+                <Image
+                  src={pic}
+                  height={300}
+                />
+              </Badge>
             </GridTile>
           )
           if (++n >= this.state.maxResults) break

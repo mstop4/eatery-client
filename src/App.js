@@ -73,8 +73,6 @@ class App extends Component {
   updateCache(newAlbum){
     g_album = newAlbum
 
-    console.log("updating cache")
-
     this.setState({
       album: newAlbum,
     })
@@ -143,9 +141,6 @@ class App extends Component {
       case 'Test':
         CurrentPage = <TestPage />
     }
-
-    console.log("app: render")
-    console.dir(this.state.album)
 
     return (
       <div>
