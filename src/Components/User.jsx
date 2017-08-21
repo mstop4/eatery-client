@@ -58,6 +58,7 @@ class User extends Component {
 
     return (
       <div>  
+        <img src={this.props.currentPicture} />
         <p>{this.props.currentUser}, {this.props.currentEmail}</p>
         <MuiThemeProvider>
           <UserOptions 
