@@ -37,7 +37,8 @@ class Feed extends React.Component {
     super(props);
     this.state = {
       open: false,
-      album: [],
+      album: {},
+      flatAlbum: [],
       details: {
           title: "",
           subtitle: "",
@@ -49,24 +50,27 @@ class Feed extends React.Component {
 
   componentWillReceiveProps(nextProps) {
 
-    let flatAlbum = []
+    let newFlatAlbum = []
 
     // convert nested album into a flat hierarchy
     for (let place in nextProps.album) {
       for (let photo in nextProps.album[place]) {
-        flatAlbum.push(nextProps.album[place][photo])
+        newFlatAlbum.push({
+          pic: nextProps.album[place][photo],
+          id: place
+        })
       }
     }
 
-    // shuffle flat album
-    for (let i = flatAlbum.length - 1; i > 0; i--) {
+    //shuffle flat album
+    for (let i = newFlatAlbum.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
-        let temp = flatAlbum[i];
-        flatAlbum[i] = flatAlbum[j];
-        flatAlbum[j] = temp;
+        let temp = newFlatAlbum[i];
+        newFlatAlbum[i] = newFlatAlbum[j];
+        newFlatAlbum[j] = temp;
     }
 
-    this.setState({ album: flatAlbum });
+    this.setState({ album: nextProps.album, flatAlbum: newFlatAlbum });
   }
 
   handleToggle = () => this.setState({ open: true })
@@ -77,31 +81,34 @@ class Feed extends React.Component {
     // build grid tiles
     let tiles
 
-    if (this.state.album.length > 0) {
+    if (this.state.flatAlbum.length > 0) {
 
       tiles = []
       let info = this.props.foodInfo
+      let placeId = ""
 
-      console.log("Feed")
-      console.dir(info)
+      for (let photo in this.state.flatAlbum) {
 
-      for (let photo in this.state.album) {
+        placeId = this.state.flatAlbum[photo].id
+        console.log(this.state.album)
+
+        let detail = {
+            title: info[placeId]["name"],
+            subtitle: info[placeId]["vicinity"],
+            photos: this.state.album[placeId],
+            info: info[placeId],
+            rating: info[placeId]["rating"]
+          }
+
         tiles.push(
           <GridTile
-            key={this.state.album[photo]}
+            key={photo}
             onTouchTap={() => {
-              let detail = {
-                    title: info[photo]["name"],
-                    subtitle: info[photo]["vicinity"],
-                    photos: this.state.album[photo],
-                    info: info[photo],
-                    rating: info[photo]["rating"]
-                  }
-                this.setState({details:detail})
-                this.handleToggle();
+              this.setState({details: detail})
+              this.handleToggle();
             }}
           >
-            <img src={this.state.album[photo]} />
+            <img src={this.state.flatAlbum[photo].pic} />
           </GridTile>
         )
       }

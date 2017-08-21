@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
+import React/*, { Component }*/ from 'react'
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
 import CircularProgress from 'material-ui/CircularProgress';
-import {GridList, GridTile} from 'material-ui/GridList'
+//import {GridList, GridTile} from 'material-ui/GridList'
 import Badge from 'material-ui/Badge'
-import Image from 'react-image-resizer'
+//import Image from 'react-image-resizer'
 import MapComponent from './MapComponent.jsx'
 import DetailDrawer from './DetailDrawer.jsx'
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {Card, /*CardActions, CardHeader,*/ CardMedia, CardTitle, /*CardText*/} from 'material-ui/Card';
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {red500} from 'material-ui/styles/colors';
@@ -150,7 +150,6 @@ class RestaurantChoice extends React.Component {
 
   render = () => {
     const infos = []
-    const cardView = []
     const places = this.state.foodJSON.results
     let gridComp
     let n = 0
@@ -196,18 +195,19 @@ class RestaurantChoice extends React.Component {
           //   </GridTile>
           // )
 
-          cardView.push(
+          infos.push(
             <MuiThemeProvider muiTheme={muiTheme}>
               <Card className='card'
                     onClick={() => {
-                        let detail = {
-                          title: places[place]["name"],
-                          subtitle: places[place]["vicinity"],
-                          photos: this.state.album[place],
-                          rating: places[place]["rating"]
-                        }
-                        this.setState({details: detail}, function () {
-                        })
+                      let detail = {
+                        title: this.state.foodInfo[place]["name"],
+                        subtitle: this.state.foodInfo[place]["vicinity"],
+                        photos: this.state.album[place],
+                        info: this.state.foodInfo[place],
+                        rating: this.state.foodInfo[place]["rating"]
+                      }
+                      this.setState({details: detail}, function () {
+                      })
                       this.handleToggle();
                     }}
               >
@@ -230,19 +230,15 @@ class RestaurantChoice extends React.Component {
         }
       }
 
-      gridComp =  {cardView}
-                  //<GridList cols={4}>
-                    //{infos}
-                  //</GridList>
-
+      gridComp = infos
     } else {
-      gridComp =
-                  <MuiThemeProvider muiTheme={muiTheme}>
-                    <CircularProgress size="175"
+      gridComp = <MuiThemeProvider muiTheme={muiTheme}>
+                  <CircularProgress size="175"
                                  thickness="30"
                                  className="progress"
                     />
                   </MuiThemeProvider>
+
     }
 
     return (
@@ -260,7 +256,7 @@ class RestaurantChoice extends React.Component {
               />
             </td>
             <td width={"40%"} height={"100%"} className="card-container">
-              {cardView}
+              {gridComp}
             </td>
           </tr>
         </table>
