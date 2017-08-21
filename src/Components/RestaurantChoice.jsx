@@ -169,9 +169,6 @@ class RestaurantChoice extends React.Component {
             <GridTile
               key={place}
               title={places[place]["name"]}
-<<<<<<< HEAD
-              subtitle={labels[n]}
-=======
               subtitle={places[place]["vicinity"]}
               onClick={() => {
                   let detail = {
@@ -185,7 +182,6 @@ class RestaurantChoice extends React.Component {
                   })
                 this.handleToggle();
               }}
->>>>>>> f02f33be500605b15ade04e6e8e4418ae3f2f27c
             >
               <Badge
                 badgeContent={n+1}

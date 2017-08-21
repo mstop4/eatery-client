@@ -145,7 +145,7 @@ class App extends Component {
           />
         break
       case 'Login':
-        CurrentPage = <Login 
+        CurrentPage = <Login
           handleUserLogin={this.handleUserLogin}
           responseFacebook={this.responseFacebook}
         />
@@ -153,7 +153,6 @@ class App extends Component {
 
     return (
       <div>
-        <span id="status" />
         <MuiThemeProvider muiTheme={muiTheme}>
           <Navbar
             handleHungryOnTap={this.handleHungryOnTap}
