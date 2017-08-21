@@ -214,13 +214,22 @@ class RestaurantChoice extends React.Component {
             <td width={"50%"} height={"100%"}>
 
               <MuiThemeProvider muiTheme={muiTheme}>
-                <Card style={{height: '100%'}}>
+                <Card className="card">
                   <CardMedia >
                     <img className='card-image'src='http://placekitten.com/g/400/200' alt="" />
                   </CardMedia>
                   <CardTitle title="Card title Card title" subtitle="Card subtitle " />
                 </Card>
               </MuiThemeProvider>
+              <MuiThemeProvider muiTheme={muiTheme}>
+                <Card className="card">
+                  <CardMedia >
+                    <img className='card-image'src='http://placekitten.com/g/400/200' alt="" />
+                  </CardMedia>
+                  <CardTitle title="Card title Card title" subtitle="Card subtitle " />
+                </Card>
+              </MuiThemeProvider>
+
 
             </td>
           </tr>
