@@ -6,8 +6,6 @@ import {List, ListItem} from 'material-ui/List';
 import Room from 'material-ui/svg-icons/action/room';
 import Globe from 'material-ui/svg-icons/social/public';
 import Phone from 'material-ui/svg-icons/communication/phone';
-import Star from 'material-ui/svg-icons/toggle/star';
-import StarEmpty from 'material-ui/svg-icons/toggle/star-border';
 
 import RaisedButton from "material-ui/RaisedButton";
 import FavoriteButton from "./FavoriteButton.jsx";
@@ -20,7 +18,8 @@ import Divider from 'material-ui/Divider';
 
 import Rating from 'react-rating';
 import Slider from 'react-slick';
-
+import Star from 'material-ui/svg-icons/toggle/star';
+import StarEmpty from 'material-ui/svg-icons/toggle/star-border';
 const muiTheme = getMuiTheme({
   palette: {
     primary1Color: red500,

@@ -17,13 +17,24 @@ button {
   transform: translate(-50%, -75%);
 }
 
+#status {
+  font-family: 'Raleway', sans-serif;
+  font-size: 2em;
+  color: white;
+  position: absolute;
+  left: 50%;
+  top: 65%;
+  transform: translate(-50%, -65%);
+  z-index: 1;
+}
+
 .bg {
   /* The image used */
   background-image: url("/images/login.gif");
   /* Full height */
   height: 100%;
   width: 100%;
-  filter: brightness(30%);
+  filter: brightness(35%);
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
