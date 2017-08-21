@@ -238,7 +238,6 @@ class RestaurantChoice extends React.Component {
                                  className="progress"
                     />
                   </MuiThemeProvider>
-
     }
 
     return (

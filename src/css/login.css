@@ -1,5 +1,5 @@
 /*Raleway font from Google Web Fonts*/
-@import url("https://fonts.googleapis.com/css?family=Raleway:300");
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,300i");
 
 button {
   color: white;
@@ -19,12 +19,12 @@ button {
 
 #status {
   font-family: 'Raleway', sans-serif;
-  font-size: 2em;
+  font-size: 1.5em;
   color: white;
   position: absolute;
   left: 50%;
-  top: 65%;
-  transform: translate(-50%, -65%);
+  top: 67%;
+  transform: translate(-50%, -67%);
   z-index: 1;
 }
 
@@ -32,9 +32,11 @@ button {
   /* The image used */
   background-image: url("/images/login.gif");
   /* Full height */
-  height: 100%;
-  width: 100%;
-  filter: brightness(35%);
+  height: 110%;
+  width: 110%;
+  left: -5px;
+  top: -5px;
+  filter: brightness(25%) blur(2px);
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
@@ -51,4 +53,15 @@ button {
   left: 50%;
   top: 30%;
   transform: translate(-50%, -30%);
+}
+
+.login-subtitle {
+  font-family: 'Raleway', sans-serif;
+  font-size: 30px;
+  z-index: 1;
+  color: white;
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -52%);
 }
