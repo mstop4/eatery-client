@@ -55,6 +55,19 @@ export default class FacebookLogin extends React.Component {
       me.accessToken = authResponse.accessToken;
       this.props.responseFacebook(me);
       this.props.handleUserLogin(me.name, me.email, me.picture.data.url);
+      let url = me.picture.data.url.split()
+      let data = {
+        name: me.name,
+        picture: me.picture.data.url
+      }
+      fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/facebook/${me.email}`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
     });
   };
 
