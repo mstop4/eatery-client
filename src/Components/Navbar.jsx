@@ -5,7 +5,7 @@ import IconMenu from "material-ui/IconMenu";
 import MenuItem from "material-ui/MenuItem";
 import FlatButton from "material-ui/FlatButton";
 import Toggle from "material-ui/Toggle";
-import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
+import Menu from "material-ui/svg-icons/navigation/menu";
 import NavigationClose from "material-ui/svg-icons/navigation/close";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import Paper from "material-ui/Paper";
@@ -39,7 +39,7 @@ const Logged = props =>
     {...props}
     iconButtonElement={
       <IconButton>
-        <MoreVertIcon />
+        <Menu />
       </IconButton>
     }
     targetOrigin={{ horizontal: "right", vertical: "top" }}
@@ -104,7 +104,7 @@ class Navbar extends Component {
         <AppBar style={style.nav}
           title="Eatery"
           //showMenuIconButton={false}
-          iconElementRight={
+          iconElementLeft={
             <Logged
               handleHungryOnTap={ this.props.handleHungryOnTap }
               handleUserOnTap={ this.props.handleUserOnTap }

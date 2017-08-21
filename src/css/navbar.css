@@ -1,1 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:300");
+
+svg {
+  color: white !important;
+}
