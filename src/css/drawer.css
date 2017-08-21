@@ -10,12 +10,15 @@ h1.title {
   display: inline-block;
   font-size: 25px;
   margin-top: 0px;
+  text-align: center;
 }
 
-ul.contact-us-list {
-  padding: 0;
+.contact-us-list {
+  text-align: center;
 }
-
+.contact-detail {
+  padding: 10px 0;
+}
 .contact {
   height: 45px;
 }
