@@ -62,7 +62,6 @@ export default class DetailDrawer extends React.Component {
       album.push(<div><img className="images" src={this.state.details.photos[photo]}/></div>)
     }
     if (album.length === 0 ){
-      album.push(<div><img src='http://placekitten.com/g/400/200' /></div>)
     }
 
     let slideshowsettings = {
