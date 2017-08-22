@@ -8,10 +8,16 @@ import FlatButton from 'material-ui/FlatButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {red500} from 'material-ui/styles/colors';
 
+const styles={
+  container:{
+    textAlign:'center'
+  }
+}
 // Creating a function that holds the button
 const UserOptions = (props) => (
-  <div>
+  <div style={styles.container}>
     <FlatButton
+      style={styles.button}
       label="Favourite"
       labelPosition="before"
       primary={true}
@@ -20,6 +26,7 @@ const UserOptions = (props) => (
       }
     />
     <FlatButton
+      style={styles.button}
       label="Friends"
       labelPosition="before"
       primary={true}

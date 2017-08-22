@@ -5,6 +5,7 @@
 
 .profile-buttons {
   margin: auto;
+  text-align: center;
   display: inline-block;
 }
 .root {
