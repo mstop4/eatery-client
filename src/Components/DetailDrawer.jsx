@@ -65,26 +65,55 @@ export default class DetailDrawer extends React.Component {
     let phoneNumber = "Unavailable"
     let rating = 0
     let reviews = []
+    let openings = ""
+    let info = this.state.details.info
 
-    if (this.state.details.info) {
-      console.dir(this.state.details.info)
-      website = this.state.details.info.website
-      phoneNumber = this.state.details.info.formatted_phone_number
-      rating = this.state.details.info.rating
+    if (info) {
+      console.dir(info)
+
+      if (info.website) {
+        website = <a href={this.state.details.info.website}>{this.state.details.info.website}</a>
+      }
+
+      if (info.formatted_phone_number) {
+        phoneNumber = this.state.details.info.formatted_phone_number
+      }
+
+      if (info.rating) {
+        rating = this.state.details.info.rating
+      }
 
       // reviews
-      for (let review in this.state.details.info.reviews) {
+      for (let review in info.reviews) {
 
-        let curReview = this.state.details.info.reviews[review]
+        let curReview = info.reviews[review]
 
         reviews.push(
             <div className="reviews">
+              <div>
+                <span className="reviewer">{curReview.author_name}</span>
+                 -
+                <Rating
+                  initialRate={curReview.rating}
+                  className={"star-rating"}
+                  empty={<StarBorder/>}
+                  full={<Star/>}
+                  readonly
+                />
+              </div>
               {curReview.text}
-              <div className="reviewer">{curReview.author_name}</div>
               <div className="review-date">{curReview.relative_time_description}</div>
             </div>
         )
       }
+
+      // get opening hours for today and make it presentable
+      let curWeekday = new Date().getDay()
+      let opening_text = info.opening_hours.weekday_text[curWeekday]
+      let colonPos = opening_text.indexOf(":")
+      opening_text = opening_text.slice(colonPos+2)
+
+      openings = <p>Hours: {opening_text}</p>
     }
 
     return (
@@ -107,6 +136,7 @@ export default class DetailDrawer extends React.Component {
               full={<Star/>}
               readonly
             />
+            {openings}
             </div>
             <Divider />
             <div>
@@ -118,7 +148,7 @@ export default class DetailDrawer extends React.Component {
                 <ListItem  className="contact email"
                            leftIcon={<Globe />}
                 >
-                  <a href={website}>{website}</a>
+                  {website}
                 </ListItem>
                 <ListItem primaryText={phoneNumber}
                           className="contact phone"

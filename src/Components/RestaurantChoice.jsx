@@ -165,36 +165,6 @@ class RestaurantChoice extends React.Component {
           continue
         } else {
 
-          // infos.push(
-          //   <GridTile
-          //     key={place}
-          //     title={places[place]["name"]}
-          //     subtitle={places[place]["vicinity"]}
-          //     onClick={() => {
-          //         let detail = {
-          //           title: this.state.foodInfo[place]["name"],
-          //           subtitle: this.state.foodInfo[place]["vicinity"],
-          //           photos: this.state.album[place],
-          //           info: this.state.foodInfo[place],
-          //           rating: this.state.foodInfo[place]["rating"]
-          //         }
-          //         this.setState({details: detail}, function () {
-          //         })
-          //       this.handleToggle();
-          //     }}
-          //   >
-          //     <Badge
-          //       badgeContent={n+1}
-          //       primary={true}
-          //     >
-          //       <Image
-          //         src={pic}
-          //         height={300}
-          //       />
-          //     </Badge>
-          //   </GridTile>
-          // )
-
           infos.push(
             <MuiThemeProvider key= {place} muiTheme={muiTheme}>
               <Card className='card'
