@@ -6,7 +6,14 @@ import FriendList from './List/FriendList.jsx';
 import Favourites from './List/Favourites.jsx';
 import Avatar from 'material-ui/Avatar';
 import '../css/profile.css';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import {red500} from 'material-ui/styles/colors';
 
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: red500,
+  }
+});
 
 class User extends Component {
 
@@ -69,7 +76,7 @@ class User extends Component {
         </MuiThemeProvider>
         <p>{this.props.currentUser}</p>
         <p>{this.props.currentEmail}</p>
-        <MuiThemeProvider>
+        <MuiThemeProvider muiTheme={muiTheme}>
           <UserOptions
             handleFavouritesOnTap = { this.handleFavouritesOnTap }
             handleFriendListOnTap = { this.handleFriendListOnTap }
