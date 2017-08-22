@@ -16,14 +16,23 @@ const styles = {
   },
 };
 
-const CheckboxExampleSimple = () => (
+//  If found in database checkedIcon
+//  If not found in database uncheckedIcon
+
+
+
+
+
+const FavoriteButton = (props) => (
   <div style={styles.block}>
     <Checkbox
-      checkedIcon={<ActionFavorite />}
+      onCheck={props.handleFavourite}
+      checkedIcon={<ActionFavorite/>}
+      /* currentEmail={this.props.currentEmail} place_id={this.props.place_id} */
       uncheckedIcon={<ActionFavoriteBorder />}
       style={styles.checkbox}
     />
   </div>
 );
 
-export default CheckboxExampleSimple;
+export default FavoriteButton;

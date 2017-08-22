@@ -25,7 +25,6 @@ let g_foodJSON = []
 let g_photos = []
 let g_album = {}
 let g_foodInfo = []
-let g_position = { lat: 43.6532, lng: -79.3832 }
 
 class RestaurantChoice extends React.Component {
 
@@ -36,19 +35,22 @@ class RestaurantChoice extends React.Component {
       foodInfo: g_foodInfo,
       photos: g_photos,
       album: g_album,
-      position: g_position,
       radius: 2000,
       rankBy: "distance",
-      maxResults: 12,
+      maxResults: 10,
 
       open: false,
       load: false,
       details: {
         title: "",
         subtitle: "",
-        photo: ""
+        photo: "",
+        place_id: ""
       }
     }
+
+    this.map = null
+    this.position = { lat: 43.6532, lng: -79.3832 }
   }
 
   getMoreDetails = (json, place, newAlbum, newInfo) => {
@@ -57,16 +59,21 @@ class RestaurantChoice extends React.Component {
     let place_id = json.results[place].place_id;
     newAlbum[place] = []
 
+    console.log(place_id);
+
     return new Promise ((resolve, reject) => {
       fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/details?placeid=${place_id}`, {
         mode: "cors"
       })
       .then((response) => {
+        console.log(response);
         return response.json()
       })
       .then((json) => {
-
+        console.log(json);
         newInfo[place] = json.result
+
+        console.log(newInfo[place]);
 
         for (let photo in json.result.photos) {
           newAlbum[place][photo] = "https://maps.googleapis.com/maps/api/place/photo?"
@@ -121,7 +128,6 @@ class RestaurantChoice extends React.Component {
             g_foodJSON = json
             g_foodInfo = newInfo
             g_photos = newPhotos
-            g_position = {lat: lat, lng: lng}
             g_album = newAlbum
 
             this.setState({
@@ -129,8 +135,9 @@ class RestaurantChoice extends React.Component {
               foodInfo: newInfo,
               photos: newPhotos,
               album: newAlbum,
-              position: { lat: lat, lng: lng }
             })
+
+            this.position = {lat: lat, lng: lng}
 
             this.props.updateCache(newAlbum, newInfo)
           })
@@ -142,6 +149,11 @@ class RestaurantChoice extends React.Component {
           console.error(error)
         })
     }
+  }
+
+  assignMap = (map) => {
+    this.map = map
+    console.dir(this.map)
   }
 
   handleToggle = () => this.setState({ open: true })
@@ -174,10 +186,14 @@ class RestaurantChoice extends React.Component {
                         subtitle: this.state.foodInfo[place]["vicinity"],
                         photos: this.state.album[place],
                         info: this.state.foodInfo[place],
-                        rating: this.state.foodInfo[place]["rating"]
+                        rating: this.state.foodInfo[place]["rating"],
+                        place_id: this.state.foodInfo[place]["place_id"]
                       }
-                      this.setState({details: detail}, function () {
+                      this.setState({
+                        details: detail,
+                        position: places[place].geometry.location
                       })
+                      this.position = places[place].geometry.location
                       this.handleToggle();
                     }}
               >
@@ -215,13 +231,14 @@ class RestaurantChoice extends React.Component {
         <table width={"100%"} height={"100vh"}>
           <tr>
             <td width={"60%"} height={"100%"}>
-              <MapComponent
+              <MapComponent ref="mapComp"
                 className="map"
                 data={this.state.foodJSON.results}
-                center={this.state.position}
+                center={this.position}
                 radius={this.state.radius}
                 getFood={this.getFood}
                 maxResults={this.state.maxResults}
+                assignMap={this.assignMap}
               />
             </td>
             <td width={"40%"} height={"100%"} className="card-container">
@@ -233,6 +250,7 @@ class RestaurantChoice extends React.Component {
           open={this.state.open}
           detail={this.state.details}
           request={open => this.setState({ open })}
+          currentEmail={this.props.currentEmail}
         />
       </div>
     )

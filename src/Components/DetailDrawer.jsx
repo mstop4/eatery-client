@@ -29,14 +29,25 @@ const muiTheme = getMuiTheme({
 export default class DetailDrawer extends React.Component {
   constructor(props) {
     super(props);
+
+    this.handleFavourite = this.handleFavourite.bind(this);
+
     this.state = {
         open: false,
-        details: this.props.detail
+        details: this.props.detail,
+        currentEmail: this.props.currentEmail
      };
+
   }
 
   handleToggle = () => this.setState({ open: !this.state.open });
   handleClose = () => this.setState({ open: false });
+
+  handleFavourite  () {
+    fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/favourite/${this.state.currentEmail}/${this.state.details.info.place_id}`, {
+      method: 'POST'
+    })
+  }
 
   detail = this.props.detail;
 
@@ -67,11 +78,14 @@ export default class DetailDrawer extends React.Component {
     let reviews = []
     let openings = ""
     let info = this.state.details.info
+    let place_id = ""
 
     if (info) {
+      if (info.place_id)
+        place_id = info.place_id
 
       if (info.website) {
-        website = <a href={this.state.details.info.website}>{this.state.details.info.website}</a>
+        website = <a href={this.state.details.info.website} target="_blank">{this.state.details.info.website}</a>
       }
 
       if (info.formatted_phone_number) {
@@ -107,7 +121,8 @@ export default class DetailDrawer extends React.Component {
       }
 
       // get opening hours for today and make it presentable
-      let curWeekday = new Date().getDay()
+      // note: Date.getDay starts on Sunday, but Google Places starts on Monday.
+      let curWeekday = (new Date().getDay()+6) % 7
       let opening_text = info.opening_hours.weekday_text[curWeekday]
       let colonPos = opening_text.indexOf(":")
       opening_text = opening_text.slice(colonPos+2)
@@ -126,7 +141,8 @@ export default class DetailDrawer extends React.Component {
         >
           <div className="drawer" style={{height: '100%'}}>
             <h1 className="title"> {this.state.details.title} </h1>
-            <FavoriteButton className="favourite" />
+
+            <FavoriteButton className="favourite" handleFavourite={this.handleFavourite}/>
             <div>
             <Rating
               initialRate={rating}
@@ -161,6 +177,7 @@ export default class DetailDrawer extends React.Component {
             </Slider>
             <Divider />
             {reviews}
+            {place_id} {this.state.currentEmail}
           </div>
         </Drawer>
       </MuiThemeProvider>
