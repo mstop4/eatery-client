@@ -19,7 +19,7 @@ import Divider from 'material-ui/Divider';
 import Rating from 'react-rating';
 import Slider from 'react-slick';
 import Star from 'material-ui/svg-icons/toggle/star';
-import StarEmpty from 'material-ui/svg-icons/toggle/star-border';
+
 const muiTheme = getMuiTheme({
   palette: {
     primary1Color: red500,
@@ -29,14 +29,25 @@ const muiTheme = getMuiTheme({
 export default class DetailDrawer extends React.Component {
   constructor(props) {
     super(props);
+
+    this.handleFavourite = this.handleFavourite.bind(this);
+
     this.state = {
         open: false,
-        details: this.props.detail
+        details: this.props.detail,
+        currentEmail: this.props.currentEmail
      };
+
   }
 
   handleToggle = () => this.setState({ open: !this.state.open });
   handleClose = () => this.setState({ open: false });
+
+  handleFavourite () {
+    fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/favourite/${this.state.currentEmail}/${this.state.details.info.place_id}`, {
+      method: 'POST'
+    })
+  }
 
   detail = this.props.detail;
 
@@ -58,15 +69,65 @@ export default class DetailDrawer extends React.Component {
       dots: true,
       focusOnSelect: true,
       slidesToShow: 2,
-      slidesToScroll: 2
+      slidesToScroll: 1
     };
 
-    let website = ""
-    let phoneNumber = ""
+    let website = "Unavailable"
+    let phoneNumber = "Unavailable"
+    let rating = 0
+    let reviews = []
+    let openings = ""
+    let info = this.state.details.info
+    let place_id = ""
 
-    if (this.state.details.info) {
-      website = this.state.details.info.website
-      phoneNumber = this.state.details.info.formatted_phone_number
+    if (info) {
+      if (info.place_id)
+        place_id = info.place_id
+
+      if (info.website) {
+        website = <a href={this.state.details.info.website} target="_blank">{this.state.details.info.website}</a>
+      }
+
+      if (info.formatted_phone_number) {
+        phoneNumber = this.state.details.info.formatted_phone_number
+      }
+
+      if (info.rating) {
+        rating = this.state.details.info.rating
+      }
+
+      // reviews
+      for (let review in info.reviews) {
+
+        let curReview = info.reviews[review]
+
+        reviews.push(
+            <div className="reviews">
+              <div>
+                <span className="reviewer">{curReview.author_name}</span>
+                 -
+                <Rating
+                  initialRate={curReview.rating}
+                  className={"star-rating"}
+                  empty={<StarBorder/>}
+                  full={<Star/>}
+                  readonly
+                />
+              </div>
+              {curReview.text}
+              <div className="review-date">{curReview.relative_time_description}</div>
+            </div>
+        )
+      }
+
+      // get opening hours for today and make it presentable
+      // note: Date.getDay starts on Sunday, but Google Places starts on Monday.
+      let curWeekday = (new Date().getDay()+6) % 7
+      let opening_text = info.opening_hours.weekday_text[curWeekday]
+      let colonPos = opening_text.indexOf(":")
+      opening_text = opening_text.slice(colonPos+2)
+
+      openings = <p>Hours: {opening_text}</p>
     }
 
     return (
@@ -80,15 +141,17 @@ export default class DetailDrawer extends React.Component {
         >
           <div className="drawer" style={{height: '100%'}}>
             <h1 className="title"> {this.state.details.title} </h1>
-            <FavoriteButton className="favourite" />
-            <Rating initialRate={this.state.details.rating}
-                    className="rating"
-                    dotsClass="slider-dots"
-                    readonly={true}
-                    quiet={true}
-                    full={<Star/>}
-                    empty={<StarEmpty/>}
+            <FavoriteButton className="favourite" handleFavourite={this.handleFavourite}/>
+            <div>
+            <Rating
+              initialRate={rating}
+              className={"star-rating"}
+              empty={<StarBorder/>}
+              full={<Star/>}
+              readonly
             />
+            {openings}
+            </div>
             <Divider />
             <div>
               <List class="contact-us-list">
@@ -99,7 +162,7 @@ export default class DetailDrawer extends React.Component {
                 <ListItem  className="contact email"
                            leftIcon={<Globe />}
                 >
-                  <a href={website}>{website}</a>
+                  {website}
                 </ListItem>
                 <ListItem primaryText={phoneNumber}
                           className="contact phone"
@@ -112,18 +175,8 @@ export default class DetailDrawer extends React.Component {
                 {album}
             </Slider>
             <Divider />
-            <div className="reviews">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque in
-              bibendum tortor, id placerat ex. Pellentesque augue quam, iaculis id
-              ligula a, rutrum placerat lectus. Maecenas venenatis nibh vitae
-              euismod pharetra. In a ex at justo aliquet imperdiet in a nibh. Sed
-              blandit id metus quis malesuada. Curabitur in velit lectus. Ut elit
-              odio, auctor dignissim volutpat eget, placerat bibendum nisi.
-              Curabitur imperdiet urna eu ipsum pretium, in tincidunt tellus
-              commodo. Ut tempor laoreet arcu, nec tristique purus congue ut.
-              Quisque sit amet auctor erat
-              <div className="reviewer"> Name Namerson </div>
-            </div>
+            {reviews}
+            {place_id} {this.state.currentEmail}
           </div>
         </Drawer>
       </MuiThemeProvider>

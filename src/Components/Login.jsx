@@ -19,7 +19,7 @@ export class Login extends React.Component{
                            scope="public_profile,email"
                            responseFacebook={this.props.responseFacebook}
                            xfbml={true}
-                           fields="id,email,name"
+                           fields="id,email,name,picture"
                            version="v2.5"
                            className="facebook-login"
                            handleUserLogin={this.props.handleUserLogin}
