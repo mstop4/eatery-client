@@ -11,6 +11,7 @@ export class Login extends React.Component{
     return (
         <div style={{width: '100%', height: '100%'}}>
           <span className='login-title'> Eatery </span>
+          <span className='login-subtitle'><i> “People who love to eat are always the best people.” </i></span>
           <span id="status" />
           <div className='bg'></div>
             <FacebookLogin socialId={process.env.REACT_APP_FB_APPID}
@@ -18,7 +19,7 @@ export class Login extends React.Component{
                            scope="public_profile,email"
                            responseFacebook={this.props.responseFacebook}
                            xfbml={true}
-                           fields="id,email,name,picture"
+                           fields="id,email,name"
                            version="v2.5"
                            className="facebook-login"
                            handleUserLogin={this.props.handleUserLogin}

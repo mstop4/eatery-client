@@ -5,8 +5,8 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import FriendList from './List/FriendList.jsx';
 import Favourites from './List/Favourites.jsx';
 import Avatar from 'material-ui/Avatar';
+import '../css/profile.css';
 
-const style = {margin: 5};
 
 class User extends Component {
 
@@ -59,17 +59,17 @@ class User extends Component {
     }
 
     return (
-      <div>  
+      <div>
         <p>{this.props.currentUser}, {this.props.currentEmail}</p>
         <MuiThemeProvider>
           <Avatar
               src={this.props.currentPicture}
               size={60}
-              style={style}
+              className="avatar"
             />
         </MuiThemeProvider>
         <MuiThemeProvider>
-          <UserOptions 
+          <UserOptions
             handleFavouritesOnTap = { this.handleFavouritesOnTap }
             handleFriendListOnTap = { this.handleFriendListOnTap }
           />
