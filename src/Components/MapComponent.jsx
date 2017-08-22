@@ -59,6 +59,7 @@ class MapComponent extends React.Component {
   onMapCreated(map) {
 
     this.setState({map: map})
+    this.props.assignMap(map)
     //map.setOptions({style: defaultStyle})
 
     // Try HTML5 geolocation.
@@ -83,7 +84,6 @@ class MapComponent extends React.Component {
   }
 
   render() {
-
     const markers = []
     const infos = []
     let message
@@ -104,7 +104,7 @@ class MapComponent extends React.Component {
               key={place}
               lat={places[place]["geometry"]["location"].lat}
               lng={places[place]["geometry"]["location"].lng}
-              icon={svgIcon}//{mapicons[place]}
+              icon={svgIcon}
               label={{
                   text: String(n+1),
                   color: "white",

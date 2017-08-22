@@ -11,6 +11,7 @@ export class Login extends React.Component{
     return (
         <div style={{width: '100%', height: '100%'}}>
           <span className='login-title'> Eatery </span>
+          <span className='login-subtitle'><i> “People who love to eat are always the best people.” </i></span>
           <span id="status" />
           <div className='bg'></div>
             <FacebookLogin socialId={process.env.REACT_APP_FB_APPID}
