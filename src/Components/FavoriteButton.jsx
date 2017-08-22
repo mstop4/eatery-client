@@ -18,11 +18,6 @@ const styles = {
 
 //  If found in database checkedIcon
 //  If not found in database uncheckedIcon
-
-
-
-
-
 const FavoriteButton = (props) => (
   <div style={styles.block}>
     <Checkbox
