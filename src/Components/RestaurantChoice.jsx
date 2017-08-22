@@ -25,7 +25,6 @@ let g_foodJSON = []
 let g_photos = []
 let g_album = {}
 let g_foodInfo = []
-let g_position = { lat: 43.6532, lng: -79.3832 }
 
 class RestaurantChoice extends React.Component {
 
@@ -36,7 +35,6 @@ class RestaurantChoice extends React.Component {
       foodInfo: g_foodInfo,
       photos: g_photos,
       album: g_album,
-      position: g_position,
       radius: 2000,
       rankBy: "distance",
       maxResults: 10,
@@ -49,6 +47,9 @@ class RestaurantChoice extends React.Component {
         photo: ""
       }
     }
+
+    this.map = null
+    this.position = { lat: 43.6532, lng: -79.3832 }
   }
 
   getMoreDetails = (json, place, newAlbum, newInfo) => {
@@ -121,7 +122,6 @@ class RestaurantChoice extends React.Component {
             g_foodJSON = json
             g_foodInfo = newInfo
             g_photos = newPhotos
-            g_position = {lat: lat, lng: lng}
             g_album = newAlbum
 
             this.setState({
@@ -129,8 +129,9 @@ class RestaurantChoice extends React.Component {
               foodInfo: newInfo,
               photos: newPhotos,
               album: newAlbum,
-              position: { lat: lat, lng: lng }
             })
+
+            this.position = {lat: lat, lng: lng}
 
             this.props.updateCache(newAlbum, newInfo)
           })
@@ -142,6 +143,11 @@ class RestaurantChoice extends React.Component {
           console.error(error)
         })
     }
+  }
+
+  assignMap = (map) => {
+    this.map = map
+    console.dir(this.map)
   }
 
   handleToggle = () => this.setState({ open: true })
@@ -176,8 +182,11 @@ class RestaurantChoice extends React.Component {
                         info: this.state.foodInfo[place],
                         rating: this.state.foodInfo[place]["rating"]
                       }
-                      this.setState({details: detail}, function () {
+                      this.setState({
+                        details: detail,
+                        position: places[place].geometry.location
                       })
+                      this.position = places[place].geometry.location
                       this.handleToggle();
                     }}
               >
@@ -215,13 +224,14 @@ class RestaurantChoice extends React.Component {
         <table width={"100%"} height={"100vh"}>
           <tr>
             <td width={"60%"} height={"100%"}>
-              <MapComponent
+              <MapComponent ref="mapComp"
                 className="map"
                 data={this.state.foodJSON.results}
-                center={this.state.position}
+                center={this.position}
                 radius={this.state.radius}
                 getFood={this.getFood}
                 maxResults={this.state.maxResults}
+                assignMap={this.assignMap}
               />
             </td>
             <td width={"40%"} height={"100%"} className="card-container">

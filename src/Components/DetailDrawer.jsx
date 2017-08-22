@@ -72,7 +72,7 @@ export default class DetailDrawer extends React.Component {
       console.dir(info)
 
       if (info.website) {
-        website = <a href={this.state.details.info.website}>{this.state.details.info.website}</a>
+        website = <a href={this.state.details.info.website} target="_blank">{this.state.details.info.website}</a>
       }
 
       if (info.formatted_phone_number) {
