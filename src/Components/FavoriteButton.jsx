@@ -28,7 +28,6 @@ const FavoriteButton = (props) => (
     <Checkbox
       onCheck={props.handleFavourite}
       checkedIcon={<ActionFavorite/>}
-      /* currentEmail={this.props.currentEmail} place_id={this.props.place_id} */
       uncheckedIcon={<ActionFavoriteBorder />}
       style={styles.checkbox}
     />
