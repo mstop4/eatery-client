@@ -78,10 +78,11 @@ export default class DetailDrawer extends React.Component {
     let reviews = []
     let openings = ""
     let info = this.state.details.info
+    let place_id = ""
 
     if (info) {
       console.dir(info)
-      let place_id = info.place_id
+      place_id = info.place_id
     
       if (info.website) {
         website = <a href={this.state.details.info.website} target="_blank">{this.state.details.info.website}</a>
