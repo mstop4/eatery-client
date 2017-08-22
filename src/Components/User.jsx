@@ -6,7 +6,14 @@ import FriendList from './List/FriendList.jsx';
 import Favourites from './List/Favourites.jsx';
 import Avatar from 'material-ui/Avatar';
 import '../css/profile.css';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import {red500} from 'material-ui/styles/colors';
 
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: red500,
+  }
+});
 
 class User extends Component {
 
@@ -60,22 +67,29 @@ class User extends Component {
 
     return (
       <div>
-        <p>{this.props.currentUser}, {this.props.currentEmail}</p>
-        <MuiThemeProvider>
-          <Avatar
-              src={this.props.currentPicture}
-              size={60}
-              className="avatar"
-            />
-        </MuiThemeProvider>
-        <MuiThemeProvider>
+        <div className="profile-header">
+          <img src="/images/main.gif" className="bg-image"/>
+          <MuiThemeProvider>
+            <Avatar
+                src={this.props.currentPicture}
+                size={100}
+                className="avatar profile"
+              />
+          </MuiThemeProvider>
+          <p className="profile user-name red"><b>{this.props.currentUser}Username Namerson</b></p>
+          <p className="profile user-email"><b>{this.props.currentEmail} Email@EmailAddress.com</b></p>
+        </div>
+        <h2 className="red" style={{textAlign: 'center'}}>Favorites</h2>
+        {/*}
+        <MuiThemeProvider muiTheme={muiTheme}>
           <UserOptions
             handleFavouritesOnTap = { this.handleFavouritesOnTap }
             handleFriendListOnTap = { this.handleFriendListOnTap }
+            className="profile-buttons"
           />
         </MuiThemeProvider>
+        */}
         <CurrentPage />
-
       </div>
     );
   }

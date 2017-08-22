@@ -22,7 +22,8 @@ const style = {
   marginBottom: 10,
   marginLeft: 15,
   nav:{
-    fontFamily: font
+    fontFamily: font,
+    color: 'white'
   }
 };
 
@@ -42,8 +43,8 @@ const Logged = props =>
         <Menu />
       </IconButton>
     }
-    targetOrigin={{ horizontal: "right", vertical: "top" }}
-    anchorOrigin={{ horizontal: "right", vertical: "top" }}
+    targetOrigin={{ horizontal: "left", vertical: "top" }}
+    anchorOrigin={{ horizontal: "left", vertical: "top" }}
   >
     <MenuItem
       primaryText="Hungry"
@@ -53,6 +54,11 @@ const Logged = props =>
     <MenuItem
       primaryText="User"
       onTouchTap={ props.handleUserOnTap }
+    />
+
+    <MenuItem
+      primaryText="Feed Me"
+      onTouchTap={ props.handleFeedOnTap }
     />
 
     <MenuItem
@@ -110,6 +116,7 @@ class Navbar extends Component {
               handleHungryOnTap={ this.props.handleHungryOnTap }
               handleUserOnTap={ this.props.handleUserOnTap }
               handleLoginOnTap={ this.props.handleLoginOnTap}
+              handleFeedOnTap={this.props.handleFeedOnTap}
               logoutFacebook={ this.props.logoutFacebook}
             />}
         />

@@ -45,10 +45,20 @@ img.images {
   margin: -15px 0 5px;
 }
 .reviews {
-  color: grey;
+  color: grey !important;
 }
 .reviewer {
   color: #F44336;
   padding-left: 1em;
   padding-top: 5px;
+}
+
+.review-date {
+  color: #F44336;
+  padding-left: 1em;
+  padding-top: 5px;
+}
+
+.star-rating svg {
+  color: black !important;
 }
