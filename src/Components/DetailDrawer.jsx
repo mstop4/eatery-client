@@ -43,7 +43,7 @@ export default class DetailDrawer extends React.Component {
   handleToggle = () => this.setState({ open: !this.state.open });
   handleClose = () => this.setState({ open: false });
 
-  handleFavourite  () {
+  handleFavourite () {
     fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/favourite/${this.state.currentEmail}/${this.state.details.info.place_id}`, {
       method: 'POST'
     })

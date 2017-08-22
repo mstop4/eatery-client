@@ -114,7 +114,6 @@ class Feed extends React.Component {
       for (let photo in this.state.flatAlbum) {
 
         placeId = this.state.flatAlbum[photo].id
-        console.log(this.state.album)
 
         let detail = {
             title: info[placeId]["name"],
@@ -152,6 +151,7 @@ class Feed extends React.Component {
         </MuiThemeProvider>
         <DetailDrawer
           open={this.state.open}
+          currentEmail={this.props.currentEmail}
           detail={this.state.details}
           request={open => this.setState({ open })}
         />

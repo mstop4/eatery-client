@@ -79,7 +79,7 @@ class App extends Component {
 
     this.setState({
       album: newAlbum,
-      foodInfo: newInfo
+      foodInfo: newInfo,
     })
   }
 
@@ -156,6 +156,7 @@ class App extends Component {
       CurrentPage = <Feed
                       album={this.state.album}
                       foodInfo={this.state.foodInfo}
+                      currentEmail={this.state.currentEmail}
                     />
     }
 
