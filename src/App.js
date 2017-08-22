@@ -98,6 +98,7 @@ class App extends Component {
     console.log(response);
     if (response !== undefined){
       document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
+      setTimeout(this.handleHungryOnTap,1500)
     }
   }
 

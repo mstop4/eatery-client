@@ -144,10 +144,6 @@ class RestaurantChoice extends React.Component {
     }
   }
 
-  assignMap = (map) => {
-    this.map = map
-  }
-
   handleToggle = () => this.setState({ open: true })
   handleClose = () => this.setState({ open: false })
   handleDetails = (details) => this.setState({ details: details })
