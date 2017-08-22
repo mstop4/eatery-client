@@ -103,6 +103,7 @@ class Navbar extends Component {
 
         <AppBar style={style.nav}
           title="Eatery"
+          className="navbar"
           //showMenuIconButton={false}
           iconElementLeft={
             <Logged
