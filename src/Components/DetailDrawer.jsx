@@ -43,7 +43,7 @@ export default class DetailDrawer extends React.Component {
   handleToggle = () => this.setState({ open: !this.state.open });
   handleClose = () => this.setState({ open: false });
 
-  handleFavourite  () {
+  handleFavourite () {
     fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/favourite/${this.state.currentEmail}/${this.state.details.info.place_id}`, {
       method: 'POST'
     })
@@ -81,9 +81,9 @@ export default class DetailDrawer extends React.Component {
     let place_id = ""
 
     if (info) {
-      console.dir(info)
-      place_id = info.place_id
-    
+      if (info.place_id)
+        place_id = info.place_id
+
       if (info.website) {
         website = <a href={this.state.details.info.website} target="_blank">{this.state.details.info.website}</a>
       }
@@ -130,7 +130,7 @@ export default class DetailDrawer extends React.Component {
       openings = <p>Hours: {opening_text}</p>
     }
 
-    return (   
+    return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <Drawer
           docked={false}
@@ -141,7 +141,6 @@ export default class DetailDrawer extends React.Component {
         >
           <div className="drawer" style={{height: '100%'}}>
             <h1 className="title"> {this.state.details.title} </h1>
-
             <FavoriteButton className="favourite" handleFavourite={this.handleFavourite}/>
             <div>
             <Rating
@@ -177,7 +176,7 @@ export default class DetailDrawer extends React.Component {
             </Slider>
             <Divider />
             {reviews}
-            {place_id} {this.state.currentEmail}            
+            {place_id} {this.state.currentEmail}
           </div>
         </Drawer>
       </MuiThemeProvider>

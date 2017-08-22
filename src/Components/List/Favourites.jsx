@@ -4,14 +4,7 @@ import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import Image from 'react-image-resizer';
-
-const styles = {
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-  },
-};
+import {red500} from 'material-ui/styles/colors';
 
 const tilesData = [
   {
@@ -60,26 +53,26 @@ const tilesData = [
  * A simple example of a scrollable `GridList` containing a [Subheader](/#/components/subheader).
  */
 const Favourites = () => (
-  <div style={styles.root}>
-    {/* <GridList
-      cellHeight={180}
-      style={styles.gridList}
-    > */}
-      <Subheader>December</Subheader>
+  <div className="root">
+    <GridList
+      cols={3}
+      cellHeight={400}
+      className="favourites-container"
+    >
+      {/*<Subheader>Why is there a header here</Subheader>*/}
       {tilesData.map((tile) => (
         <GridTile
           key={tile.img}
-          title={tile.title}
-          subtitle={<span>by <b>{tile.author}</b></span>}
-          actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
+          title={<span className="grid-title"> {tile.title} </span>}
+          subtitle={<span className="grid-subtitle"><b>ADDRESS HERE</b></span>}
+          className="favourites-details"
+          titleBackground="white"
+          /*actionIcon={<IconButton><StarBorder color="white" /></IconButton>}*/
         >
-          <Image src={tile.img} 
-            height = {400}
-            width = {400}
-          />
+          <img src={tile.img} />
         </GridTile>
       ))}
-    {/* </GridList> */}
+    </GridList>
   </div>
 );
 
