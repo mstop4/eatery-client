@@ -60,7 +60,13 @@ class User extends Component {
 
     return (
       <div>
-        <p>{this.props.currentUser}, {this.props.currentEmail}</p>
+        <MuiThemeProvider>
+          <UserOptions
+            handleFavouritesOnTap = { this.handleFavouritesOnTap }
+            handleFriendListOnTap = { this.handleFriendListOnTap }
+          />
+        </MuiThemeProvider>
+
         <MuiThemeProvider>
           <Avatar
               src={this.props.currentPicture}
@@ -68,14 +74,9 @@ class User extends Component {
               className="avatar"
             />
         </MuiThemeProvider>
-        <MuiThemeProvider>
-          <UserOptions
-            handleFavouritesOnTap = { this.handleFavouritesOnTap }
-            handleFriendListOnTap = { this.handleFriendListOnTap }
-          />
-        </MuiThemeProvider>
+        <p>{this.props.currentUser}</p>
+        <p>{this.props.currentEmail}</p>
         <CurrentPage />
-
       </div>
     );
   }

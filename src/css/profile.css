@@ -1,1 +1,18 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:300");
+
+.root {
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.favourites-container {
+  position: fixed;
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;
+}
+
+.favourites-details {
+  font-size: 200%;
+}
