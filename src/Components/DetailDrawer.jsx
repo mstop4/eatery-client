@@ -61,8 +61,8 @@ export default class DetailDrawer extends React.Component {
       slidesToScroll: 1
     };
 
-    let website = ""
-    let phoneNumber = ""
+    let website = "Unavailable"
+    let phoneNumber = "Unavailable"
     let rating = 0
     let reviews = []
 
@@ -102,6 +102,9 @@ export default class DetailDrawer extends React.Component {
             <div>
             <Rating
               initialRate={rating}
+              className={"star-rating"}
+              empty={<StarBorder/>}
+              full={<Star/>}
               readonly
             />
             </div>

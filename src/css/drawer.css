@@ -52,3 +52,7 @@ img.images {
   padding-left: 1em;
   padding-top: 5px;
 }
+
+.star-rating svg {
+  color: black !important;
+}
