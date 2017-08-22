@@ -66,7 +66,7 @@ class User extends Component {
     }
 
     return (
-      <div>
+      <div style={{textAlign: 'center'}}>
         <MuiThemeProvider>
           <Avatar
               src={this.props.currentPicture}
