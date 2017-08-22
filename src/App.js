@@ -36,6 +36,7 @@ class App extends Component {
     this.handleUserOnTap = this.handleUserOnTap.bind(this);
     this.handleLoginOnTap = this.handleLoginOnTap.bind(this);
     this.handleUserLogin = this.handleUserLogin.bind(this);
+    this.handleFeedOnTap = this.handleFeedOnTap.bind(this);
     this.responseFacebook = this.responseFacebook.bind(this);
     this.logoutFacebook = this.logoutFacebook.bind(this);
     this.state = {
@@ -65,6 +66,13 @@ class App extends Component {
   handleLoginOnTap() {
     this.setState({
       currentPage: 'Login'
+    });
+  }
+
+  handleFeedOnTap() {
+    console.log("ASDSA")
+    this.setState({
+      currentPage: 'Feed'
     });
   }
 
@@ -118,9 +126,9 @@ class App extends Component {
   }
   render() {
 
-    const onHungryPage = this.state.onHungryPage;
-    const onUserPage = this.state.onUserPage;
-    const onLoginPage = this.state.onLoginPage;
+    // const onHungryPage = this.state.onHungryPage;
+    // const onUserPage = this.state.onUserPage;
+    // const onLoginPage = this.state.onLoginPage;
     const logoutFacebook = this.state.logoutFacebook;
     //Components can be functions or classes, React gives us the choice
     //Declared an empty component
@@ -154,6 +162,12 @@ class App extends Component {
           handleUserLogin={this.handleUserLogin}
           responseFacebook={this.responseFacebook}
         />
+        break
+      case 'Feed':
+      CurrentPage = <Feed
+                      album={this.state.album}
+                      foodInfo={this.state.foodInfo}
+                    />
     }
 
     return (
@@ -163,16 +177,11 @@ class App extends Component {
             handleHungryOnTap={this.handleHungryOnTap}
             handleUserOnTap={this.handleUserOnTap}
             handleLoginOnTap={this.handleLoginOnTap}
+            handleFeedOnTap={this.handleFeedOnTap}
             logoutFacebook={this.logoutFacebook}
           />
         </MuiThemeProvider>
         {CurrentPage}
-        {//<Feed
-          //key={1}
-          //album={this.state.album}
-          //foodInfo={this.state.foodInfo}
-       ///>
-     }
       </div>
 
     );

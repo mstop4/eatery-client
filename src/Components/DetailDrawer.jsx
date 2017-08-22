@@ -69,7 +69,6 @@ export default class DetailDrawer extends React.Component {
     let info = this.state.details.info
 
     if (info) {
-      console.dir(info)
 
       if (info.website) {
         website = <a href={this.state.details.info.website}>{this.state.details.info.website}</a>

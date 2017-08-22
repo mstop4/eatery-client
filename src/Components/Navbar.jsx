@@ -56,6 +56,11 @@ const Logged = props =>
     />
 
     <MenuItem
+      primaryText="Feed Me"
+      onTouchTap={ props.handleFeedOnTap }
+    />
+
+    <MenuItem
       primaryText="Login"
       onTouchTap={ props.handleLoginOnTap }
     />
@@ -110,6 +115,7 @@ class Navbar extends Component {
               handleHungryOnTap={ this.props.handleHungryOnTap }
               handleUserOnTap={ this.props.handleUserOnTap }
               handleLoginOnTap={ this.props.handleLoginOnTap}
+              handleFeedOnTap={this.props.handleFeedOnTap}
               logoutFacebook={ this.props.logoutFacebook}
             />}
         />

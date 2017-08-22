@@ -35,21 +35,45 @@ const styles = {
 class Feed extends React.Component {
   constructor(props) {
     super(props);
+
+    console.log("feed const")
+
+    let newFlatAlbum = []
+
+    // convert nested album into a flat hierarchy
+    for (let place in this.props.album) {
+      for (let photo in this.props.album[place]) {
+        newFlatAlbum.push({
+          pic: this.props.album[place][photo],
+          id: place
+        })
+      }
+    }
+
+    //shuffle flat album
+    for (let i = newFlatAlbum.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        let temp = newFlatAlbum[i];
+        newFlatAlbum[i] = newFlatAlbum[j];
+        newFlatAlbum[j] = temp;
+    }
+
     this.state = {
       open: false,
-      album: {},
-      flatAlbum: [],
+      album: this.props.album,
+      flatAlbum: newFlatAlbum,
       details: {
           title: "",
           subtitle: "",
           photos: "",
           rating:""
-      },
+      }
     };
   }
 
   componentWillReceiveProps(nextProps) {
 
+    console.log("feed receive props")
     let newFlatAlbum = []
 
     // convert nested album into a flat hierarchy
