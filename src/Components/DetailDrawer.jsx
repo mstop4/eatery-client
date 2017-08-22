@@ -19,7 +19,6 @@ import Divider from 'material-ui/Divider';
 import Rating from 'react-rating';
 import Slider from 'react-slick';
 import Star from 'material-ui/svg-icons/toggle/star';
-import StarEmpty from 'material-ui/svg-icons/toggle/star-border';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -64,11 +63,28 @@ export default class DetailDrawer extends React.Component {
 
     let website = ""
     let phoneNumber = ""
+    let rating = 0
+    let reviews = []
 
     if (this.state.details.info) {
       console.dir(this.state.details.info)
       website = this.state.details.info.website
       phoneNumber = this.state.details.info.formatted_phone_number
+      rating = this.state.details.info.rating
+
+      // reviews
+      for (let review in this.state.details.info.reviews) {
+
+        let curReview = this.state.details.info.reviews[review]
+
+        reviews.push(
+            <div className="reviews">
+              {curReview.text}
+              <div className="reviewer">{curReview.author_name}</div>
+              <div className="review-date">{curReview.relative_time_description}</div>
+            </div>
+        )
+      }
     }
 
     return (
@@ -83,13 +99,12 @@ export default class DetailDrawer extends React.Component {
           <div className="drawer" style={{height: '100%'}}>
             <h1 className="title"> {this.state.details.title} </h1>
             <FavoriteButton className="favourite" />
-            <Rating initialRate={this.state.details.rating}
-                    className="rating"
-                    readonly={true}
-                    quiet={true}
-                    full={<Star/>}
-                    empty={<StarEmpty/>}
+            <div>
+            <Rating
+              initialRate={rating}
+              readonly
             />
+            </div>
             <Divider />
             <div>
               <List class="contact-us-list">
@@ -113,18 +128,7 @@ export default class DetailDrawer extends React.Component {
                 {album}
             </Slider>
             <Divider />
-            <div className="reviews">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque in
-              bibendum tortor, id placerat ex. Pellentesque augue quam, iaculis id
-              ligula a, rutrum placerat lectus. Maecenas venenatis nibh vitae
-              euismod pharetra. In a ex at justo aliquet imperdiet in a nibh. Sed
-              blandit id metus quis malesuada. Curabitur in velit lectus. Ut elit
-              odio, auctor dignissim volutpat eget, placerat bibendum nisi.
-              Curabitur imperdiet urna eu ipsum pretium, in tincidunt tellus
-              commodo. Ut tempor laoreet arcu, nec tristique purus congue ut.
-              Quisque sit amet auctor erat
-              <div className="reviewer"> Name Namerson </div>
-            </div>
+            {reviews}
           </div>
         </Drawer>
       </MuiThemeProvider>
