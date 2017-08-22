@@ -61,8 +61,8 @@ const Favourites = () => (
       {tilesData.map((tile) => (
         <GridTile
           key={tile.img}
-          title={tile.title}
-          subtitle={<span>by <b>ADDRESS HERE</b></span>}
+          title={<span className="grid-title"> {tile.title} </span>}
+          subtitle={<span><b>ADDRESS HERE</b></span>}
           className="favourites-details"
           /*actionIcon={<IconButton><StarBorder color="white" /></IconButton>}*/
         >

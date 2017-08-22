@@ -1,18 +1,33 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:300");
 
+.avatar {
+}
+
+.profile-buttons {
+  margin: auto;
+  display: inline-block;
+}
 .root {
+  text-align: center;
   display:flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
 
+.grid-title {
+  font-size: 150%;
+}
 .favourites-container {
   position: fixed;
   overflow-y: auto;
-  width: 100%;
+  width: 90%;
   height: 100%;
+  padding: 5%;
 }
 
 .favourites-details {
   font-size: 200%;
+  min-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
 }
