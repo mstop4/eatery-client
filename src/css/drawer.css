@@ -45,7 +45,7 @@ img.images {
   margin: -15px 0 5px;
 }
 .reviews {
-  color: grey;
+  color: grey !important;
 }
 .reviewer {
   color: #F44336;

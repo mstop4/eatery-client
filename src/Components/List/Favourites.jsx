@@ -56,7 +56,7 @@ const Favourites = () => (
   <div className="root">
     <GridList
       cols={3}
-      cellHeight={500}
+      cellHeight={450}
       className="favourites-container"
     >
       {/*<Subheader>Why is there a header here</Subheader>*/}

@@ -83,6 +83,7 @@ export default class DetailDrawer extends React.Component {
             <FavoriteButton className="favourite" />
             <Rating initialRate={this.state.details.rating}
                     className="rating"
+                    dotsClass="slider-dots"
                     readonly={true}
                     quiet={true}
                     full={<Star/>}
