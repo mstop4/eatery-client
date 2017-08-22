@@ -108,7 +108,8 @@ export default class DetailDrawer extends React.Component {
       }
 
       // get opening hours for today and make it presentable
-      let curWeekday = new Date().getDay()
+      // note: Date.getDay starts on Sunday, but Google Places starts on Monday.
+      let curWeekday = (new Date().getDay()+6) % 7
       let opening_text = info.opening_hours.weekday_text[curWeekday]
       let colonPos = opening_text.indexOf(":")
       opening_text = opening_text.slice(colonPos+2)

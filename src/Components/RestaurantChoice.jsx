@@ -39,7 +39,7 @@ class RestaurantChoice extends React.Component {
       position: g_position,
       radius: 2000,
       rankBy: "distance",
-      maxResults: 12,
+      maxResults: 10,
 
       open: false,
       load: false,
