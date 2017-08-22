@@ -25,15 +25,6 @@ const UserOptions = (props) => (
         props.handleFavouritesOnTap
       }
     />
-    <FlatButton
-      style={styles.button}
-      label="Friends"
-      labelPosition="before"
-      primary={true}
-      onTouchTap = {
-        props.handleFriendListOnTap
-      }
-    />
   </div>
 );
 

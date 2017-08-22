@@ -70,12 +70,14 @@ class User extends Component {
         <MuiThemeProvider>
           <Avatar
               src={this.props.currentPicture}
-              size={60}
+              size={100}
               className="avatar"
             />
         </MuiThemeProvider>
         <p>{this.props.currentUser}</p>
         <p>{this.props.currentEmail}</p>
+        <h1>Favorites</h1>
+        {/*}
         <MuiThemeProvider muiTheme={muiTheme}>
           <UserOptions
             handleFavouritesOnTap = { this.handleFavouritesOnTap }
@@ -83,6 +85,7 @@ class User extends Component {
             className="profile-buttons"
           />
         </MuiThemeProvider>
+        */}
         <CurrentPage />
       </div>
     );
