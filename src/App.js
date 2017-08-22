@@ -133,7 +133,9 @@ class App extends Component {
                         photos={this.state.photos}
                         album={this.state.album}
                         position={this.state.position}
-                        updateCache={this.updateCache}/>
+                        updateCache={this.updateCache}
+                        currentEmail={this.state.currentEmail}
+                        />
         break
       case 'User':
         CurrentPage =

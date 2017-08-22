@@ -29,14 +29,25 @@ const muiTheme = getMuiTheme({
 export default class DetailDrawer extends React.Component {
   constructor(props) {
     super(props);
+
+    this.handleFavourite = this.handleFavourite.bind(this);
+
     this.state = {
         open: false,
-        details: this.props.detail
+        details: this.props.detail,
+        currentEmail: this.props.currentEmail
      };
+
   }
 
   handleToggle = () => this.setState({ open: !this.state.open });
   handleClose = () => this.setState({ open: false });
+
+  handleFavourite  () {
+    fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/favourite/${this.state.currentEmail}/${this.state.details.info.place_id}`, {
+      method: 'POST'
+    })
+  }
 
   detail = this.props.detail;
 
@@ -63,13 +74,15 @@ export default class DetailDrawer extends React.Component {
 
     let website = ""
     let phoneNumber = ""
+    let place_id = ""
 
     if (this.state.details.info) {
       website = this.state.details.info.website
       phoneNumber = this.state.details.info.formatted_phone_number
+      place_id = this.state.details.info.place_id
     }
 
-    return (
+    return (   
       <MuiThemeProvider muiTheme={muiTheme}>
         <Drawer
           docked={false}
@@ -80,7 +93,8 @@ export default class DetailDrawer extends React.Component {
         >
           <div className="drawer" style={{height: '100%'}}>
             <h1 className="title"> {this.state.details.title} </h1>
-            <FavoriteButton className="favourite" />
+            <FavoriteButton className="favourite" handleFavourite={this.handleFavourite}/>
+            {/* currentEmail={this.state.currentEmail} place_id={this.state.details.place_id} */}
             <Rating initialRate={this.state.details.rating}
                     className="rating"
                     readonly={true}
@@ -112,15 +126,7 @@ export default class DetailDrawer extends React.Component {
             </Slider>
             <Divider />
             <div className="reviews">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque in
-              bibendum tortor, id placerat ex. Pellentesque augue quam, iaculis id
-              ligula a, rutrum placerat lectus. Maecenas venenatis nibh vitae
-              euismod pharetra. In a ex at justo aliquet imperdiet in a nibh. Sed
-              blandit id metus quis malesuada. Curabitur in velit lectus. Ut elit
-              odio, auctor dignissim volutpat eget, placerat bibendum nisi.
-              Curabitur imperdiet urna eu ipsum pretium, in tincidunt tellus
-              commodo. Ut tempor laoreet arcu, nec tristique purus congue ut.
-              Quisque sit amet auctor erat
+              {place_id} {this.state.currentEmail}
               <div className="reviewer"> Name Namerson </div>
             </div>
           </div>

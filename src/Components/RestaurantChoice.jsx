@@ -46,7 +46,8 @@ class RestaurantChoice extends React.Component {
       details: {
         title: "",
         subtitle: "",
-        photo: ""
+        photo: "",
+        place_id: ""
       }
     }
   }
@@ -57,16 +58,21 @@ class RestaurantChoice extends React.Component {
     let place_id = json.results[place].place_id;
     newAlbum[place] = []
 
+    console.log(place_id);
+
     return new Promise ((resolve, reject) => {
       fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/details?placeid=${place_id}`, {
         mode: "cors"
       })
       .then((response) => {
+        console.log(response);
         return response.json()
       })
       .then((json) => {
-
+        console.log(json);
         newInfo[place] = json.result
+
+        console.log(newInfo[place]);
 
         for (let photo in json.result.photos) {
           newAlbum[place][photo] = "https://maps.googleapis.com/maps/api/place/photo?"
@@ -175,7 +181,8 @@ class RestaurantChoice extends React.Component {
                         subtitle: this.state.foodInfo[place]["vicinity"],
                         photos: this.state.album[place],
                         info: this.state.foodInfo[place],
-                        rating: this.state.foodInfo[place]["rating"]
+                        rating: this.state.foodInfo[place]["rating"],
+                        place_id: this.state.foodInfo[place]["place_id"]
                       }
                       this.setState({details: detail}, function () {
                       })
@@ -237,6 +244,7 @@ class RestaurantChoice extends React.Component {
           open={this.state.open}
           detail={this.state.details}
           request={open => this.setState({ open })}
+          currentEmail={this.props.currentEmail}
         />
       </div>
     )
