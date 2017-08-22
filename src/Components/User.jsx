@@ -74,8 +74,8 @@ class User extends Component {
               className="avatar"
             />
         </MuiThemeProvider>
-        <p>{this.props.currentUser}</p>
-        <p>{this.props.currentEmail}</p>
+        <p className="user-name"><b>{this.props.currentUser}Username Namerson</b></p>
+        <p className="user-email">{this.props.currentEmail} Email@EmailAddress.com</p>
         <h1>Favorites</h1>
         {/*}
         <MuiThemeProvider muiTheme={muiTheme}>

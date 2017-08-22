@@ -3,7 +3,14 @@
 .avatar {
   margin: 5% 5% 0 ;
 }
+.user-name {
+  color: #f44336;
+  font-size: 200%;
 
+}
+.user-email {
+
+}
 .profile-buttons {
   margin: auto;
   text-align: center;
@@ -30,7 +37,7 @@
   overflow-y: auto;
   width: 95%;
   height: 65%;
-  padding: 5%;
+  padding: 0 5%;
 }
 
 .favourites-details {
