@@ -19,7 +19,6 @@ import FacebookLogin from './Components/FacebookLogin.js';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {red500} from 'material-ui/styles/colors';
 
-
 const muiTheme = getMuiTheme({
   palette: {
     primary1Color: red500,
@@ -32,13 +31,6 @@ let g_foodInfo = []
 class App extends Component {
   constructor(props) {
     super(props);
-    this.handleHungryOnTap = this.handleHungryOnTap.bind(this);
-    this.handleUserOnTap = this.handleUserOnTap.bind(this);
-    this.handleLoginOnTap = this.handleLoginOnTap.bind(this);
-    this.handleUserLogin = this.handleUserLogin.bind(this);
-    this.handleFeedOnTap = this.handleFeedOnTap.bind(this);
-    this.responseFacebook = this.responseFacebook.bind(this);
-    this.logoutFacebook = this.logoutFacebook.bind(this);
     this.state = {
       currentPage: 'User',
       currentUser: '',
@@ -47,36 +39,33 @@ class App extends Component {
       album: {},
       foodInfo: []
     }
-
-    this.updateCache = this.updateCache.bind(this)
   }
 
-  handleHungryOnTap() {
+  handleHungryOnTap = () => {
     this.setState({
       currentPage: 'Hungry'
     });
   }
 
-  handleUserOnTap() {
+  handleUserOnTap = () => {
     this.setState({
       currentPage: 'User'
     });
   }
 
-  handleLoginOnTap() {
+  handleLoginOnTap = () => {
     this.setState({
       currentPage: 'Login'
     });
   }
 
-  handleFeedOnTap() {
-    console.log("ASDSA")
+  handleFeedOnTap = () => {
     this.setState({
       currentPage: 'Feed'
     });
   }
 
-  handleUserLogin(name, email, picture){
+  handleUserLogin = (name, email, picture) => {
     this.setState({
       currentUser: name,
       currentEmail: email,
@@ -84,7 +73,7 @@ class App extends Component {
     });
   }
 
-  updateCache(newAlbum, newInfo){
+  updateCache = (newAlbum, newInfo) => {
     g_album = newAlbum
     g_foodInfo = newInfo
 
@@ -94,7 +83,7 @@ class App extends Component {
     })
   }
 
-  responseFacebook (response) {
+  responseFacebook = (response) => {
     console.log(response);
     if (response !== undefined){
       document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
@@ -104,7 +93,7 @@ class App extends Component {
 
   // Deletes permission of Eatery on User's FB
   // Otherwise it will log them out of FB too for some reaosn
-  logoutFacebook(){
+  logoutFacebook = () => {
     window.FB.getLoginStatus(function(response) {
       if (response.status === 'connected') {
         // the user is logged in and has authenticated your
@@ -125,11 +114,8 @@ class App extends Component {
       }
      });
   }
-  render() {
+  render = () => {
 
-    // const onHungryPage = this.state.onHungryPage;
-    // const onUserPage = this.state.onUserPage;
-    // const onLoginPage = this.state.onLoginPage;
     const logoutFacebook = this.state.logoutFacebook;
     //Components can be functions or classes, React gives us the choice
     //Declared an empty component
