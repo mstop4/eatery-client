@@ -1,21 +1,50 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:300");
 
-.avatar {
-  margin: 5% 5% 0 ;
-}
-.user-name {
-  color: #f44336;
-  font-size: 200%;
 
+.red {
+  color: #f44336;
+}
+
+.profile-header {
+  max-height: 5%;
+}
+
+.bg-image {
+  width: 101%;
+  max-height: 375px;
+  margin-top: -5%;
+  margin-left:-5px;
+  background-image: url("/images/main.gif");
+  filter: brightness(50%) blur(2px);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  position: fixed;
+  z-index: -1;
+}
+.avatar {
+  margin-top: 3%;
+  margin-left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.user-name {
+  font-size: 200%;
+  text-align: center;
 }
 .user-email {
-
+  color:white;
+  font-size: 120%;
+  margin-top: -20px;
+  padding-bottom: 2%;
+  text-align: center;
 }
 .profile-buttons {
   margin: auto;
   text-align: center;
   display: inline-block;
 }
+
 .root {
   text-align: center;
   display:flex;

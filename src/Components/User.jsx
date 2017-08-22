@@ -66,17 +66,20 @@ class User extends Component {
     }
 
     return (
-      <div style={{textAlign: 'center'}}>
-        <MuiThemeProvider>
-          <Avatar
-              src={this.props.currentPicture}
-              size={100}
-              className="avatar"
-            />
-        </MuiThemeProvider>
-        <p className="user-name"><b>{this.props.currentUser}Username Namerson</b></p>
-        <p className="user-email">{this.props.currentEmail} Email@EmailAddress.com</p>
-        <h1>Favorites</h1>
+      <div>
+        <div className="profile-header">
+          <img src="/images/main.gif" className="bg-image"/>
+          <MuiThemeProvider>
+            <Avatar
+                src={this.props.currentPicture}
+                size={100}
+                className="avatar profile"
+              />
+          </MuiThemeProvider>
+          <p className="profile user-name red"><b>{this.props.currentUser}Username Namerson</b></p>
+          <p className="profile user-email"><b>{this.props.currentEmail} Email@EmailAddress.com</b></p>
+        </div>
+        <h2 className="red" style={{textAlign: 'center'}}>Favorites</h2>
         {/*}
         <MuiThemeProvider muiTheme={muiTheme}>
           <UserOptions
