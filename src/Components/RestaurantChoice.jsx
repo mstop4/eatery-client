@@ -4,6 +4,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 //import {GridList, GridTile} from 'material-ui/GridList'
 import Badge from 'material-ui/Badge'
 //import Image from 'react-image-resizer'
+import FlatButton from 'material-ui/FlatButton';
 import MapComponent from './MapComponent.jsx'
 import DetailDrawer from './DetailDrawer.jsx'
 import {Card, /*CardActions, CardHeader,*/ CardMedia, CardTitle, /*CardText*/} from 'material-ui/Card';
@@ -65,11 +66,10 @@ class RestaurantChoice extends React.Component {
         mode: "cors"
       })
       .then((response) => {
-        // console.log(response);
+
         return response.json()
       })
       .then((json) => {
-        // console.log(json);
         newInfo[place] = json.result
 
         for (let photo in json.result.photos) {
@@ -87,12 +87,13 @@ class RestaurantChoice extends React.Component {
     })
   }
 
-  getFood = (lat, lng) => {
-    if (this.state.foodJSON.length === 0 || this.state.photos.length === 0) {
+  getFood = (lat, lng, price) => {
+    //if (this.state.foodJSON.length === 0 || this.state.photos.length === 0) {
 
+      console.log("Fetch")
       const type = "restaurant"
 
-      fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/places?lat=${lat}&lng=${lng}&type=${type}&rankby=${this.state.rankBy}`, {
+      fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/places?lat=${lat}&lng=${lng}&type=${type}&rankby=${this.state.rankBy}&maxprice=${price}`, {
         mode: "cors"
       })
         .then((response) => {
@@ -137,6 +138,7 @@ class RestaurantChoice extends React.Component {
             this.position = {lat: lat, lng: lng}
 
             this.props.updateCache(newAlbum, newInfo)
+            console.log(price)
           })
           .catch((error) => {
             console.error(error)
@@ -145,20 +147,54 @@ class RestaurantChoice extends React.Component {
         .catch((error) => {
           console.error(error)
         })
-    }
+    //}
   }
 
   assignMap = (map) => {
     this.map = map
-    console.dir(this.map)
   }
 
   handleToggle = () => this.setState({ open: true })
   handleClose = () => this.setState({ open: false })
   handleDetails = (details) => this.setState({ details: details })
 
+  handlePriceFilter = (price) => { this.getFood(this.position.lat, this.position.lng, price) }
+
   render = () => {
-    const infos = []
+    const infos = [
+      <div className="button-container">
+      <MuiThemeProvider>
+        <FlatButton label="$"
+                    className="price-button"
+                    onClick={() => {this.handlePriceFilter(0)}}
+        />
+      </MuiThemeProvider>
+      <MuiThemeProvider>
+        <FlatButton label="$$"
+                    className="price-button"
+                    onClick={() => {this.handlePriceFilter(1)}}
+        />
+      </MuiThemeProvider>
+      <MuiThemeProvider>
+        <FlatButton label="$$$"
+                    className="price-button"
+                    onClick={() => {this.handlePriceFilter(2)}}
+        />
+      </MuiThemeProvider>
+      <MuiThemeProvider>
+        <FlatButton label="$$$$"
+                    className="price-button"
+                    onClick={() => {this.handlePriceFilter(3)}}
+        />
+      </MuiThemeProvider>
+      <MuiThemeProvider>
+        <FlatButton label="$$$$$"
+                    className="price-button"
+                    onClick={() => {this.handlePriceFilter(4)}}
+        />
+      </MuiThemeProvider>
+      </div>,
+    ]
     const places = this.state.foodJSON.results
     let gridComp
     let n = 0
@@ -194,7 +230,6 @@ class RestaurantChoice extends React.Component {
                       this.handleToggle();
                     }}
               >
-
                 <CardMedia >
                   <img className='card-image'src={pic} alt="" />
                 </CardMedia>
@@ -204,7 +239,6 @@ class RestaurantChoice extends React.Component {
                   className ="badge"
                 />
                 <CardTitle title={places[place]["name"]} subtitle={places[place]["vicinity"]} className="card-title"/>
-
               </Card>
             </MuiThemeProvider>
 
@@ -228,6 +262,7 @@ class RestaurantChoice extends React.Component {
         <table width={"100%"} height={"100vh"}>
           <tr>
             <td width={"60%"} height={"100%"}>
+
               <MapComponent ref="mapComp"
                 className="map"
                 data={this.state.foodJSON.results}

@@ -66,7 +66,7 @@ class MapComponent extends React.Component {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         map.panTo({lat: position.coords.latitude, lng: position.coords.longitude})
-        this.props.getFood(position.coords.latitude, position.coords.longitude)
+        this.props.getFood(position.coords.latitude, position.coords.longitude, 4)
       })
     }
   }
