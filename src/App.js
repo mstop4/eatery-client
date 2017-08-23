@@ -37,7 +37,8 @@ class App extends Component {
       currentEmail: '',
       currentPicture: '',
       album: {},
-      foodInfo: []
+      foodInfo: [],
+      logged:false
     }
   }
 
@@ -87,6 +88,7 @@ class App extends Component {
     if (response !== undefined){
       document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
       setTimeout(this.handleHungryOnTap,1500)
+      this.setState({logged:true})
     }
   }
 
@@ -168,6 +170,7 @@ class App extends Component {
             handleLoginOnTap={this.handleLoginOnTap}
             handleFeedOnTap={this.handleFeedOnTap}
             logoutFacebook={this.logoutFacebook}
+            logged={this.state.logged}
           />
         </MuiThemeProvider>
         {CurrentPage}

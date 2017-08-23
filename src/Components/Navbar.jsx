@@ -119,6 +119,7 @@ class Navbar extends Component {
               handleFeedOnTap={this.props.handleFeedOnTap}
               logoutFacebook={ this.props.logoutFacebook}
             />}
+          showMenuIconButton={this.props.logged}
         />
       </div>
     );
