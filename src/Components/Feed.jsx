@@ -9,7 +9,6 @@ import DetailDrawer from "./DetailDrawer.jsx";
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {red500} from 'material-ui/styles/colors';
-import '../css/feed.css';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -145,7 +144,7 @@ class Feed extends React.Component {
       <div>
         <MuiThemeProvider muiTheme={muiTheme}>
           <div style={styles.root}>
-            <GridList cols={4} cellHeight={250} style={styles.gridList} padding={10}>
+            <GridList cols={4} cellHeight={375} style={styles.gridList} padding={10}>
               <Subheader>Restaurants</Subheader>
               {tiles}
             </GridList>
