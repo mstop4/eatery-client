@@ -62,6 +62,7 @@ export default class DetailDrawer extends React.Component {
       album.push(<div><img className="images" src={this.state.details.photos[photo]}/></div>)
     }
     if (album.length === 0 ){
+      album.push(<div><img src='http://placekitten.com/g/400/200' /></div>)
     }
 
     let slideshowsettings = {
@@ -103,8 +104,7 @@ export default class DetailDrawer extends React.Component {
         reviews.push(
             <div className="reviews">
               <div>
-                <span className="reviewer">{curReview.author_name}</span>
-                <div className="review-date">{curReview.relative_time_description}</div>
+                <span className="reviewer">{curReview.author_name} </span>
                 <Rating
                   initialRate={curReview.rating}
                   className={"star-rating detailed-rating"}
@@ -112,6 +112,7 @@ export default class DetailDrawer extends React.Component {
                   full={<Star/>}
                   readonly
                 />
+                <div className="review-date">{curReview.relative_time_description}</div>
               </div>
               {curReview.text}
             </div>

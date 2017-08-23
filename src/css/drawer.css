@@ -45,7 +45,7 @@ img.images {
   margin: -15px 0 5px;
 }
 .reviews {
-  color: grey !important;
+  color: black !important;
   margin-bottom: 1em;
 }
 .reviewer {
@@ -56,7 +56,7 @@ img.images {
 .review-date {
   padding-left: 1em;
   font-size: 90%;
-  color: black;
+  color: grey;
 }
 
 .star-rating svg {
@@ -64,6 +64,5 @@ img.images {
 }
 
 .detailed-rating {
-  float:right;
   size: 50%;
 }
