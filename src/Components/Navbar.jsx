@@ -62,11 +62,6 @@ const Logged = props =>
     />
 
     <MenuItem
-      primaryText="Login"
-      onTouchTap={ props.handleLoginOnTap }
-    />
-
-    <MenuItem
       primaryText="Sign out"
       onTouchTap={ props.logoutFacebook }
     />
