@@ -23,6 +23,7 @@
 .price-button {
   position: fixed;
   color: #F44336 !important;
+  margin: 0 15px;
 }
 
 .card-container {

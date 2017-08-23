@@ -179,6 +179,16 @@ class RestaurantChoice extends React.Component {
                       className="price-button"
           />
         </MuiThemeProvider>
+        <MuiThemeProvider>
+          <FlatButton label="$$$$"
+                      className="price-button"
+          />
+        </MuiThemeProvider>
+        <MuiThemeProvider>
+          <FlatButton label="$$$$$"
+                      className="price-button"
+          />
+        </MuiThemeProvider>
       </div>,
     ]
     const places = this.state.foodJSON.results
