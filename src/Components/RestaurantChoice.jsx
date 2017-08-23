@@ -46,7 +46,8 @@ class RestaurantChoice extends React.Component {
         title: "",
         subtitle: "",
         photo: "",
-        place_id: ""
+        place_id: "",
+        checked: ""
       }
     }
 
@@ -56,17 +57,16 @@ class RestaurantChoice extends React.Component {
 
   getMoreDetails = (json, place, newAlbum, newInfo) => {
     // get more details
-
+  
     let place_id = json.results[place].place_id;
     newAlbum[place] = []
-
-    console.log(place_id);
 
     return new Promise ((resolve, reject) => {
       fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/details?placeid=${place_id}`, {
         mode: "cors"
       })
       .then((response) => {
+
         return response.json()
       })
       .then((json) => {

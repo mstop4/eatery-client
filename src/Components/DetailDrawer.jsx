@@ -30,24 +30,17 @@ export default class DetailDrawer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleFavourite = this.handleFavourite.bind(this);
 
     this.state = {
         open: false,
         details: this.props.detail,
-        currentEmail: this.props.currentEmail
+        currentEmail: this.props.currentEmail,
      };
 
   }
 
   handleToggle = () => this.setState({ open: !this.state.open });
   handleClose = () => this.setState({ open: false });
-
-  handleFavourite () {
-    fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/favourite/${this.state.currentEmail}/${this.state.details.info.place_id}`, {
-      method: 'POST'
-    })
-  }
 
   detail = this.props.detail;
 
@@ -140,7 +133,11 @@ export default class DetailDrawer extends React.Component {
         >
           <div className="drawer" style={{height: '100%'}}>
             <h1 className="title"> {this.state.details.title} </h1>
-            <FavoriteButton className="favourite" handleFavourite={this.handleFavourite}/>
+            <FavoriteButton 
+              className="favourite" 
+              currentEmail={this.state.currentEmail}
+              place_id={this.props.detail.place_id}  
+            />
             <div>
             <Rating
               initialRate={rating}
