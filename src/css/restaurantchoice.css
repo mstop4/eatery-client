@@ -18,10 +18,12 @@
 .button-container {
   align-items: center;
   text-align: center;
+  margin-top: 15px;
 }
 .price-button {
   position: fixed;
   color: #F44336 !important;
+  margin: 0 15px;
 }
 
 .card-container {
