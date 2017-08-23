@@ -205,7 +205,6 @@ export default class DetailDrawer extends React.Component {
             </Slider>
             <Divider />
             {reviews}
-            {place_id} {this.state.currentEmail}
           </div>
         </Drawer>
       </MuiThemeProvider>
