@@ -154,6 +154,35 @@ export default class DetailDrawer extends React.Component {
             {openings}
             </div>
             <Divider />
+            <p>My Opinion</p>
+            <p>
+              Price
+              <Rating
+                initialRate={0}
+                className={"star-rating"}
+                empty={<StarBorder/>}
+                full={<Star/>}
+              />
+            </p>
+            <p>
+              Quality
+              <Rating
+                initialRate={0}
+                className={"star-rating"}
+                empty={<StarBorder/>}
+                full={<Star/>}
+              />
+            </p>
+            <p>
+              Portions
+              <Rating
+                initialRate={0}
+                className={"star-rating"}
+                empty={<StarBorder/>}
+                full={<Star/>}
+              />
+            </p>
+            <Divider />
             <div>
               <List class="contact-us-list">
                 <ListItem primaryText={this.state.details.subtitle}
