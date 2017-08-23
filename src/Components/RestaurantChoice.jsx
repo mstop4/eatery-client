@@ -160,29 +160,23 @@ class RestaurantChoice extends React.Component {
       <MuiThemeProvider>
         <FlatButton label="$"
                     className="price-button"
-                    onClick={() => {this.handlePriceFilter(0)}}
+                    onClick={() => {this.handlePriceFilter(1)}}
         />
       </MuiThemeProvider>
       <MuiThemeProvider>
         <FlatButton label="$$"
                     className="price-button"
-                    onClick={() => {this.handlePriceFilter(1)}}
+                    onClick={() => {this.handlePriceFilter(2)}}
         />
       </MuiThemeProvider>
       <MuiThemeProvider>
         <FlatButton label="$$$"
                     className="price-button"
-                    onClick={() => {this.handlePriceFilter(2)}}
-        />
-      </MuiThemeProvider>
-      <MuiThemeProvider>
-        <FlatButton label="$$$$"
-                    className="price-button"
                     onClick={() => {this.handlePriceFilter(3)}}
         />
       </MuiThemeProvider>
       <MuiThemeProvider>
-        <FlatButton label="$$$$$"
+        <FlatButton label="$$$$"
                     className="price-button"
                     onClick={() => {this.handlePriceFilter(4)}}
         />

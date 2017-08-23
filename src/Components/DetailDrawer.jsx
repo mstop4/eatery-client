@@ -180,34 +180,34 @@ export default class DetailDrawer extends React.Component {
             <p>
               Price
               <Rating
-                initialRate={this.state.ratings[this.state.details.rateId].price}
+                initialRate={0}//this.state.ratings[this.state.details.rateId].price}
                 className={"star-rating"}
                 empty={<StarBorder/>}
                 full={<Star/>}
                 fractions={2}
-                onChange={(rate) => {this.handleRate(rate, "price", this.state.details.rateId)}}
+                //onChange={(rate) => {this.handleRate(rate, "price", this.state.details.rateId)}}
               />
             </p>
             <p>
               Quality
               <Rating
-                initialRate={this.state.ratings[this.state.details.rateId].quality}
+                initialRate={0}//this.state.ratings[this.state.details.rateId].quality}
                 className={"star-rating"}
                 empty={<StarBorder/>}
                 full={<Star/>}
                 fractions={2}
-                onChange={(rate) => {this.handleRate(rate, "quality", this.state.details.rateId)}}
+                //onChange={(rate) => {this.handleRate(rate, "quality", this.state.details.rateId)}}
               />
             </p>
             <p>
               Portions
               <Rating
-                initialRate={this.state.ratings[this.state.details.rateId].portions}
+                initialRate={0}//this.state.ratings[this.state.details.rateId].portions}
                 className={"star-rating"}
                 empty={<StarBorder/>}
                 full={<Star/>}
                 fractions={2}
-                onChange={(rate) => {this.handleRate(rate, "portions", this.state.details.rateId)}}
+                //onChange={(rate) => {this.handleRate(rate, "portions", this.state.details.rateId)}}
               />
             </p>
             <Divider />
