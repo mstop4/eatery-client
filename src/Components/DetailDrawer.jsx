@@ -97,18 +97,17 @@ export default class DetailDrawer extends React.Component {
         reviews.push(
             <div className="reviews">
               <div>
-                <span className="reviewer">{curReview.author_name}</span>
-                 -
+                <span className="reviewer">{curReview.author_name} </span>
                 <Rating
                   initialRate={curReview.rating}
-                  className={"star-rating"}
+                  className={"star-rating detailed-rating"}
                   empty={<StarBorder/>}
                   full={<Star/>}
                   readonly
                 />
+                <div className="review-date">{curReview.relative_time_description}</div>
               </div>
               {curReview.text}
-              <div className="review-date">{curReview.relative_time_description}</div>
             </div>
         )
       }
@@ -145,7 +144,8 @@ export default class DetailDrawer extends React.Component {
               className={"star-rating"}
               empty={<StarBorder/>}
               full={<Star/>}
-              readonly
+              readonly={true}
+
             />
             {openings}
             </div>

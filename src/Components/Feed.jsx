@@ -20,7 +20,8 @@ const styles = {
   root: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "space-around"
+    justifyContent: "space-around",
+    padding: 10
   },
   gridList: {
     width: "auto",
@@ -143,7 +144,7 @@ class Feed extends React.Component {
       <div>
         <MuiThemeProvider muiTheme={muiTheme}>
           <div style={styles.root}>
-            <GridList cols={4} cellHeight={180} style={styles.gridList} padding={0}>
+            <GridList cols={4} cellHeight={375} style={styles.gridList} padding={10}>
               <Subheader>Restaurants</Subheader>
               {tiles}
             </GridList>
