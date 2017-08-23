@@ -15,6 +15,10 @@
   bottom: 25px;
 }
 
+.price-button {
+  position: fixed;
+}
+
 .card-container {
   overflow: auto;
   position: fixed;
