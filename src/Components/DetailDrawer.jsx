@@ -30,12 +30,18 @@ export default class DetailDrawer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleFavourite = this.handleFavourite.bind(this);
-
     this.state = {
         open: false,
         details: this.props.detail,
-        currentEmail: this.props.currentEmail
+        currentEmail: this.props.currentEmail,
+
+        ratings: [
+          {
+            price: 0,
+            quality: 0,
+            portions: 0
+          }
+        ]
      };
 
   }
@@ -43,10 +49,18 @@ export default class DetailDrawer extends React.Component {
   handleToggle = () => this.setState({ open: !this.state.open });
   handleClose = () => this.setState({ open: false });
 
-  handleFavourite () {
+  handleFavourite = () => {
     fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/favourite/${this.state.currentEmail}/${this.state.details.info.place_id}`, {
       method: 'POST'
     })
+  }
+
+  handleRate = (rate, category, index) => {
+
+    let newRatings = this.state.ratings.slice()
+    newRatings[index][category] = rate
+
+    this.setState({ratings: newRatings})
   }
 
   detail = this.props.detail;
@@ -157,28 +171,34 @@ export default class DetailDrawer extends React.Component {
             <p>
               Price
               <Rating
-                initialRate={0}
+                initialRate={this.state.ratings[0].price}
                 className={"star-rating"}
                 empty={<StarBorder/>}
                 full={<Star/>}
+                fractions={2}
+                onChange={(rate) => {this.handleRate(rate, "price", 0)}}
               />
             </p>
             <p>
               Quality
               <Rating
-                initialRate={0}
+                initialRate={this.state.ratings[0].quality}
                 className={"star-rating"}
                 empty={<StarBorder/>}
                 full={<Star/>}
+                fractions={2}
+                onChange={(rate) => {this.handleRate(rate, "quality", 0)}}
               />
             </p>
             <p>
               Portions
               <Rating
-                initialRate={0}
+                initialRate={this.state.ratings[0].portions}
                 className={"star-rating"}
                 empty={<StarBorder/>}
                 full={<Star/>}
+                fractions={2}
+                onChange={(rate) => {this.handleRate(rate, "portions", 0)}}
               />
             </p>
             <Divider />
