@@ -59,8 +59,6 @@ class MapComponent extends React.Component {
   onMapCreated(map) {
 
     this.setState({map: map})
-    this.props.assignMap(map)
-    //map.setOptions({style: defaultStyle})
 
     // Try HTML5 geolocation.
     if (navigator.geolocation) {

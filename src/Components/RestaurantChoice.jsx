@@ -46,7 +46,9 @@ class RestaurantChoice extends React.Component {
         title: "",
         subtitle: "",
         photo: "",
-        place_id: ""
+        place_id: "",
+        checked: "",
+        rateId: 0
       }
     }
 
@@ -60,13 +62,12 @@ class RestaurantChoice extends React.Component {
     let place_id = json.results[place].place_id;
     newAlbum[place] = []
 
-    console.log(place_id);
-
     return new Promise ((resolve, reject) => {
       fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/details?placeid=${place_id}`, {
         mode: "cors"
       })
       .then((response) => {
+
         return response.json()
       })
       .then((json) => {
@@ -88,9 +89,7 @@ class RestaurantChoice extends React.Component {
   }
 
   getFood = (lat, lng, price) => {
-    //if (this.state.foodJSON.length === 0 || this.state.photos.length === 0) {
 
-      console.log("Fetch")
       const type = "restaurant"
 
       fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/places?lat=${lat}&lng=${lng}&type=${type}&rankby=${this.state.rankBy}&maxprice=${price}`, {
@@ -147,11 +146,6 @@ class RestaurantChoice extends React.Component {
         .catch((error) => {
           console.error(error)
         })
-    //}
-  }
-
-  assignMap = (map) => {
-    this.map = map
   }
 
   handleToggle = () => this.setState({ open: true })
@@ -220,7 +214,8 @@ class RestaurantChoice extends React.Component {
                         photos: this.state.album[place],
                         info: this.state.foodInfo[place],
                         rating: this.state.foodInfo[place]["rating"],
-                        place_id: this.state.foodInfo[place]["place_id"]
+                        place_id: this.state.foodInfo[place]["place_id"],
+                        rateId: place
                       }
                       this.setState({
                         details: detail,

@@ -30,21 +30,26 @@ export default class DetailDrawer extends React.Component {
   constructor(props) {
     super(props);
 
+    let ratingsArray = []
+    for (let i = 0; i < 20; i++) {
+      ratingsArray.push({
+            price: 0,
+            quality: 0,
+            portions: 0
+      })
+    }
+
     this.state = {
         open: false,
         details: this.props.detail,
         currentEmail: this.props.currentEmail,
-
-        ratings: [
-          {
-            price: 0,
-            quality: 0,
-            portions: 0
-          }
-        ]
+        ratings: ratingsArray
      };
 
+     console.dir(this.state.details)
   }
+
+  detail = this.props.detail;
 
   handleToggle = () => this.setState({ open: !this.state.open });
   handleClose = () => this.setState({ open: false });
@@ -61,9 +66,9 @@ export default class DetailDrawer extends React.Component {
     newRatings[index][category] = rate
 
     this.setState({ratings: newRatings})
-  }
 
-  detail = this.props.detail;
+    //fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/save/${this.props.currentEmail}/:googleId/${newRatings[index][category].price}/${newRatings[index][category].quality}/${newRatings[index][category].portions}`)
+  }
 
   componentWillReceiveProps(nextProps) {
     this.setState({ details: nextProps.detail });
@@ -154,7 +159,11 @@ export default class DetailDrawer extends React.Component {
         >
           <div className="drawer" style={{height: '100%'}}>
             <h1 className="title"> {this.state.details.title} </h1>
-            <FavoriteButton className="favourite" handleFavourite={this.handleFavourite}/>
+            <FavoriteButton
+              className="favourite"
+              currentEmail={this.state.currentEmail}
+              place_id={this.props.detail.place_id}
+            />
             <div>
             <Rating
               initialRate={rating}
@@ -171,34 +180,34 @@ export default class DetailDrawer extends React.Component {
             <p>
               Price
               <Rating
-                initialRate={this.state.ratings[0].price}
+                initialRate={this.state.ratings[this.state.details.rateId].price}
                 className={"star-rating"}
                 empty={<StarBorder/>}
                 full={<Star/>}
                 fractions={2}
-                onChange={(rate) => {this.handleRate(rate, "price", 0)}}
+                onChange={(rate) => {this.handleRate(rate, "price", this.state.details.rateId)}}
               />
             </p>
             <p>
               Quality
               <Rating
-                initialRate={this.state.ratings[0].quality}
+                initialRate={this.state.ratings[this.state.details.rateId].quality}
                 className={"star-rating"}
                 empty={<StarBorder/>}
                 full={<Star/>}
                 fractions={2}
-                onChange={(rate) => {this.handleRate(rate, "quality", 0)}}
+                onChange={(rate) => {this.handleRate(rate, "quality", this.state.details.rateId)}}
               />
             </p>
             <p>
               Portions
               <Rating
-                initialRate={this.state.ratings[0].portions}
+                initialRate={this.state.ratings[this.state.details.rateId].portions}
                 className={"star-rating"}
                 empty={<StarBorder/>}
                 full={<Star/>}
                 fractions={2}
-                onChange={(rate) => {this.handleRate(rate, "portions", 0)}}
+                onChange={(rate) => {this.handleRate(rate, "portions", this.state.details.rateId)}}
               />
             </p>
             <Divider />
@@ -225,7 +234,6 @@ export default class DetailDrawer extends React.Component {
             </Slider>
             <Divider />
             {reviews}
-            {place_id} {this.state.currentEmail}
           </div>
         </Drawer>
       </MuiThemeProvider>
