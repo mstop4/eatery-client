@@ -15,6 +15,15 @@
   bottom: 25px;
 }
 
+.button-container {
+  align-items: center;
+  text-align: center;
+}
+.price-button {
+  position: fixed;
+  color: #F44336 !important;
+}
+
 .card-container {
   overflow: auto;
   position: fixed;
@@ -33,6 +42,7 @@
 .card-image {
   min-width: 100%;
   min-height: 60%;
+  max-height: 400px;
   object-fit: cover;
   left: -100%;
   right: -100%;

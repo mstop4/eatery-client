@@ -4,6 +4,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 //import {GridList, GridTile} from 'material-ui/GridList'
 import Badge from 'material-ui/Badge'
 //import Image from 'react-image-resizer'
+import FlatButton from 'material-ui/FlatButton';
 import MapComponent from './MapComponent.jsx'
 import DetailDrawer from './DetailDrawer.jsx'
 import {Card, /*CardActions, CardHeader,*/ CardMedia, CardTitle, /*CardText*/} from 'material-ui/Card';
@@ -161,7 +162,35 @@ class RestaurantChoice extends React.Component {
   handleDetails = (details) => this.setState({ details: details })
 
   render = () => {
-    const infos = []
+    const infos = [
+      <div className="button-container">
+      <MuiThemeProvider>
+        <FlatButton label="$"
+                    className="price-button"
+        />
+      </MuiThemeProvider>
+      <MuiThemeProvider>
+        <FlatButton label="$$"
+                    className="price-button"
+        />
+      </MuiThemeProvider>
+      <MuiThemeProvider>
+        <FlatButton label="$$$"
+                    className="price-button"
+        />
+      </MuiThemeProvider>
+      <MuiThemeProvider>
+        <FlatButton label="$$$$"
+                    className="price-button"
+        />
+      </MuiThemeProvider>
+      <MuiThemeProvider>
+        <FlatButton label="$$$$$"
+                    className="price-button"
+        />
+      </MuiThemeProvider>
+      </div>,
+    ]
     const places = this.state.foodJSON.results
     let gridComp
     let n = 0
@@ -197,7 +226,6 @@ class RestaurantChoice extends React.Component {
                       this.handleToggle();
                     }}
               >
-
                 <CardMedia >
                   <img className='card-image'src={pic} alt="" />
                 </CardMedia>
@@ -207,7 +235,6 @@ class RestaurantChoice extends React.Component {
                   className ="badge"
                 />
                 <CardTitle title={places[place]["name"]} subtitle={places[place]["vicinity"]} className="card-title"/>
-
               </Card>
             </MuiThemeProvider>
 
@@ -231,6 +258,7 @@ class RestaurantChoice extends React.Component {
         <table width={"100%"} height={"100vh"}>
           <tr>
             <td width={"60%"} height={"100%"}>
+
               <MapComponent ref="mapComp"
                 className="map"
                 data={this.state.foodJSON.results}

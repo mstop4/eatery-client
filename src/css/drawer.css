@@ -8,7 +8,7 @@
 h1.title {
   color: #F44336;
   display: inline-block;
-  font-size: 25px;
+  font-size: 50px;
   margin-top: 0px;
   text-align: center;
 }
@@ -45,20 +45,24 @@ img.images {
   margin: -15px 0 5px;
 }
 .reviews {
-  color: grey;
+  color: black !important;
+  margin-bottom: 1em;
 }
 .reviewer {
   color: #F44336;
-  padding-left: 1em;
-  padding-top: 5px;
+  font-size: 150%;
 }
 
 .review-date {
-  color: #F44336;
   padding-left: 1em;
-  padding-top: 5px;
+  font-size: 90%;
+  color: grey;
 }
 
 .star-rating svg {
-  color: black !important;
+  color: #F44336 !important;
+}
+
+.detailed-rating {
+  size: 50%;
 }
