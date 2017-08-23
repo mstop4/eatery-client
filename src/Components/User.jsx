@@ -76,8 +76,8 @@ class User extends Component {
                 className="avatar profile"
               />
           </MuiThemeProvider>
-          <p className="profile user-name red"><b>{this.props.currentUser}Username Namerson</b></p>
-          <p className="profile user-email"><b>{this.props.currentEmail} Email@EmailAddress.com</b></p>
+          <p className="profile user-name red"><b>{this.props.currentUser}</b></p>
+          <p className="profile user-email"><b>{this.props.currentEmail}</b></p>
         </div>
         <h2 className="red" style={{textAlign: 'center'}}>Favorites</h2>
         {/*}
