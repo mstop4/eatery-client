@@ -67,14 +67,10 @@ class RestaurantChoice extends React.Component {
         mode: "cors"
       })
       .then((response) => {
-        console.log(response);
         return response.json()
       })
       .then((json) => {
-        console.log(json);
         newInfo[place] = json.result
-
-        console.log(newInfo[place]);
 
         for (let photo in json.result.photos) {
           newAlbum[place][photo] = "https://maps.googleapis.com/maps/api/place/photo?"
@@ -91,12 +87,13 @@ class RestaurantChoice extends React.Component {
     })
   }
 
-  getFood = (lat, lng) => {
-    if (this.state.foodJSON.length === 0 || this.state.photos.length === 0) {
+  getFood = (lat, lng, price) => {
+    //if (this.state.foodJSON.length === 0 || this.state.photos.length === 0) {
 
+      console.log("Fetch")
       const type = "restaurant"
 
-      fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/places?lat=${lat}&lng=${lng}&type=${type}&rankby=${this.state.rankBy}`, {
+      fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/places?lat=${lat}&lng=${lng}&type=${type}&rankby=${this.state.rankBy}&maxprice=${price}`, {
         mode: "cors"
       })
         .then((response) => {
@@ -141,6 +138,7 @@ class RestaurantChoice extends React.Component {
             this.position = {lat: lat, lng: lng}
 
             this.props.updateCache(newAlbum, newInfo)
+            console.log(price)
           })
           .catch((error) => {
             console.error(error)
@@ -149,17 +147,18 @@ class RestaurantChoice extends React.Component {
         .catch((error) => {
           console.error(error)
         })
-    }
+    //}
   }
 
   assignMap = (map) => {
     this.map = map
-    console.dir(this.map)
   }
 
   handleToggle = () => this.setState({ open: true })
   handleClose = () => this.setState({ open: false })
   handleDetails = (details) => this.setState({ details: details })
+
+  handlePriceFilter = (price) => { this.getFood(this.position.lat, this.position.lng, price) }
 
   render = () => {
     const infos = [
@@ -167,26 +166,31 @@ class RestaurantChoice extends React.Component {
       <MuiThemeProvider>
         <FlatButton label="$"
                     className="price-button"
+                    onClick={() => {this.handlePriceFilter(0)}}
         />
       </MuiThemeProvider>
       <MuiThemeProvider>
         <FlatButton label="$$"
                     className="price-button"
+                    onClick={() => {this.handlePriceFilter(1)}}
         />
       </MuiThemeProvider>
       <MuiThemeProvider>
         <FlatButton label="$$$"
                     className="price-button"
+                    onClick={() => {this.handlePriceFilter(2)}}
         />
       </MuiThemeProvider>
       <MuiThemeProvider>
         <FlatButton label="$$$$"
                     className="price-button"
+                    onClick={() => {this.handlePriceFilter(3)}}
         />
       </MuiThemeProvider>
       <MuiThemeProvider>
         <FlatButton label="$$$$$"
                     className="price-button"
+                    onClick={() => {this.handlePriceFilter(4)}}
         />
       </MuiThemeProvider>
       </div>,
