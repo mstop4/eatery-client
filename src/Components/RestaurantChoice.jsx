@@ -164,31 +164,21 @@ class RestaurantChoice extends React.Component {
   render = () => {
     const infos = [
       <div className="button-container">
-      <MuiThemeProvider>
-        <FlatButton label="$"
-                    className="price-button"
-        />
-      </MuiThemeProvider>
-      <MuiThemeProvider>
-        <FlatButton label="$$"
-                    className="price-button"
-        />
-      </MuiThemeProvider>
-      <MuiThemeProvider>
-        <FlatButton label="$$$"
-                    className="price-button"
-        />
-      </MuiThemeProvider>
-      <MuiThemeProvider>
-        <FlatButton label="$$$$"
-                    className="price-button"
-        />
-      </MuiThemeProvider>
-      <MuiThemeProvider>
-        <FlatButton label="$$$$$"
-                    className="price-button"
-        />
-      </MuiThemeProvider>
+        <MuiThemeProvider>
+          <FlatButton label="$"
+                      className="price-button"
+          />
+        </MuiThemeProvider>
+        <MuiThemeProvider>
+          <FlatButton label="$$"
+                      className="price-button"
+          />
+        </MuiThemeProvider>
+        <MuiThemeProvider>
+          <FlatButton label="$$$"
+                      className="price-button"
+          />
+        </MuiThemeProvider>
       </div>,
     ]
     const places = this.state.foodJSON.results

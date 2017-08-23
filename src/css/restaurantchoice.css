@@ -18,6 +18,7 @@
 .button-container {
   align-items: center;
   text-align: center;
+  margin-top: 15px;
 }
 .price-button {
   position: fixed;
