@@ -5,7 +5,7 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import FriendList from './List/FriendList.jsx';
 import Favourites from './List/Favourites.jsx';
 import Avatar from 'material-ui/Avatar';
-import '../css/profile.css';
+import '../css/user.css';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {red500} from 'material-ui/styles/colors';
 
@@ -79,7 +79,7 @@ class User extends Component {
           <p className="profile user-name red"><b>{this.props.currentUser}</b></p>
           <p className="profile user-email"><b>{this.props.currentEmail}</b></p>
         </div>
-        <h2 className="red" style={{textAlign: 'center'}}>Favorites</h2>
+        <h2 className="red header" style={{textAlign: 'center'}}>Favorites</h2>
         {/*}
         <MuiThemeProvider muiTheme={muiTheme}>
           <UserOptions
