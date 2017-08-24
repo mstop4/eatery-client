@@ -64,10 +64,12 @@ class Feed extends React.Component {
       album: this.props.album,
       flatAlbum: newFlatAlbum,
       details: {
-          title: "",
-          subtitle: "",
-          photos: "",
-          rating:""
+        title: "",
+        subtitle: "",
+        photo: "",
+        place_id: "",
+        checked: "",
+        rateId: 0
       }
     };
   }
@@ -121,7 +123,8 @@ class Feed extends React.Component {
             subtitle: info[placeId]["vicinity"],
             photos: this.state.album[placeId],
             info: info[placeId],
-            rating: info[placeId]["rating"]
+            rating: info[placeId]["rating"],
+            rateId: 0
           }
 
         tiles.push(

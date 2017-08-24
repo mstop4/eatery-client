@@ -1,18 +1,11 @@
 import React from 'react';
 //import ReactDOM from 'react-dom';
 import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
-import {red500} from 'material-ui/styles/colors';
+import {red500} from 'material-ui/styles/colors'
+import {indigo500} from 'material-ui/styles/colors'
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 const params = {v: '3.exp', key: process.env.REACT_APP_GOOGLEMAPS_APIKEY, libraries: "places"};
-
-const svgIcon = {
-  path: "M-16,0a16,16 0 1,0 32,0a16,16 0 1,0 -32,0",
-  fillColor: red500,
-  fillOpacity: 1,
-  strokeWeight: 0,
-  scale: 0.75
-}
 
 const defaultStyle = {
             featureType: 'poi',
@@ -28,6 +21,24 @@ class MapComponent extends React.Component {
     }
 
     this.onMapCreated = this.onMapCreated.bind(this)
+    this.yourLat = null
+    this.yourLng = null
+
+    this.svgIconRed = {
+      path: "M-16,0a16,16 0 1,0 32,0a16,16 0 1,0 -32,0",
+      fillColor: red500,
+      fillOpacity: 1,
+      strokeWeight: 0,
+      scale: 0.75
+    }
+
+    this.svgIconYou = {
+      path: "M-16,0a16,16 0 1,0 32,0a16,16 0 1,0 -32,0",
+      fillColor: indigo500,
+      fillOpacity: 1,
+      strokeWeight: 0,
+      scale: 0.75
+    }
   }
 
   componentDidUpdate() {
@@ -65,6 +76,9 @@ class MapComponent extends React.Component {
       navigator.geolocation.getCurrentPosition((position) => {
         map.panTo({lat: position.coords.latitude, lng: position.coords.longitude})
         this.props.getFood(position.coords.latitude, position.coords.longitude, 4)
+
+        this.yourLat = position.coords.latitude
+        this.yourLng = position.coords.longitude
       })
     }
   }
@@ -92,7 +106,6 @@ class MapComponent extends React.Component {
     if (places && places.length > 0) {
 
       for (let place in places) {
-
         let pic = places[place]["photos"]
         if (!pic) {
           continue
@@ -102,7 +115,7 @@ class MapComponent extends React.Component {
               key={place}
               lat={places[place]["geometry"]["location"].lat}
               lng={places[place]["geometry"]["location"].lng}
-              icon={svgIcon}
+              icon={this.svgIconRed}
               label={{
                   text: String(n+1),
                   color: "white",
@@ -113,6 +126,23 @@ class MapComponent extends React.Component {
         }
 
         if (++n >= this.props.maxResults) break
+      }
+
+      // your location
+
+      if (this.yourLat != null && this.yourLng != null) {
+      markers.push(<Marker
+              key="You"
+              lat={this.yourLat}
+              lng={this.yourLng}
+              icon={this.svgIconYou}
+              label={{
+                  text: "★",
+                  color: "white",
+                  fontFamily: "sans-serif"
+                }}
+              />
+            )
       }
     }
 
