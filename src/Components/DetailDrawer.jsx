@@ -177,40 +177,42 @@ export default class DetailDrawer extends React.Component {
             {openings}
             </div>
             <Divider />
-            <p>My Opinion</p>
-            <p>
-              Price
-              <Rating
-                initialRate={this.state.ratings[this.state.details.rateId].price}
-                className={"star-rating"}
-                empty={<StarBorder/>}
-                full={<Star/>}
-                fractions={2}
-                onChange={(rate) => {this.handleRate(rate, "price", this.state.details.rateId)}}
-              />
-            </p>
-            <p>
-              Quality
-              <Rating
-                initialRate={this.state.ratings[this.state.details.rateId].quality}
-                className={"star-rating"}
-                empty={<StarBorder/>}
-                full={<Star/>}
-                fractions={2}
-                onChange={(rate) => {this.handleRate(rate, "quality", this.state.details.rateId)}}
-              />
-            </p>
-            <p>
-              Portions
-              <Rating
-                initialRate={this.state.ratings[this.state.details.rateId].portions}
-                className={"star-rating"}
-                empty={<StarBorder/>}
-                full={<Star/>}
-                fractions={2}
-                onChange={(rate) => {this.handleRate(rate, "portions", this.state.details.rateId)}}
-              />
-            </p>
+            <div className="self-rating-container">
+              <p >Your Rating</p>
+              <span>
+                Price
+                <Rating
+                  initialRate={this.state.ratings[this.state.details.rateId].price}
+                  className={"star-rating self-rating red"}
+                  empty={<StarBorder/>}
+                  full={<Star/>}
+                  fractions={2}
+                  onChange={(rate) => {this.handleRate(rate, "price", this.state.details.rateId)}}
+                />
+              </span>
+              <span>
+                Quality
+                <Rating
+                  initialRate={this.state.ratings[this.state.details.rateId].quality}
+                  className={"star-rating self-rating red"}
+                  empty={<StarBorder/>}
+                  full={<Star/>}
+                  fractions={2}
+                  onChange={(rate) => {this.handleRate(rate, "quality", this.state.details.rateId)}}
+                />
+              </span>
+              <span>
+                Portions
+                <Rating
+                  initialRate={this.state.ratings[this.state.details.rateId].portions}
+                  className={"star-rating self-rating red"}
+                  empty={<StarBorder/>}
+                  full={<Star/>}
+                  fractions={2}
+                  onChange={(rate) => {this.handleRate(rate, "portions", this.state.details.rateId)}}
+                />
+              </span>
+            </div>
             <Divider />
             <div>
               <List class="contact-us-list">
