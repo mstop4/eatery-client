@@ -45,8 +45,6 @@ export default class DetailDrawer extends React.Component {
         currentEmail: this.props.currentEmail,
         ratings: ratingsArray
      };
-
-     console.dir(this.state.details)
   }
 
   detail = this.props.detail;
@@ -78,8 +76,11 @@ export default class DetailDrawer extends React.Component {
     let album = []
 
     for (let photo in this.state.details.photos) {
-      album.push(<div><img className="images" src={this.state.details.photos[photo]}/></div>)
+      if (photo != "rateId") {
+        album.push(<div><img className="images" src={this.state.details.photos[photo]}/></div>)
+      }
     }
+
     if (album.length === 0 ){
       album.push(<div><img src='http://placekitten.com/g/400/200' /></div>)
     }
@@ -147,8 +148,6 @@ export default class DetailDrawer extends React.Component {
 
       openings = <p>Hours: {opening_text}</p>
     }
-
-    console.dir(this.state.details)
 
     return (
       <MuiThemeProvider muiTheme={muiTheme}>

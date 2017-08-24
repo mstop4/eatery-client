@@ -37,8 +37,6 @@ class Feed extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log("feed const")
-
     let newFlatAlbum = []
 
     // convert nested album into a flat hierarchy
@@ -46,7 +44,8 @@ class Feed extends React.Component {
       for (let photo in this.props.album[place]) {
         newFlatAlbum.push({
           pic: this.props.album[place][photo],
-          id: place
+          id: place,
+          rateId: this.props.album[place].rateId
         })
       }
     }
@@ -76,7 +75,6 @@ class Feed extends React.Component {
 
   componentWillReceiveProps(nextProps) {
 
-    console.log("feed receive props")
     let newFlatAlbum = []
 
     // convert nested album into a flat hierarchy
@@ -84,7 +82,8 @@ class Feed extends React.Component {
       for (let photo in nextProps.album[place]) {
         newFlatAlbum.push({
           pic: nextProps.album[place][photo],
-          id: place
+          id: place,
+          rateId: nextProps.album[place].rateId
         })
       }
     }
@@ -124,13 +123,14 @@ class Feed extends React.Component {
             photos: this.state.album[placeId],
             info: info[placeId],
             rating: info[placeId]["rating"],
-            rateId: 0
+            rateId: this.state.flatAlbum[photo].rateId
           }
 
         tiles.push(
           <GridTile
             key={photo}
             onTouchTap={() => {
+
               this.setState({details: detail})
               this.handleToggle();
             }}
