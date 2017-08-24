@@ -42,11 +42,13 @@ class Feed extends React.Component {
     // convert nested album into a flat hierarchy
     for (let place in this.props.album) {
       for (let photo in this.props.album[place]) {
-        newFlatAlbum.push({
-          pic: this.props.album[place][photo],
-          id: place,
-          rateId: this.props.album[place].rateId
-        })
+        if (photo != "rateId") {
+          newFlatAlbum.push({
+            pic: this.props.album[place][photo],
+            id: place,
+            rateId: this.props.album[place].rateId
+          })
+        }
       }
     }
 
@@ -80,11 +82,13 @@ class Feed extends React.Component {
     // convert nested album into a flat hierarchy
     for (let place in nextProps.album) {
       for (let photo in nextProps.album[place]) {
-        newFlatAlbum.push({
-          pic: nextProps.album[place][photo],
-          id: place,
-          rateId: nextProps.album[place].rateId
-        })
+        if (photo != "rateId") {
+          newFlatAlbum.push({
+            pic: this.props.album[place][photo],
+            id: place,
+            rateId: this.props.album[place].rateId
+          })
+        }
       }
     }
 

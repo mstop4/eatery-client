@@ -31,12 +31,14 @@ export default class DetailDrawer extends React.Component {
     super(props);
 
     let ratingsArray = []
+    this.rateIndex = []
     for (let i = 0; i < 20; i++) {
       ratingsArray.push({
             price: 0,
             quality: 0,
             portions: 0
       })
+      this.rateIndex.push(0)
     }
 
     this.state = {
@@ -45,8 +47,6 @@ export default class DetailDrawer extends React.Component {
         currentEmail: this.props.currentEmail,
         ratings: ratingsArray
      };
-
-     this.rateIndex = 0
   }
 
   detail = this.props.detail;
@@ -67,7 +67,7 @@ export default class DetailDrawer extends React.Component {
 
     this.setState({ratings: newRatings})
 
-    this.rateIndex = Math.round((Math.cbrt((newRatings[index].price+1) * (newRatings[index].portions+1) * (newRatings[index].quality+1)) - 1) * 10) / 10
+    this.rateIndex[index] = Math.round((Math.cbrt((newRatings[index].price+1) * (newRatings[index].portions+1) * (newRatings[index].quality+1)) - 1) * 10) / 10
 
     fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/rates/save/${this.props.currentEmail}/${this.props.detail.place_id}/${newRatings[index].price}/${newRatings[index].quality}/${newRatings[index].portions}`, {
       method: "POST"
@@ -184,7 +184,7 @@ export default class DetailDrawer extends React.Component {
             </div>
             <Divider />
             <div className="self-rating-container">
-              <h2 className="title">Your Rating: {this.rateIndex}</h2>
+              <h2 className="title">Your Rating: {this.rateIndex[this.state.details.rateId]}</h2>
               <span>
                 Price
                 <Rating
