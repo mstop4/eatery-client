@@ -63,8 +63,6 @@ export default class DetailDrawer extends React.Component {
     let newRatings = this.state.ratings.slice()
     newRatings[index][category] = rate
 
-    console.dir(newRatings[index][category])
-
     this.setState({ratings: newRatings})
 
     fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/rates/save/${this.props.currentEmail}/${this.props.detail.place_id}/${newRatings[index].price}/${newRatings[index].quality}/${newRatings[index].portions}`, {
