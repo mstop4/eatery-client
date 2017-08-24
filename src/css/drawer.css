@@ -25,6 +25,14 @@ h1.title {
 div.reviews {
   margin-top: 5px;
 }
+
+.self-rating-container {
+  text-align: center;
+}
+
+.self-rating {
+  margin: 0 15px;
+}
 .album{
   margin-top: 5px;
   margin-bottom: 50px;
