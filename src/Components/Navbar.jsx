@@ -47,7 +47,7 @@ const Logged = props =>
     anchorOrigin={{ horizontal: "left", vertical: "top" }}
   >
     <MenuItem
-      primaryText="Hungry"
+      primaryText="Map"
       onTouchTap={ props.handleHungryOnTap }
     />
 
@@ -57,13 +57,8 @@ const Logged = props =>
     />
 
     <MenuItem
-      primaryText="Feed Me"
+      primaryText="Feed"
       onTouchTap={ props.handleFeedOnTap }
-    />
-
-    <MenuItem
-      primaryText="Login"
-      onTouchTap={ props.handleLoginOnTap }
     />
 
     <MenuItem

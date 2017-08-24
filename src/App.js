@@ -114,6 +114,8 @@ class App extends Component {
         // the user isn't logged in to Facebook.
       }
      });
+     this.setState({logged:false})
+     this.setState({currentPage:'Login'})
   }
   render = () => {
 
