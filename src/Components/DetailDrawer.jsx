@@ -45,6 +45,8 @@ export default class DetailDrawer extends React.Component {
         currentEmail: this.props.currentEmail,
         ratings: ratingsArray
      };
+
+     this.rateIndex = 0
   }
 
   detail = this.props.detail;
@@ -64,6 +66,8 @@ export default class DetailDrawer extends React.Component {
     newRatings[index][category] = rate
 
     this.setState({ratings: newRatings})
+
+    this.rateIndex = Math.round((Math.cbrt((newRatings[index].price+1) * (newRatings[index].portions+1) * (newRatings[index].quality+1)) - 1) * 10) / 10
 
     fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/rates/save/${this.props.currentEmail}/${this.props.detail.place_id}/${newRatings[index].price}/${newRatings[index].quality}/${newRatings[index].portions}`, {
       method: "POST"
@@ -180,7 +184,7 @@ export default class DetailDrawer extends React.Component {
             </div>
             <Divider />
             <div className="self-rating-container">
-              <p >Your Rating</p>
+              <h2 className="title">Your Rating: {this.rateIndex}</h2>
               <span>
                 Price
                 <Rating
