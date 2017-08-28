@@ -31,12 +31,14 @@ export default class DetailDrawer extends React.Component {
     super(props);
 
     let ratingsArray = []
+    this.rateIndex = []
     for (let i = 0; i < 20; i++) {
       ratingsArray.push({
             price: 0,
             quality: 0,
             portions: 0
       })
+      this.rateIndex.push(0)
     }
 
     this.state = {
@@ -45,8 +47,6 @@ export default class DetailDrawer extends React.Component {
         currentEmail: this.props.currentEmail,
         ratings: ratingsArray
      };
-
-     console.dir(this.state.details)
   }
 
   detail = this.props.detail;
@@ -67,7 +67,11 @@ export default class DetailDrawer extends React.Component {
 
     this.setState({ratings: newRatings})
 
-    //fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/save/${this.props.currentEmail}/:googleId/${newRatings[index][category].price}/${newRatings[index][category].quality}/${newRatings[index][category].portions}`)
+    this.rateIndex[index] = Math.round((Math.cbrt((newRatings[index].price+1) * (newRatings[index].portions+1) * (newRatings[index].quality+1)) - 1) * 10) / 10
+
+    fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/rates/save/${this.props.currentEmail}/${this.props.detail.place_id}/${newRatings[index].price}/${newRatings[index].quality}/${newRatings[index].portions}`, {
+      method: "POST"
+    })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -78,8 +82,11 @@ export default class DetailDrawer extends React.Component {
     let album = []
 
     for (let photo in this.state.details.photos) {
-      album.push(<div><img className="images" src={this.state.details.photos[photo]}/></div>)
+      if (photo != "rateId") {
+        album.push(<div><img className="images" src={this.state.details.photos[photo]}/></div>)
+      }
     }
+
     if (album.length === 0 ){
       album.push(<div><img src='http://placekitten.com/g/400/200' /></div>)
     }
@@ -148,8 +155,6 @@ export default class DetailDrawer extends React.Component {
       openings = <p>Hours: {opening_text}</p>
     }
 
-    console.dir(this.state.details)
-
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <Drawer
@@ -179,7 +184,7 @@ export default class DetailDrawer extends React.Component {
             </div>
             <Divider />
             <div className="self-rating-container">
-              <p >Your Rating</p>
+              <h2 className="title">Your Rating: {this.rateIndex[this.state.details.rateId]}</h2>
               <span>
                 Price
                 <Rating

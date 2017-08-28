@@ -84,11 +84,15 @@ class App extends Component {
     })
   }
 
+  handleLoggedIn = () => {
+    this.handleHungryOnTap()
+    this.setState({logged:true})
+  }
+
   responseFacebook = (response) => {
     if (response !== undefined){
       document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
-      setTimeout(this.handleHungryOnTap,1500)
-      this.setState({logged:true})
+      setTimeout(this.handleLoggedIn,1500)
     }
   }
 

@@ -13,6 +13,11 @@ h1.title {
   text-align: center;
 }
 
+h2.title {
+  color: #F44336;
+  text-align: center;
+}
+
 .contact-us-list {
   text-align: center;
 }

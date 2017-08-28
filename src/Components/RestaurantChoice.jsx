@@ -72,6 +72,7 @@ class RestaurantChoice extends React.Component {
       })
       .then((json) => {
         newInfo[place] = json.result
+        newAlbum[place].rateId = place
 
         for (let photo in json.result.photos) {
           newAlbum[place][photo] = "https://maps.googleapis.com/maps/api/place/photo?"
@@ -137,7 +138,6 @@ class RestaurantChoice extends React.Component {
             this.position = {lat: lat, lng: lng}
 
             this.props.updateCache(newAlbum, newInfo)
-            console.log(price)
           })
           .catch((error) => {
             console.error(error)
@@ -209,7 +209,7 @@ class RestaurantChoice extends React.Component {
                         info: this.state.foodInfo[place],
                         rating: this.state.foodInfo[place]["rating"],
                         place_id: this.state.foodInfo[place]["place_id"],
-                        rateId: place
+                        rateId: this.state.album[place].rateId
                       }
                       this.setState({
                         details: detail,
