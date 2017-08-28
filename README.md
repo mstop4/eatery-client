@@ -1,5 +1,5 @@
 !["Main page"](https://github.com/mstop4/eatery-client/blob/master/screenshots/Screen%20Shot%202017-08-28%20at%202.16.06%20PM.png?raw=true)
-
+!["Feed](https://github.com/mstop4/eatery-client/blob/master/screenshots/Screen%20Shot%202017-08-28%20at%204.21.37%20PM.png?raw=true)
 **[Eatery Server](https://github.com/mstop4/eatery-server)**
 
 ## Developed by
