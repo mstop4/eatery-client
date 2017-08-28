@@ -35,6 +35,7 @@ I narrow down the searches myself and share with my friends to vote.
 
 - React
 - Material UI
+- NodeJS
+- Facebook SDK
 - Google Maps API
 - Google Places API
-- (fill in further)
