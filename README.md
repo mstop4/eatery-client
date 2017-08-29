@@ -1,4 +1,4 @@
-**[Eatery Server](https://github.com/mstop4/eatery-server)**
+**[Link to Eatery Server](https://github.com/mstop4/eatery-server)**
 
 
 !["Main page"](https://github.com/mstop4/eatery-client/blob/master/screenshots/Login.png?raw=true)
@@ -10,6 +10,15 @@
 * Arnold Chan
 * Victor Festa
 * John Tolentino
+
+## Tech Stack
+
+- React
+- Material UI
+- NodeJS
+- Facebook SDK
+- Google Maps API
+- Google Places API
 
 ## User Stories
 
@@ -32,12 +41,3 @@ I narrow down the searches myself and share with my friends to vote.
     * Resuarant choices are sent to friends via friend list
     * Users vote on the restuarants given and majority decides which restuarant the group will go
 5. The group of user(s) will be taken to a detail page. Page will have options like Ritual etc...
-
-## Tech Stack
-
-- React
-- Material UI
-- NodeJS
-- Facebook SDK
-- Google Maps API
-- Google Places API
