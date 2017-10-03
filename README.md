@@ -1,8 +1,11 @@
-**[Link to Eatery Server](https://github.com/mstop4/eatery-server)**
+# Eatery Server
 
+What should we get for lunch, guys?
 
 !["Main page"](https://github.com/mstop4/eatery-client/blob/master/screenshots/Login.png?raw=true)
 !["Feed](https://github.com/mstop4/eatery-client/blob/master/screenshots/Feed.png?raw=true)
+
+**[Eatery Server](https://github.com/mstop4/eatery-server)**
 
 ## Developed by
 
@@ -11,9 +14,11 @@
 * Victor Festa
 * John Tolentino
 
+[![dependencies Status](https://david-dm.org/mstop4/eatery-client/status.svg)](https://david-dm.org/mstop4/eatery-client)
+
 ## Tech Stack
 
-- React
+- React 15
 - Material UI
 - NodeJS
 - Facebook SDK
