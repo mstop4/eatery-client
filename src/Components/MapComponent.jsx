@@ -6,11 +6,13 @@ import {indigo500} from 'material-ui/styles/colors'
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 const params = {v: '3.exp', key: process.env.REACT_APP_GOOGLEMAPS_APIKEY, libraries: "places"};
-
 const defaultStyle = {
             featureType: 'poi',
             stylers: [{visibility: 'off'}]
           }
+
+let bounds = undefined
+let fetchHandle = undefined
 
 class MapComponent extends React.Component {
 
@@ -45,7 +47,7 @@ class MapComponent extends React.Component {
 
     // create a new bounds object only if map is set up
     if (this.state.map) {
-      let bounds = new window.google.maps.LatLngBounds(null)
+      bounds = new window.google.maps.LatLngBounds(null)
 
       // update bounds only if map is set up
       const places = this.props.data
@@ -75,12 +77,26 @@ class MapComponent extends React.Component {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         map.panTo({lat: position.coords.latitude, lng: position.coords.longitude})
-        this.props.getFood(position.coords.latitude, position.coords.longitude, 4)
+        this.props.getFood(position.coords.latitude, position.coords.longitude, this.props.maxPrice)
 
         this.yourLat = position.coords.latitude
         this.yourLng = position.coords.longitude
       })
     }
+
+    map.addListener('dragstart', () => {
+      window.clearTimeout(fetchHandle)
+    })
+
+    map.addListener('dragend', () => {
+      let newLocation = map.getCenter()
+      this.yourLat = newLocation.lat()
+      this.yourLng = newLocation.lng()
+
+      fetchHandle = window.setTimeout( () => {
+        this.props.getFood(this.yourLat, this.yourLng, this.props.maxPrice)
+      }, 1000)
+    })
   }
 
   render() {

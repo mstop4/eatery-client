@@ -39,6 +39,7 @@ class RestaurantChoice extends React.Component {
       radius: 2000,
       rankBy: "distance",
       maxResults: 10,
+      maxPrice: 4,
 
       open: false,
       load: false,
@@ -92,6 +93,11 @@ class RestaurantChoice extends React.Component {
   getFood = (lat, lng, price) => {
 
       const type = "restaurant"
+      this.setState({
+        foodJSON: []
+      })
+
+      console.log(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/places?lat=${lat}&lng=${lng}&type=${type}&rankby=${this.state.rankBy}&maxprice=${price}`)
 
       fetch(`http://${process.env.REACT_APP_SERVER_ADDR}:${process.env.REACT_APP_SERVER_PORT}/places?lat=${lat}&lng=${lng}&type=${type}&rankby=${this.state.rankBy}&maxprice=${price}`, {
         mode: "cors"
@@ -152,7 +158,10 @@ class RestaurantChoice extends React.Component {
   handleClose = () => this.setState({ open: false })
   handleDetails = (details) => this.setState({ details: details })
 
-  handlePriceFilter = (price) => { this.getFood(this.position.lat, this.position.lng, price) }
+  handlePriceFilter = (price) => { 
+    this.getFood(this.position.lat, this.position.lng, price) 
+    this.setState({ maxPrice: price })
+  }
 
   render = () => {
     const infos = [
@@ -260,6 +269,7 @@ class RestaurantChoice extends React.Component {
                 getFood={this.getFood}
                 maxResults={this.state.maxResults}
                 assignMap={this.assignMap}
+                maxPrice={this.state.maxPrice}
               />
             </td>
             <td width={"40%"} height={"100%"} className="card-container">

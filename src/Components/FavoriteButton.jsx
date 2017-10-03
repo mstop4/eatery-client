@@ -132,7 +132,7 @@ class FavoriteButton extends React.Component {
         break;
     }
     
-    console.log(this.state.checked);
+    //console.log(this.state.checked);
 
     return (
       <div style={styles.block}>
