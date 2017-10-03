@@ -95,7 +95,7 @@ class MapComponent extends React.Component {
 
       fetchHandle = window.setTimeout( () => {
         this.props.getFood(this.yourLat, this.yourLng, this.props.maxPrice)
-      }, 1000)
+      }, 1500)
     })
   }
 
