@@ -1,4 +1,4 @@
-# Eatery Server
+# Eatery Client
 
 What should we get for lunch, guys?
 
