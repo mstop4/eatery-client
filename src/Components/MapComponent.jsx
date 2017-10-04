@@ -53,6 +53,7 @@ class MapComponent extends React.Component {
       const places = this.props.data
       let n = 0
 
+
       for (let place in places) {
         if (bounds) {
           bounds.extend({
@@ -64,8 +65,10 @@ class MapComponent extends React.Component {
         if (++n >= this.props.maxResults) break
       }
 
-      this.state.map.panToBounds(bounds)
-      this.state.map.fitBounds(bounds)
+      if (n != 0) {
+        this.state.map.panToBounds(bounds)
+        this.state.map.fitBounds(bounds)
+      }
     }
   }
 
@@ -95,7 +98,7 @@ class MapComponent extends React.Component {
 
       fetchHandle = window.setTimeout( () => {
         this.props.getFood(this.yourLat, this.yourLng, this.props.maxPrice)
-      }, 1500)
+      }, 2000)
     })
   }
 
